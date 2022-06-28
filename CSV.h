@@ -10,13 +10,12 @@
 #include <codecvt>
 #include <fcntl.h>
 #include <stdio.h>
-#include "List.h"
 #include <QString>
-
+#include <QVector>
 
 class CSV {
 public:
-    static void _readLine(const QString& line, List<QString>& values) {
+    static void _readLine(const QString& line, QVector<QString>& values) {
         QString value = "";
         int state = 0;
 
@@ -92,7 +91,7 @@ public:
             return;
         }
     }
-    static QString _writeLine(const List<QString>& values) {
+    static QString _writeLine(const QVector<QString>& values) {
         QString line = "";
         bool first = true;
         for (const QString& value : values) {
@@ -130,7 +129,7 @@ public:
     template <class... Ts>
     static void readLine(const QString& line, Ts &...args) {
 
-        List<QString> values;
+        QVector<QString> values;
         _readLine(line, values);
 
         int index = 0;
@@ -143,7 +142,7 @@ public:
 
     template <class... Ts>
     static QString writeLine(Ts... args) {
-        List<QString> values;
+        QVector<QString> values;
 
         auto fn = [&](auto &v) {
               values.push_back(v);

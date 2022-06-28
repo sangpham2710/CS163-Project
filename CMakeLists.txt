@@ -19,7 +19,6 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
-        List.h
         CSV.h
         resource.qrc
 )
