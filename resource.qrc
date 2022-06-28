@@ -1,0 +1,6 @@
+<RCC>
+    <qresource prefix="/data">
+        <file>data/Eng-Vie.csv</file>
+        <file>data/output.txt</file>
+    </qresource>
+</RCC>
