@@ -19,6 +19,12 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        Trie.h
+        IDictionary.h
+        IFavorite.h
+        FavoriteWord.h
+        IHistory.h
+        Map.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
