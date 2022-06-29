@@ -25,6 +25,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
-    Trie trie;
+    Trie<QString> trie;
 };
 #endif // MAINWINDOW_H

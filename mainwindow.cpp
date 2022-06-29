@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_insertLineEdit_returnPressed()
 {
     QString word = ui->insertLineEdit->text();
-    trie.insert(word);
+    trie.insert(word, "nghĩa của từ " + word);
     ui->resultLabel->setText("Inserted \"" + word + "\"");
     ui->insertLineEdit->setText("");
 }
@@ -31,9 +31,9 @@ void MainWindow::on_insertLineEdit_returnPressed()
 void MainWindow::on_findLineEdit_returnPressed()
 {
     QString word = ui->findLineEdit->text();
-    bool result = trie.search(word);
+    bool result = trie.contains(word);
     if (result) {
-        ui->resultLabel->setText("Found!");
+        ui->resultLabel->setText(trie[word]);
     } else {
         ui->resultLabel->setText("Not Found!");
     }
