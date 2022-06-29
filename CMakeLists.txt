@@ -22,7 +22,6 @@ set(PROJECT_SOURCES
         Trie.h
         IDictionary.h
         IFavorite.h
-        FavoriteWord.h
         IHistory.h
         Map.h
 )
