@@ -1,13 +1,13 @@
 #ifndef IHISTORY_H
 #define IHISTORY_H
 
-#include <QVector>
+#include <QList>
 #include <QString>
 
 class IHistory {
 public:
     virtual bool add(const QString& token, int maxSize = 20) = 0;
-    virtual QVector<QString> getHistory() = 0;
+    virtual QList<QString> getHistory() = 0;
 };
 
 #endif // IHISTORY_H

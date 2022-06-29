@@ -1,12 +1,12 @@
 #ifndef IDICTIONARY_H
 #define IDICTIONARY_H
 
-#include <QVector>
+#include <QList>
 #include <QString>
 
 class IDictionary {
 public:
-    virtual QVector<QString> getListWordsWithPrefix(const QString& prefix, int resultLength = 20) = 0;
+    virtual QList<QString> getListWordsWithPrefix(const QString& prefix, int resultLength = 20) = 0;
     virtual bool changeDictionary(const QString& dictName) = 0;
     virtual bool addWord(const QString& word, const QString& definition) = 0;
     virtual bool removeWord(const QString& word) = 0;

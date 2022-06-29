@@ -4,7 +4,7 @@
 #include "Map.h"
 #include <QString>
 #include <QChar>
-#include <QVector>
+#include <QList>
 #include <functional>
 
 class Trie
@@ -50,8 +50,8 @@ public:
         }
         return ptr->flag;
     }
-    QVector<QString> searchPrefix(QString prefix) {
-        QVector<QString> result;
+    QList<QString> searchPrefix(QString prefix) {
+        QList<QString> result;
         TrieNode* ptr = root;
         for (auto& ch : prefix) {
             if (!ptr->next.contains(ch)) return result;
