@@ -10,15 +10,47 @@ public:
     ~DictionaryDataStructure() {
         delete trie;
     }
+    QString getDictionaryName() {
+        return dictName;
+    }
+    void loadWords() {
+        // open folder having name dictName and load the words
+//        trie[word] = defi;
+    }
+
+    QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
+        return trie->searchPrefix(prefix, maxResultLength);
+    }
+    bool addWord(const QString& word, const QString& definition) {
+        if (trie->contains(word)) return false;
+        (*trie)[word] = "tmp.txt";
+        // append definition into tmp.txt
+        return true;
+    }
+    bool removeWord(const QString& word) {
+        if (!trie->contains(word)) return false;
+        QString path = getFullDefinitionPath(word);
+        // remove word in file using path variable
+        trie->remove(word);
+        return true;
+    }
+    QString getDefinition(const QString& word) {
+        if (!trie->contains(word)) return "";
+        QString path = getFullDefinitionPath(word);
+        // get definition of word in file using path variable
+        QString definition = "nothing";
+        return definition;
+    }
+    QList<QString> getListWordsHaveDefinition(const QString& token, int maxResultLength) {
+        return {};
+    }
+    QString getFullDefinitionPath(const QString& word) {
+        if (!trie->contains(word)) return "";
+        return QString("D:/CS163-Project/data/dicts/%1/defis/$2.csv").arg(dictName).arg((*trie)[word]);
+    }
 private:
     Trie<QString>* trie;
     QString dictName;
-    void loadWords() {
-        // open folder having name dictName
-    }
-    QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
-        trie->searchPrefix();
-    }
 };
 
 #endif // DICTIONARYDATASTRUCTURE_H
