@@ -79,11 +79,13 @@ public:
             ptr = ptr->next[ch];
             stackNodes.push_back(ptr);
         }
+        if (!ptr->flag) return false;
+        ptr->flag = false;
         for (int i = stackNodes.size() - 1; i > 0; --i) {
             TrieNode* cur = stackNodes[i];
             TrieNode* par = stackNodes[i - 1];
             QChar curChar = word[i - 1];
-            if (cur->isLeaf()) {
+            if (cur->isLeaf() && !cur->flag) {
                 par->next.remove(curChar);
                 delete cur;
             } else break;
