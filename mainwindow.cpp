@@ -44,7 +44,7 @@ void MainWindow::on_findLineEdit_returnPressed()
 void MainWindow::on_findPrefixLineEdit_returnPressed()
 {
     QString word = ui->findPrefixLineEdit->text();
-    auto result = trie.searchPrefix(word);
+    auto result = trie.searchPrefix(word, 2);
     ui->listWidget->clear();
     for (auto x : result) {
         new QListWidgetItem(x, ui->listWidget);

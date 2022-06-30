@@ -80,7 +80,7 @@ public:
         return this->value(word);
     }
 
-    QList<QString> searchPrefix(const QString& prefix) {
+    QList<QString> searchPrefix(const QString& prefix, int maxResultLength) {
         QList<QString> result;
         TrieNode* ptr = root;
         for (auto& ch : prefix) {
@@ -90,9 +90,13 @@ public:
 
         std::function<void(TrieNode*, const QString&)> dfs = [&](TrieNode* root, const QString& suffix) {
             if (root == nullptr) return;
+
+            if (result.size() >= maxResultLength) return;
+
             if (root->flag) {
                 result.push_back(prefix + suffix);
             }
+
             for (auto& ch : root->next.keys()) {
                 dfs(root->next[ch], suffix + ch);
             }
