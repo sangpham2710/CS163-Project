@@ -30,8 +30,11 @@ public:
         return dictionary->editWord(word, newDefinition);
     }
     bool removeWord(const QString &word) {
+        auto dictDefi = dictionary->getDefinition(word);
         if (!dictionary->removeWord(word)) return false;
-        if (!favorite->removeWord(word)) return false;
+        if (favorite->getFavoriteWordDefinition(word) == dictDefi) {
+            if (!favorite->removeWord(word)) return false;
+        }
         return true;
     }
     QString getDefinition(const QString &word) {
