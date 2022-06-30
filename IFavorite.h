@@ -6,7 +6,7 @@
 
 class IFavorite {
 public:
-    virtual bool addWord(const QString& word, const QString& definition) = 0;
+    virtual bool addWord(const QString& word, const QString& filePath) = 0;
     virtual bool removeWord(const QString& word) = 0;
     virtual QList<QString> getFavoriteWords() = 0;
     virtual QString getFavoriteWordDefinition(const QString& word) = 0;

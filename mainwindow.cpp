@@ -22,7 +22,7 @@ MainWindow::~MainWindow()
 void MainWindow::on_insertLineEdit_returnPressed()
 {
     QString word = ui->insertLineEdit->text();
-    trie.insert(word, "nghĩa của từ " + word);
+    trie[word] = "file-of-" + word;
     ui->resultLabel->setText("Inserted \"" + word + "\"");
     ui->insertLineEdit->setText("");
 }
