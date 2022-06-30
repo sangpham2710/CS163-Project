@@ -45,11 +45,9 @@ public:
 
 private:
     Node *root;
-
     static const int ALLOWED_IMBALANCE = 1;
 
     int height(Node *t) const { return t == nullptr ? -1 : t->height; }
-
     bool contains(Node *t, const Key &x) const {
         if (t == nullptr)
             return false;
@@ -60,7 +58,6 @@ private:
         else
             return true;
     }
-
     Node *insert(Node *&t, const Key &x, const T &value) {
         if (t == nullptr)
             return t = new Node{x, new T(value), nullptr, nullptr};
@@ -70,7 +67,11 @@ private:
             return insert(t->right, x, value);
         balance(t);
     }
-
+    Node *findMin(Node *t) const {
+        if (t == nullptr) return nullptr;
+        if (t->left == nullptr) return t;
+        return findMin(t->left);
+    }
     void remove(Node *&t, const Key &x) {
         if (t == nullptr)
             return;
@@ -91,7 +92,6 @@ private:
         }
         balance(t);
     }
-
     void clear(Node *&t) {
         if (t == nullptr) return;
         clear(t->left);
@@ -102,29 +102,27 @@ private:
         delete t;
         t = nullptr;
     }
-
     void getKeys(Node *t, QList<Key>& result) {
         if (t == nullptr) return;
         getKeys(t->left, result);
         result.push_back(t->key);
         getKeys(t->right, result);
     }
-
     void balance(Node *&t) {
         if (t == nullptr) return;
-        if (height(t->left) - height(t->right) > ALLOWED_IMBALANCE)
+        if (height(t->left) - height(t->right) > ALLOWED_IMBALANCE) {
             if (height(t->left->left) >= height(t->left->right))
                 rotateWithLeftChild(t);
             else
                 doubleWithLeftChild(t);
-        else if (height(t->right) - height(t->left) > ALLOWED_IMBALANCE)
+        } else if (height(t->right) - height(t->left) > ALLOWED_IMBALANCE) {
             if (height(t->right->right) >= height(t->right->left))
                 rotateWithRightChild(t);
             else
                 doubleWithRightChild(t);
+        }
         t->height = std::max(height(t->left), height(t->right)) + 1;
     }
-
     void rotateWithLeftChild(Node *&k2) {
         Node *k1 = k2->left;
         k2->left = k1->right;
@@ -133,7 +131,6 @@ private:
         k1->height = std::max(height(k1->left), k2->height) + 1;
         k2 = k1;
     }
-
     void rotateWithRightChild(Node *&k2) {
         Node *k1 = k2->right;
         k2->right = k1->left;
@@ -142,17 +139,14 @@ private:
         k1->height = std::max(k2->height, height(k1->right)) + 1;
         k2 = k1;
     }
-
     void doubleWithLeftChild(Node *&k3) {
         rotateWithRightChild(k3->left);
         rotateWithLeftChild(k3);
     }
-
     void doubleWithRightChild(Node *&k3) {
         rotateWithLeftChild(k3->right);
         rotateWithRightChild(k3);
     }
-
     Node *find(Node *t, const Key &x) const {
         if (t == nullptr)
             return nullptr;

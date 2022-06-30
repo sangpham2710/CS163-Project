@@ -84,7 +84,7 @@ public:
             TrieNode* par = stackNodes[i - 1];
             QChar curChar = word[i - 1];
             if (cur->isLeaf()) {
-                par->next->remove(curChar);
+                par->next.remove(curChar);
                 delete cur;
             } else break;
         }
