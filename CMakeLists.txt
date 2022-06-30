@@ -19,6 +19,16 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+        Trie.h
+        IDictionary.h
+        IFavorite.h
+        IHistory.h
+        Map.h
+        Dictionary.h
+        DictionaryDataStructure.h
+        App.h
+        Favorite.h
+        History.h
         dialogaddnewword.h
         dialogaddnewword.cpp
         dialogaddnewword.ui
