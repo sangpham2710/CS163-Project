@@ -3,6 +3,7 @@
 
 #include <QMainWindow>
 #include "Trie.h"
+#include "App.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }

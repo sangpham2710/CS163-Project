@@ -36,6 +36,9 @@ public:
     bool addWord(const QString &word, const QString &definition) {
         return currentDict->addWord(word, definition);
     }
+    bool editWord(const QString &word, const QString &newDefinition) {
+        return currentDict->editWord(word, newDefinition);
+    }
     bool removeWord(const QString &word) {
         return currentDict->removeWord(word);
     }

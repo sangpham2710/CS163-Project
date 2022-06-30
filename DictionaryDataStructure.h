@@ -6,7 +6,9 @@
 class DictionaryDataStructure {
 public:
     DictionaryDataStructure() : trie{new Trie<QString>()} {}
-    DictionaryDataStructure(const QString& dictName) : trie{new Trie<QString>()}, dictName{dictName} {}
+    DictionaryDataStructure(const QString& dictName) : trie{new Trie<QString>()}, dictName{dictName} {
+        loadWords();
+    }
     ~DictionaryDataStructure() {
         delete trie;
     }
@@ -14,17 +16,25 @@ public:
         return dictName;
     }
     void loadWords() {
-        // open folder having name dictName and load the words
-//        trie[word] = defi;
-    }
+        trie->clear();
+        QString wordFolderPath = QString("D:/CS163-Project/data/dicts/%1/words/index.csv").arg(dictName);
+        // load words from file
 
+    }
     QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
     bool addWord(const QString& word, const QString& definition) {
         if (trie->contains(word)) return false;
         (*trie)[word] = "tmp.txt";
+        QString path = getFullDefinitionPath(word);
         // append definition into tmp.txt
+        return true;
+    }
+    bool editWord(const QString& word, const QString& newDefinition) {
+        if (!trie->contains(word)) return false;
+        QString path = getFullDefinitionPath(word);
+        // edit word in file using path variable
         return true;
     }
     bool removeWord(const QString& word) {
