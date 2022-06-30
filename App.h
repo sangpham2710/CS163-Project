@@ -16,6 +16,7 @@ public:
         static App app;
         return app;
     }
+    // dictionary functionalities
     QList<QString> getListWordsWithPrefix(const QString &prefix) {
         return dictionary->getListWordsWithPrefix(prefix);
     }
@@ -56,6 +57,7 @@ public:
         history->add(token);
         return dictionary->getListWordsHaveDefinition(token, maxResultLength);
     }
+    // favorite functionalities
     bool addWordToFavorite(const QString& word) {
         return favorite->addWord(word, dictionary->getFullDefinitionPath(word));
     }
@@ -69,6 +71,7 @@ public:
         history->add(word);
         return favorite->getFavoriteWordDefinition(word);
     }
+    // history functionalities
     QList<QString> getHistory() {
         return history->getHistory();
     }
