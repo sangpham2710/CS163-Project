@@ -26,6 +26,9 @@ set(PROJECT_SOURCES
         Map.h
         Dictionary.h
         DictionaryDataStructure.h
+        App.h
+        Favorite.h
+        History.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
