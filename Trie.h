@@ -17,6 +17,9 @@ private:
         T* value;
         Map<QChar, TrieNode*> next;
         TrieNode() : flag{0}, next{} {}
+        bool isLeaf() {
+            return next.empty();
+        }
     };
 
     TrieNode* root;
@@ -65,6 +68,27 @@ public:
         auto ptr = find(word);
         if (ptr) return ptr->flag;
         else return false;
+    }
+
+    bool remove(const QString& word) {
+        QList<TrieNode*> stackNodes;
+        TrieNode* ptr = root;
+        stackNodes.push_back(ptr);
+        for (auto& ch : word) {
+            if (!ptr->next.contains(ch)) return false;
+            ptr = ptr->next[ch];
+            stackNodes.push_back(ptr);
+        }
+        for (int i = stackNodes.size() - 1; i > 0; --i) {
+            TrieNode* cur = stackNodes[i];
+            TrieNode* par = stackNodes[i - 1];
+            QChar curChar = word[i - 1];
+            if (cur->isLeaf()) {
+                par->next->remove(curChar);
+                delete cur;
+            } else break;
+        }
+        return true;
     }
 
     T& value(const QString& word) {
