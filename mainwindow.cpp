@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+#include <QMessageBox>
 
 
 MainWindow::MainWindow(QWidget *parent)
@@ -13,6 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBoxSearch->addItem("Slang");
     ui->comboBoxSearch->addItem("Emoji");
     ui->comboBoxSearch->addItem("Favourite");
+    this->setWindowTitle("Dictionary");
     this->setFixedHeight(544);
     this->setFixedWidth(960);
 }
@@ -22,4 +24,32 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
+
+
+void MainWindow::on_pushButtonAdd_clicked()
+{
+    dialogAddNewWord = new DialogAddNewWord(this);
+    dialogAddNewWord->show();
+}
+
+
+void MainWindow::on_pushButtonRemove_clicked()
+{
+    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to remove this word from the dictionary ?", QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes)
+    {
+        //Delete the word
+    }
+    else
+    {
+        //Do nothing
+    }
+}
+
+
+void MainWindow::on_pushButtonEdit_clicked()
+{
+    dialogEditWord = new DialogEditWord(this);
+    dialogEditWord->show();
+}
 

@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include <dialogaddnewword.h>
+#include <dialogeditword.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,7 +20,16 @@ public:
 private slots:
 
 
+    void on_pushButtonAdd_clicked();
+
+    void on_pushButtonRemove_clicked();
+
+    void on_pushButtonEdit_clicked();
+
 private:
     Ui::MainWindow *ui;
+    DialogAddNewWord *dialogAddNewWord;
+    DialogEditWord *dialogEditWord;
+
 };
 #endif // MAINWINDOW_H
