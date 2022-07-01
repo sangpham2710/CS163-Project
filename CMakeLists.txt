@@ -29,6 +29,7 @@ set(PROJECT_SOURCES
         App.h
         Favorite.h
         History.h
+        CSV.h
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
