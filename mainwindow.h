@@ -26,6 +26,8 @@ private slots:
 
     void on_pushButtonEdit_clicked();
 
+    void on_Game_start_clicked();
+
 private:
     Ui::MainWindow *ui;
     DialogAddNewWord *dialogAddNewWord;
