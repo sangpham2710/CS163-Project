@@ -7,17 +7,17 @@
     <x>0</x>
     <y>0</y>
     <width>360</width>
-    <height>180</height>
+    <height>360</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_2">
+  <layout class="QVBoxLayout" name="verticalLayout_4">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayout">
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayoutNewWord">
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
         <widget class="QLabel" name="labelNewWord">
          <property name="enabled">
@@ -34,7 +34,23 @@
       </layout>
      </item>
      <item>
-      <layout class="QHBoxLayout" name="horizontalLayoutAddNewDefinition">
+      <spacer name="verticalSpacer">
+       <property name="orientation">
+        <enum>Qt::Vertical</enum>
+       </property>
+       <property name="sizeType">
+        <enum>QSizePolicy::MinimumExpanding</enum>
+       </property>
+       <property name="sizeHint" stdset="0">
+        <size>
+         <width>20</width>
+         <height>20</height>
+        </size>
+       </property>
+      </spacer>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
        <item>
         <widget class="QLabel" name="labelNewDefinition">
          <property name="text">
@@ -43,21 +59,34 @@
         </widget>
        </item>
        <item>
-        <widget class="QLineEdit" name="lineEditNewDefinition"/>
+        <widget class="QTextEdit" name="textEditNewDefinition">
+         <property name="enabled">
+          <bool>true</bool>
+         </property>
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="MinimumExpanding" vsizetype="Maximum">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
+        </widget>
        </item>
       </layout>
      </item>
     </layout>
    </item>
    <item>
-    <spacer name="verticalSpacer">
+    <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
+     </property>
+     <property name="sizeType">
+      <enum>QSizePolicy::MinimumExpanding</enum>
      </property>
      <property name="sizeHint" stdset="0">
       <size>
        <width>20</width>
-       <height>40</height>
+       <height>20</height>
       </size>
      </property>
     </spacer>

@@ -16,9 +16,9 @@ find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
 
 set(PROJECT_SOURCES
         main.cpp
-        mainwindow.cpp
-        mainwindow.h
-        mainwindow.ui
+        MainWindow.cpp
+        MainWindow.h
+        MainWindow.ui
         Trie.h
         IDictionary.h
         IFavorite.h
@@ -29,10 +29,15 @@ set(PROJECT_SOURCES
         App.h
         Favorite.h
         History.h
-        dialogaddnewword.h
-        dialogaddnewword.cpp
-        dialogaddnewword.ui
-        dialogeditword.h dialogeditword.cpp dialogeditword.ui
+        DialogAddNewWord.h
+        DialogAddNewWord.cpp
+        DialogAddNewWord.ui
+        DialogEditWord.h
+        DialogEditWord.cpp
+        DialogEditWord.ui
+        WidgetWordDefinition.h
+        WidgetWordDefinition.cpp
+        WidgetWordDefinition.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

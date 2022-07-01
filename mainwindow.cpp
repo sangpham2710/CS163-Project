@@ -1,7 +1,7 @@
-#include "mainwindow.h"
-#include "./ui_mainwindow.h"
+#include "MainWindow.h"
+#include "./ui_MainWindow.h"
+#include "WidgetWordDefinition.h"
 #include <QMessageBox>
-
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -15,8 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBoxSearch->addItem("Emoji");
     ui->comboBoxSearch->addItem("Favourite");
     this->setWindowTitle("Dictionary");
-    this->setFixedHeight(544);
-    this->setFixedWidth(960);
+    ui->tabWidgetDefinition->clear();
 }
 
 MainWindow::~MainWindow()
@@ -51,5 +50,17 @@ void MainWindow::on_pushButtonEdit_clicked()
 {
     dialogEditWord = new DialogEditWord(this);
     dialogEditWord->show();
+}
+
+
+void MainWindow::on_tabWidgetDefinition_tabCloseRequested(int index)
+{
+    ui->tabWidgetDefinition->removeTab(index);
+}
+
+
+void MainWindow::on_pushButton_5_clicked()
+{
+    ui->tabWidgetDefinition->addTab(new WidgetWordDefinition(), QString("Word").arg(ui->tabWidgetDefinition->count() + 1));
 }
 
