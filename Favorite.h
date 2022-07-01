@@ -81,7 +81,10 @@ public:
         while (!in.atEnd()) {
             line = in.readLine();
             CSV::readLine(line, _word, _defi);
-            if (_word == word) return _defi;
+            if (_word == word) {
+                fin.close();
+                return _defi;
+            }
         }
         return "";
     }
