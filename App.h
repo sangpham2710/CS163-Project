@@ -31,9 +31,10 @@ public:
     }
     bool removeWord(const QString &word) {
         auto dictDefi = dictionary->getDefinition(word);
+        auto defiFilePath = dictionary ->getFullDefinitionPath(word);
         if (!dictionary->removeWord(word)) return false;
-        if (favorite->getFavoriteWordDefinition(word) == dictDefi) {
-            if (!favorite->removeWord(word)) return false;
+        if (favorite->getFavoriteWordDefinition(word, defiFilePath) == dictDefi) {
+            if (!favorite->removeWord(word, defiFilePath)) return false;
         }
         return true;
     }
@@ -67,15 +68,16 @@ public:
     bool addWordToFavorite(const QString& word) {
         return favorite->addWord(word, dictionary->getFullDefinitionPath(word));
     }
-    bool removeWordFromFavorite(const QString& word) {
-        return favorite->removeWord(word);
+    bool removeWordFromFavorite(const QString& word, const QString& defiFilePath) {
+        return favorite->removeWord(word, defiFilePath);
     }
     QList<QString> getFavoriteWordsWithPrefix(const QString& prefix) {
         return favorite->getFavoriteWordsWithPrefix(prefix);
     }
     QString getFavoriteWordDefinition(const QString& word) {
         history->add(word);
-        return favorite->getFavoriteWordDefinition(word);
+        auto defiFilePath = dictionary ->getFullDefinitionPath(word);
+        return favorite->getFavoriteWordDefinition(word, defiFilePath);
     }
     // history functionalities
     QList<QString> getHistory() {

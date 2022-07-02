@@ -9,10 +9,36 @@
 
 class Favorite : public IFavorite {
 public:
-    bool addWord(const QString &word, const QString &filePath) {
-        if (trie->contains(word)) return false;
+    Favorite() {
+        trie = new Trie<QString>();
+        loadWord();
+    }
+    ~Favorite() {
+        delete trie;
+    }
+    bool loadWord() {
+        QString favoritePath = getFavoritePath();
+        QFile fin;
+        QTextStream in;
 
-        (*trie)[word] = filePath;
+        fin.setFileName(favoritePath);
+        if (!fin.open(QFile::ReadOnly | QFile::Text)) return false;
+        in.setDevice(&fin);
+
+        QString line, _word, _defiPath;
+        while(!in.atEnd()) {
+            line = in.readLine();
+            CSV::readLine(line, _word, _defiPath);
+            (*trie)[_word + _defiPath] = _defiPath;
+        }
+        fin.close();
+        return true;
+    }
+    bool addWord(const QString &word, const QString &filePath) {
+        QString key = word + filePath;
+        if (trie->contains(key)) return false;
+
+        (*trie)[key] = filePath;
         QString favoritePath = getFavoritePath();
 
         QFile fout;
@@ -27,10 +53,11 @@ public:
 
         return true;
     }
-    bool removeWord(const QString &word) {
-        if (!trie->contains(word)) return false;
+    bool removeWord(const QString &word, const QString &filePath) {
+        QString key = word + filePath;
+        if (!trie->contains(key)) return false;
 
-        trie->remove(word);
+        trie->remove(key);
 
         // remove word in file
         QString favoritePath = getFavoritePath();
@@ -68,10 +95,11 @@ public:
     QList<QString> getFavoriteWordsWithPrefix(const QString &prefix, int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
-    QString getFavoriteWordDefinition(const QString &word) {
-        if (!trie->contains(word)) return "";
+    QString getFavoriteWordDefinition(const QString &word, const QString &filePath) {
+        QString key = word + filePath;
+        if (!trie->contains(key)) return "";
 
-        QString defiPath = (*trie)[word];
+        QString defiPath = (*trie)[key];
         QFile fin;
         QTextStream in;
         QString line, _word, _defi;
