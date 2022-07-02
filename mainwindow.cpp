@@ -64,7 +64,6 @@ void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
 
 void MainWindow::on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *item)
 {
-    qDebug() << item->text();
     QString word = item->text();
     auto newTab = new WordDefinitionWidget(this);
     ui->tabWidgetWordDefinition->addTab(newTab, word);

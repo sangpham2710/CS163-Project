@@ -10,6 +10,7 @@ public:
     virtual bool removeWord(const QString& word) = 0;
     virtual QList<QString> getFavoriteWordsWithPrefix(const QString& prefix, int maxResultLength = 20) = 0;
     virtual QString getFavoriteWordDefinition(const QString& word) = 0;
+    virtual ~IFavorite() = default;
 };
 
 #endif // IFAVORITE_H
