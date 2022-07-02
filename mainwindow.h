@@ -19,15 +19,15 @@ public:
 
 private slots:
 
-//    void on_pushButtonAddWord_clicked();
+    void on_pushButtonAddWord_clicked();
 
-//    void on_pushButtonEditWord_clicked();
+    void on_pushButtonEditWord_clicked();
 
     void on_lineEditFindPrefix_returnPressed();
 
-//    void on_lineEditFind_returnPressed();
+    void on_lineEditFind_returnPressed();
 
-//    void on_comboBoxDictionary_currentTextChanged(const QString &arg1);
+    void on_comboBoxDictionary_currentTextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;

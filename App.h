@@ -12,6 +12,9 @@ class App {
 public:
     App(const App&) = delete;
     App& operator=(const App&) = delete;
+    ~App() {
+        delete dictionary;
+    }
     static App& get() {
         static App app;
         return app;
@@ -38,7 +41,7 @@ public:
         return true;
     }
     QString getDefinition(const QString &word) {
-        history->add(word);
+//        history->add(word);
         return dictionary->getDefinition(word);
     }
     QList<QString> getWordAnd4Definitions() {
@@ -87,9 +90,7 @@ private:
 //        favorite = new Favorite();
 //        history = new History();
     }
-    ~App() {
-        delete dictionary;
-    }
+
     IDictionary* dictionary;
     IFavorite* favorite;
     IHistory* history;

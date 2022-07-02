@@ -19,45 +19,45 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-//void MainWindow::on_pushButtonAddWord_clicked()
-//{
-//    QString word = ui->lineEditAddWord->text();
-//    QString definition = ui->textEditAddWordDefinition->toPlainText();
-//    App::get().addWord(word, definition);
-//}
+void MainWindow::on_pushButtonAddWord_clicked()
+{
+    QString word = ui->lineEditAddWord->text();
+    QString definition = ui->textEditAddWordDefinition->toPlainText();
+    App::get().addWord(word, definition);
+}
 
 
-//void MainWindow::on_pushButtonEditWord_clicked()
-//{
-//    QString word = ui->lineEditEditWord->text();
-//    QString newDefinition = ui->textEditEditWordDefinition->toPlainText();
-//    App::get().addWord(word, newDefinition);
-//}
+void MainWindow::on_pushButtonEditWord_clicked()
+{
+    QString word = ui->lineEditEditWord->text();
+    QString newDefinition = ui->textEditEditWordDefinition->toPlainText();
+    App::get().addWord(word, newDefinition);
+}
 
 
 void MainWindow::on_lineEditFindPrefix_returnPressed()
 {
     QString prefix = ui->lineEditFindPrefix->text();
-    qDebug() << prefix;
     auto result = App::get().getListWordsWithPrefix(prefix);
-    qDebug() << "OK";
 
-//    for (auto& word : result) {
-//        new QListWidgetItem(word, ui->listWidgetSearchResult);
-//    }
+    ui->listWidgetSearchResult->clear();
+    for (auto& word : result) {
+        new QListWidgetItem(word, ui->listWidgetSearchResult);
+    }
 }
 
 
-//void MainWindow::on_lineEditFind_returnPressed()
-//{
-//    QString word = ui->lineEditFind->text();
-//    QString definition = App::get().getDefinition(word);
-//}
+void MainWindow::on_lineEditFind_returnPressed()
+{
+    QString word = ui->lineEditFind->text();
+    QString definition = App::get().getDefinition(word);
+    qDebug() << definition;
+}
 
 
-//void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
-//{
-//    QString dictName = ui->comboBoxDictionary->currentText();
-//    App::get().changeDictionary(dictName);
-//}
+void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
+{
+    QString dictName = ui->comboBoxDictionary->currentText();
+    App::get().changeDictionary(dictName);
+}
 

@@ -16,7 +16,7 @@ public:
     virtual QString getRandomWord() = 0;
     virtual QList<QString> getListWordsHaveDefinition(const QString& token, int maxResultLength = 20) = 0;
     virtual QString getFullDefinitionPath(const QString& word) = 0;
-    virtual ~IDictionary() {}
+    virtual ~IDictionary() = default;
 };
 
 #endif // IDICTIONARY_H

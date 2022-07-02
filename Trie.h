@@ -10,8 +10,7 @@
 template <class T>
 class Trie
 {
-//private:
-public:
+private:
     class TrieNode {
     public:
         bool flag;
