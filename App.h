@@ -84,8 +84,11 @@ public:
 private:
     App() {
         dictionary = new Dictionary();
-        favorite = new Favorite();
-        history = new History();
+//        favorite = new Favorite();
+//        history = new History();
+    }
+    ~App() {
+        delete dictionary;
     }
     IDictionary* dictionary;
     IFavorite* favorite;

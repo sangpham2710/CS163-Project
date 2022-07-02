@@ -11,11 +11,11 @@ public:
     Dictionary() {
         QList<QString> dictNames = {
             "Eng-Eng-small",
-            "Eng-Eng",
-            "Eng-Vie",
-            "Vie-Eng",
-            "Slang",
-            "Emotional"
+//            "Eng-Eng",
+//            "Eng-Vie",
+//            "Vie-Eng",
+//            "Slang",
+//            "Emotional",
         };
         for (auto& dictName : dictNames) {
             dictMap[dictName] = new DictionaryDataStructure(dictName);

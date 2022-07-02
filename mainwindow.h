@@ -18,14 +18,18 @@ public:
     ~MainWindow();
 
 private slots:
-    void on_insertLineEdit_returnPressed();
 
-    void on_findLineEdit_returnPressed();
+//    void on_pushButtonAddWord_clicked();
 
-    void on_findPrefixLineEdit_returnPressed();
+//    void on_pushButtonEditWord_clicked();
+
+    void on_lineEditFindPrefix_returnPressed();
+
+//    void on_lineEditFind_returnPressed();
+
+//    void on_comboBoxDictionary_currentTextChanged(const QString &arg1);
 
 private:
     Ui::MainWindow *ui;
-    Trie<QString> trie;
 };
 #endif // MAINWINDOW_H

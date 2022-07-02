@@ -5,6 +5,7 @@
 #include "CSV.h"
 #include <QFile>
 #include <QTextStream>
+#include <QDebug>
 
 class DictionaryDataStructure {
 public:
@@ -19,6 +20,7 @@ public:
         return dictName;
     }
     bool loadWords() {
+        qDebug() << this->trie;
         trie->clear();
         QString wordPath = getFullWordPath();
         // load words from file
@@ -32,9 +34,13 @@ public:
             (*trie)[word] = definitionFileName;
         }
         fin.close();
+        qDebug() << this->trie;
         return true;
     }
     QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
+//        return trie->searchPrefix(prefix, maxResultLength);
+        qDebug() << this;
+        qDebug() << this->trie;
         return trie->searchPrefix(prefix, maxResultLength);
     }
     bool addWord(const QString& word, const QString& definition) {
@@ -183,13 +189,14 @@ public:
         return {};
     }
     QString getFullWordPath() {
-        return QString("D:/CS163-Project/data/dicts/%1/words/index.csv").arg(dictName);
+        return QString("data/dicts/%1/words/index.csv").arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
-        return QString("D:/CS163-Project/data/dicts/%1/defis/$2.csv").arg(dictName).arg((*trie)[word]);
+        return QString("data/dicts/%1/defis/$2.csv").arg(dictName).arg((*trie)[word]);
     }
-private:
+public:
+//private:
     Trie<QString>* trie;
     QString dictName;
 };

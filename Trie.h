@@ -10,7 +10,8 @@
 template <class T>
 class Trie
 {
-private:
+//private:
+public:
     class TrieNode {
     public:
         bool flag;
@@ -106,7 +107,7 @@ public:
         return this->value(word);
     }
 
-    QList<QString> searchPrefix(const QString& prefix, int maxResultLength) {
+    QList<QString> searchPrefix(const QString& prefix, int maxResultLength) const {
         QList<QString> result;
         TrieNode* ptr = root;
         for (auto& ch : prefix) {
