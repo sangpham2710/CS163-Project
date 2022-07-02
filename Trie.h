@@ -113,16 +113,10 @@ public:
             if (!ptr->next.contains(ch)) return result;
             ptr = ptr->next[ch];
         }
-
         std::function<void(TrieNode*, const QString&)> dfs = [&](TrieNode* root, const QString& suffix) {
             if (root == nullptr) return;
-
             if (result.size() >= maxResultLength) return;
-
-            if (root->flag) {
-                result.push_back(prefix + suffix);
-            }
-
+            if (root->flag) result.push_back(prefix + suffix);
             for (auto& ch : root->next.keys()) {
                 dfs(root->next[ch], suffix + ch);
             }

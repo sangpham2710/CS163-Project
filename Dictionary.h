@@ -14,8 +14,10 @@ public:
             "Eng-Eng",
             "Eng-Vie",
             "Vie-Eng",
-            "Slang",
+//            "Slang",
             "Emotional",
+
+
         };
         for (auto& dictName : dictNames) {
             dictMap[dictName] = new DictionaryDataStructure(dictName);
