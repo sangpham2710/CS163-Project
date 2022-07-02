@@ -29,13 +29,14 @@ public:
         while(!in.atEnd()) {
             line = in.readLine();
             CSV::readLine(line, _word, _defiPath);
-            (*trie)[_word + _defiPath] = _defiPath;
+            (*trie)[_word + getDictName(_defiPath)] = _defiPath;
         }
         fin.close();
         return true;
     }
     bool addWord(const QString &word, const QString &filePath) {
-        QString key = word + filePath;
+
+        QString key = word + getDictName(filePath);
         if (trie->contains(key)) return false;
 
         (*trie)[key] = filePath;
@@ -54,7 +55,7 @@ public:
         return true;
     }
     bool removeWord(const QString &word, const QString &filePath) {
-        QString key = word + filePath;
+        QString key = word + getDictName(filePath);
         if (!trie->contains(key)) return false;
 
         trie->remove(key);
@@ -96,15 +97,15 @@ public:
         return trie->searchPrefix(prefix, maxResultLength);
     }
     QString getFavoriteWordDefinition(const QString &word, const QString &filePath) {
-        QString key = word + filePath;
-        if (!trie->contains(key)) return "";
+        QString key = word + getDictName(filePath);
+        if (!trie->contains(key)) return QString();
 
         QString defiPath = (*trie)[key];
         QFile fin;
         QTextStream in;
         QString line, _word, _defi;
         fin.setFileName(defiPath);
-        if (!fin.open(QFile::ReadOnly | QFile::Text)) return "";
+        if (!fin.open(QFile::ReadOnly | QFile::Text)) return QString();
         in.setDevice(&fin);
         while (!in.atEnd()) {
             line = in.readLine();
@@ -114,12 +115,20 @@ public:
                 return _defi;
             }
         }
-        return "";
+        fin.close();
+        return QString();
     }
     QString getFavoritePath() {
         return "data/favorite/index.csv";
     }
 
+    QString getDictName(QString filePath) {
+        QString dictName = "(";
+        for (int i = 11; filePath[i] != '/'; ++i) { // data/dicts/Eng-Eng/...
+            dictName += filePath[i];
+        }
+        return dictName + ')';
+    }
 private:
     Trie<QString>* trie;
 };

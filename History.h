@@ -44,7 +44,7 @@ public:
         out.setDevice(&fout);
 
         for (int i = 0; i < (*list).size(); ++i) {
-            out << (*list)[i] << Qt:: endl;
+            out << (*list)[i] << '\n';
         }
         return true;
     }
