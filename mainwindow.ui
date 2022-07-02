@@ -247,9 +247,15 @@
                <widget class="QListWidget" name="listWidgetSearchResult"/>
               </item>
               <item>
-               <widget class="QTabWidget" name="tabWidgetWord">
+               <widget class="QTabWidget" name="tabWidgetWordDefinition">
                 <property name="currentIndex">
                  <number>1</number>
+                </property>
+                <property name="tabsClosable">
+                 <bool>true</bool>
+                </property>
+                <property name="movable">
+                 <bool>true</bool>
                 </property>
                 <widget class="QWidget" name="tab">
                  <attribute name="title">

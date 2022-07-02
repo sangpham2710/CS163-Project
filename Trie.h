@@ -16,7 +16,7 @@ private:
         bool flag;
         T* value;
         Map<QChar, TrieNode*> next;
-        TrieNode() : flag{0}, next{} {}
+        TrieNode() : flag{0}, value{nullptr}, next{} {}
         bool isLeaf() {
             return next.empty();
         }
@@ -95,7 +95,7 @@ public:
 
     T& value(const QString& word) {
         auto res = find(word);
-        if (res) {
+        if (res && res->value) {
             return *res->value;
         } else {
             return *insert(word, T{})->value;

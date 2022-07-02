@@ -1,9 +1,9 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 
-#include <QDebug>
-#include <typeinfo>
-#include <QListWidgetItem>
+#include "WordDefinitionWidget.h"
+#include "./ui_WordDefinitionWidget.h"
+
 #include <QDebug>
 
 MainWindow::MainWindow(QWidget *parent)
@@ -59,5 +59,17 @@ void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
 {
     QString dictName = ui->comboBoxDictionary->currentText();
     App::get().changeDictionary(dictName);
+}
+
+
+void MainWindow::on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *item)
+{
+    qDebug() << item->text();
+    QString word = item->text();
+    auto newTab = new WordDefinitionWidget(this);
+    ui->tabWidgetWordDefinition->addTab(newTab, word);
+    ui->tabWidgetWordDefinition->setCurrentIndex(ui->tabWidgetWordDefinition->count() - 1);
+    newTab->setWord(word);
+    newTab->setDefinition(App::get().getDefinition(word));
 }
 
