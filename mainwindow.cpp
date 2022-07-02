@@ -59,6 +59,7 @@ void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
 {
     QString dictName = ui->comboBoxDictionary->currentText();
     App::get().changeDictionary(dictName);
+    ui->listWidgetSearchResult->clear();
 }
 
 
