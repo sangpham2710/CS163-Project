@@ -33,7 +33,7 @@ set(PROJECT_SOURCES
         dialogaddnewword.cpp
         dialogaddnewword.ui
         dialogeditword.h dialogeditword.cpp dialogeditword.ui
-        game_dialog.h game_dialog.cpp game_dialog.ui
+        GameDialog.h GameDialog.cpp GameDialog.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

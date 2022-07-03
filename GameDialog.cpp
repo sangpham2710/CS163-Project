@@ -1,10 +1,10 @@
-#include "game_dialog.h"
-#include "ui_game_dialog.h"
+#include "GameDialog.h"
+#include "ui_GameDialog.h"
 #include <QMessageBox>
 #include <QDebug>
-Game_Dialog::Game_Dialog(QWidget *parent, QString lang, QString state) :
+GameDialog::GameDialog(QWidget *parent, QString lang, QString state) :
     QDialog(parent),
-    ui(new Ui::Game_Dialog), lang(lang), state(state)
+    ui(new Ui::GameDialog), lang(lang), state(state)
 {
     ui->setupUi(this);
     int i=0;
@@ -17,23 +17,23 @@ Game_Dialog::Game_Dialog(QWidget *parent, QString lang, QString state) :
     for (int j=0;j<i;j++) {
         result[j]=state[j];
     }
-    ui->Dif_Chosen->setText (result);
-    ui->Lang_Chosen->setText (lang);
+    ui->DifChosen->setText (result);
+    ui->LangChosen->setText (lang);
 }
 
-Game_Dialog::~Game_Dialog()
+GameDialog::~GameDialog()
 {
     delete ui;
 }
 
 
-void Game_Dialog::on_Game_Quit_Button_clicked()
+void GameDialog::on_Game_Quit_Button_clicked()
 {
     close();
 }
 
 
-void Game_Dialog::on_pushButton_clicked()
+void GameDialog::on_pushButton_clicked()
 {
     QMessageBox::StandardButton reply = QMessageBox::question (this, "Restart", "Do you want to restart?" , QMessageBox::Yes| QMessageBox::No);
     if (reply==QMessageBox::Yes);

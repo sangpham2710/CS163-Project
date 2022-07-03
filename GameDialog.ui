@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>Game_Dialog</class>
- <widget class="QDialog" name="Game_Dialog">
+ <class>GameDialog</class>
+ <widget class="QDialog" name="GameDialog">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -43,7 +43,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="Dif_Title">
+              <widget class="QLabel" name="DifTitle">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                  <horstretch>30</horstretch>
@@ -51,12 +51,12 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Difficulty:</string>
+                <string>Difficulty: </string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="Dif_Chosen">
+              <widget class="QLabel" name="DifChosen">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -76,7 +76,7 @@
               <number>0</number>
              </property>
              <item>
-              <widget class="QLabel" name="Lang_Title">
+              <widget class="QLabel" name="LangTitle">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -84,12 +84,12 @@
                 </sizepolicy>
                </property>
                <property name="text">
-                <string>Language:</string>
+                <string>Language: </string>
                </property>
               </widget>
              </item>
              <item>
-              <widget class="QLabel" name="Lang_Chosen">
+              <widget class="QLabel" name="LangChosen">
                <property name="minimumSize">
                 <size>
                  <width>0</width>
@@ -127,7 +127,7 @@
             <number>0</number>
            </property>
            <item>
-            <widget class="QLabel" name="Time">
+            <widget class="QLabel" name="TimeTitle">
              <property name="sizePolicy">
               <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                <horstretch>0</horstretch>
@@ -146,7 +146,7 @@
             </widget>
            </item>
            <item>
-            <widget class="QLabel" name="label_3">
+            <widget class="QLabel" name="Time">
              <property name="text">
               <string>TextLabel</string>
              </property>
@@ -162,17 +162,17 @@
           <number>0</number>
          </property>
          <item>
-          <widget class="QLabel" name="label">
+          <widget class="QLabel" name="ScoreTitle">
            <property name="enabled">
             <bool>true</bool>
            </property>
            <property name="text">
-            <string>Score:</string>
+            <string>Score: </string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLabel" name="label_2">
+          <widget class="QLabel" name="Score">
            <property name="minimumSize">
             <size>
              <width>0</width>

@@ -138,7 +138,7 @@
          </rect>
         </property>
         <property name="currentIndex">
-         <number>1</number>
+         <number>0</number>
         </property>
         <property name="tabsClosable">
          <bool>true</bool>
@@ -239,7 +239,7 @@
             <item>
              <layout class="QHBoxLayout" name="horizontalLayout_7">
               <item>
-               <widget class="QLabel" name="label_3">
+               <widget class="QLabel" name="labelGameTitle">
                 <property name="sizePolicy">
                  <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
                   <horstretch>0</horstretch>
@@ -286,7 +286,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_4">
                   <item>
-                   <widget class="QLabel" name="language_label">
+                   <widget class="QLabel" name="labelLang">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -310,7 +310,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="language_game_choose">
+                   <widget class="QComboBox" name="qcomboboxLang">
                     <item>
                      <property name="text">
                       <string>Eng-Eng</string>
@@ -333,7 +333,7 @@
                 <item>
                  <layout class="QHBoxLayout" name="horizontalLayout_3">
                   <item>
-                   <widget class="QLabel" name="difficulty_label">
+                   <widget class="QLabel" name="labelDif">
                     <property name="sizePolicy">
                      <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
                       <horstretch>0</horstretch>
@@ -357,7 +357,7 @@
                    </widget>
                   </item>
                   <item>
-                   <widget class="QComboBox" name="difficulty_game">
+                   <widget class="QComboBox" name="qcomboboxDif">
                     <item>
                      <property name="text">
                       <string>Easy - 10 Questions</string>
@@ -402,7 +402,7 @@
               <item>
                <layout class="QHBoxLayout" name="horizontalLayout_6">
                 <item>
-                 <widget class="QPushButton" name="Game_start">
+                 <widget class="QPushButton" name="buttonGameStart">
                   <property name="sizePolicy">
                    <sizepolicy hsizetype="Minimum" vsizetype="Fixed">
                     <horstretch>0</horstretch>

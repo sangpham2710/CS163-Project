@@ -1,7 +1,7 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <QMessageBox>
-#include "game_dialog.h"
+#include "GameDialog.h"
 QString state;
 QString lang;
 MainWindow::MainWindow(QWidget *parent)
@@ -57,9 +57,9 @@ void MainWindow::on_pushButtonEdit_clicked()
 
 void MainWindow::on_Game_start_clicked()
 {
-    state=ui->difficulty_game->currentText();
-    lang=ui->language_game_choose->currentText();
-    Game_Dialog* game = new Game_Dialog(this, lang, state);
+    state=ui->qcomboboxDif->currentText();
+    lang=ui->qcomboboxLang->currentText();
+    GameDialog* game = new GameDialog(this, lang, state);
     game->show();
 }
 
