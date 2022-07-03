@@ -2,7 +2,6 @@
 #include "./ui_mainwindow.h"
 
 #include "WordDefinitionWidget.h"
-#include "./ui_WordDefinitionWidget.h"
 
 #include <QDebug>
 

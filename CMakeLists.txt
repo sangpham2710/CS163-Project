@@ -30,8 +30,8 @@ set(PROJECT_SOURCES
         Favorite.h
         History.h
         CSV.h
-        WordDefinitionWidget.h
         WordDefinitionWidget.cpp
+        WordDefinitionWidget.h
         WordDefinitionWidget.ui
 )
 

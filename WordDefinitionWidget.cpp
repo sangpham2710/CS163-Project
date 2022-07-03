@@ -1,5 +1,5 @@
 #include "WordDefinitionWidget.h"
-#include "ui_WordDefinitionWidget.h"
+#include "./ui_WordDefinitionWidget.h"
 
 WordDefinitionWidget::WordDefinitionWidget(QWidget *parent) :
     QWidget(parent),
