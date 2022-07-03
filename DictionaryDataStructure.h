@@ -40,12 +40,12 @@ class DictionaryDataStructure {
         return trie->searchPrefix(prefix, maxResultLength);
     }
     bool addWord(const QString& word, const QString& definition) {
+        qDebug() << trie->contains(word) << '\n';
         if (trie->contains(word)) return false;
-        (*trie)[word] = "tmp.txt";
+        (*trie)[word] = "tmp";
         QString wordPath = getFullWordPath();
         QString definitionPath =
-            QString("D:/CS163-Project/data/dicts/%1/defis/tmp.csv")
-                .arg(dictName);
+            QString("data/dicts/%1/defis/tmp.csv").arg(dictName);
 
         // append definition into word/index.csv and defis/tmp.csv
         QFile fout;
@@ -56,7 +56,7 @@ class DictionaryDataStructure {
             return false;
 
         out.setDevice(&fout);
-        out << CSV::writeLine(word, "tmp.txt") << '\n';
+        out << CSV::writeLine(word, "tmp") << '\n';
         fout.close();
 
         fout.setFileName(definitionPath);
@@ -92,7 +92,7 @@ class DictionaryDataStructure {
         listDefinitions[wordIndex] = newDefinition;
 
         QFile fout(definitionPath);
-        if (!fin.open(QFile::WriteOnly | QFile::Text)) return false;
+        if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
         QTextStream out(&fout);
 
         for (int i = 0; i < listWords.size(); ++i) {
@@ -169,7 +169,8 @@ class DictionaryDataStructure {
         return true;
     }
     QString getRandomWord() {
-        std::mt19937 rng(std::chrono::steady_clock::now().time_since_epoch().count());
+        std::mt19937 rng(
+            std::chrono::steady_clock::now().time_since_epoch().count());
         int wordIndex = rng() % trie->size();
         int currentIndex = 0;
         QFile fin;
@@ -191,7 +192,7 @@ class DictionaryDataStructure {
         return QString();
     }
     QString getDefinition(const QString& word) {
-        if (!trie->contains(word)) return "";
+        if (!trie->contains(word)) return QString();
         QString path = getFullDefinitionPath(word);
         // get definition of word in file using path variable
         QFile fin(path);

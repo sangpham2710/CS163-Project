@@ -23,7 +23,9 @@ void MainWindow::on_pushButtonAddWord_clicked()
 {
     QString word = ui->lineEditAddWord->text();
     QString definition = ui->textEditAddWordDefinition->toPlainText();
-    App::get().addWord(word, definition);
+    qDebug() << App::get().addWord(word, definition);
+    ui->lineEditAddWord->clear();
+    ui->textEditAddWordDefinition->clear();
 }
 
 
@@ -31,7 +33,9 @@ void MainWindow::on_pushButtonEditWord_clicked()
 {
     QString word = ui->lineEditEditWord->text();
     QString newDefinition = ui->textEditEditWordDefinition->toPlainText();
-    App::get().addWord(word, newDefinition);
+    qDebug() << App::get().editWord(word, newDefinition);
+    ui->lineEditEditWord->clear();
+    ui->textEditEditWordDefinition->clear();
 }
 
 void MainWindow::on_lineEditFind_returnPressed()
@@ -62,9 +66,9 @@ void MainWindow::on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *it
     auto newTab = new WordDefinitionWidget(this);
     ui->tabWidgetWordDefinition->addTab(newTab, word);
     ui->tabWidgetWordDefinition->setCurrentIndex(ui->tabWidgetWordDefinition->count() - 1);
-
+    QString definition = App::get().getDefinition(word);
     newTab->setWord(word);
-    newTab->setDefinition(App::get().getDefinition(word));
+    newTab->setDefinition(definition);
 }
 
 

@@ -4,9 +4,9 @@
 #include "IHistory.h"
 
 class History : public IHistory {
-public:
+   public:
     bool add(const QString &token, int maxSize);
     QList<QString> getHistory();
 };
 
-#endif // HISTORY_H
+#endif  // HISTORY_H

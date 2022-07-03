@@ -4,11 +4,12 @@
 #include "IFavorite.h"
 
 class Favorite : public IFavorite {
-public:
+   public:
     bool addWord(const QString &word, const QString &filePath);
     bool removeWord(const QString &word);
-    QList<QString> getFavoriteWordsWithPrefix(const QString &prefix, int maxResultLength);
+    QList<QString> getFavoriteWordsWithPrefix(const QString &prefix,
+                                              int maxResultLength);
     QString getFavoriteWordDefinition(const QString &word);
 };
 
-#endif // FAVORITE_H
+#endif  // FAVORITE_H
