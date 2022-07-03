@@ -16,11 +16,11 @@ class History : public IHistory {
         delete list;
     }
     bool loadData() {
-        QString HistoryPath = getHistoryPath();
+        QString historyPath = getHistoryPath();
         QFile fin;
         QTextStream in;
 
-        fin.setFileName(HistoryPath);
+        fin.setFileName(historyPath);
         if(!fin.open(QFile::ReadOnly | QFile::Text)) return false;
         in.setDevice(&fin);
 
