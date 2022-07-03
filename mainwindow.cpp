@@ -79,11 +79,13 @@ void MainWindow::on_pushButtonReset_clicked()
 }
 
 
-void MainWindow::on_lineEditFindPrefix_textChanged(const QString &text)
+void MainWindow::on_lineEditFindPrefix_textChanged(const QString &prefix)
 {
-    QString prefix = ui->lineEditFindPrefix->text();
     auto result = App::get().getListWordsWithPrefix(prefix);
-
+    if (prefix == "") {
+        loadHistory();
+        return;
+    }
     ui->listWidgetSearchResult->clear();
     for (auto& word : result) {
         new QListWidgetItem(word, ui->listWidgetSearchResult);
@@ -94,5 +96,16 @@ void MainWindow::on_lineEditFindPrefix_textChanged(const QString &text)
 void MainWindow::on_tabWidgetWordDefinition_tabCloseRequested(int index)
 {
     ui->tabWidgetWordDefinition->removeTab(index);
+}
+
+void MainWindow::loadHistory() {
+    ui->listWidgetSearchResult->clear();
+    for (auto& word : App::get().getHistory()) {
+        new QListWidgetItem(word, ui->listWidgetSearchResult);
+    }
+    for (int listIndex = 0; listIndex < ui->listWidgetSearchResult->count(); ++listIndex) {
+        auto item = ui->listWidgetSearchResult->item(listIndex);
+        item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
+    }
 }
 

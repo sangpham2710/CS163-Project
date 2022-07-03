@@ -15,7 +15,7 @@ class App {
     ~App() {
         delete dictionary;
         //        delete favorite;
-        //        delete history;
+        delete history;
     }
     static App& get() {
         static App app;
@@ -44,7 +44,7 @@ class App {
     }
     bool resetDictionary() { return dictionary->reset(); }
     QString getDefinition(const QString& word) {
-        //        history->add(word);
+        history->add(word);
         return dictionary->getDefinition(word);
     }
     QList<QString> getWordAnd4Definitions() {
@@ -91,7 +91,7 @@ class App {
     App() {
         dictionary = new Dictionary();
         //        favorite = new Favorite();
-        //        history = new History();
+        history = new History();
     }
 
     IDictionary* dictionary;
