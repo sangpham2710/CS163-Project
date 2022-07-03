@@ -27,15 +27,17 @@ private slots:
 
     void on_pushButtonEditWord_clicked();
 
-    void on_lineEditFindPrefix_returnPressed();
-
     void on_lineEditFind_returnPressed();
 
     void on_comboBoxDictionary_currentTextChanged(const QString &arg1);
 
     void on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *item);
 
-    void on_pushButton_clicked();
+    void on_pushButtonReset_clicked();
+
+    void on_lineEditFindPrefix_textChanged(const QString &arg1);
+
+    void on_tabWidgetWordDefinition_tabCloseRequested(int index);
 
 private:
     Ui::MainWindow *ui;

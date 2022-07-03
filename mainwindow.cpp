@@ -34,19 +34,6 @@ void MainWindow::on_pushButtonEditWord_clicked()
     App::get().addWord(word, newDefinition);
 }
 
-
-void MainWindow::on_lineEditFindPrefix_returnPressed()
-{
-    QString prefix = ui->lineEditFindPrefix->text();
-    auto result = App::get().getListWordsWithPrefix(prefix);
-
-    ui->listWidgetSearchResult->clear();
-    for (auto& word : result) {
-        new QListWidgetItem(word, ui->listWidgetSearchResult);
-    }
-}
-
-
 void MainWindow::on_lineEditFind_returnPressed()
 {
     QString word = ui->lineEditFind->text();
@@ -66,16 +53,42 @@ void MainWindow::on_comboBoxDictionary_currentTextChanged(const QString &text)
 void MainWindow::on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *item)
 {
     QString word = item->text();
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetWordDefinition->count(); ++tabIndex) {
+        if (ui->tabWidgetWordDefinition->tabText(tabIndex) == word) {
+            ui->tabWidgetWordDefinition->setCurrentIndex(tabIndex);
+            return;
+        }
+    }
     auto newTab = new WordDefinitionWidget(this);
     ui->tabWidgetWordDefinition->addTab(newTab, word);
     ui->tabWidgetWordDefinition->setCurrentIndex(ui->tabWidgetWordDefinition->count() - 1);
+
     newTab->setWord(word);
     newTab->setDefinition(App::get().getDefinition(word));
 }
 
 
-void MainWindow::on_pushButton_clicked()
+void MainWindow::on_pushButtonReset_clicked()
 {
+    ui->listWidgetSearchResult->clear();
     App::get().resetDictionary();
+}
+
+
+void MainWindow::on_lineEditFindPrefix_textChanged(const QString &text)
+{
+    QString prefix = ui->lineEditFindPrefix->text();
+    auto result = App::get().getListWordsWithPrefix(prefix);
+
+    ui->listWidgetSearchResult->clear();
+    for (auto& word : result) {
+        new QListWidgetItem(word, ui->listWidgetSearchResult);
+    }
+}
+
+
+void MainWindow::on_tabWidgetWordDefinition_tabCloseRequested(int index)
+{
+    ui->tabWidgetWordDefinition->removeTab(index);
 }
 
