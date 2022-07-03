@@ -73,3 +73,9 @@ void MainWindow::on_listWidgetSearchResult_itemDoubleClicked(QListWidgetItem *it
     newTab->setDefinition(App::get().getDefinition(word));
 }
 
+
+void MainWindow::on_pushButton_clicked()
+{
+    App::get().resetDictionary();
+}
+

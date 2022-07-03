@@ -29,8 +29,8 @@ private:
             clear(root->next[ch]);
             delete root->next[ch];
             root->next[ch] = nullptr;
-            if (root->value) delete root->value;
         }
+        if (root->value) delete root->value;
     }
 
     TrieNode* find(const QString& word) {

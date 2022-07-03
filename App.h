@@ -14,6 +14,8 @@ public:
     App& operator=(const App&) = delete;
     ~App() {
         delete dictionary;
+//        delete favorite;
+//        delete history;
     }
     static App& get() {
         static App app;
@@ -39,6 +41,9 @@ public:
             if (!favorite->removeWord(word)) return false;
         }
         return true;
+    }
+    bool resetDictionary() {
+        return dictionary->reset();
     }
     QString getDefinition(const QString &word) {
 //        history->add(word);

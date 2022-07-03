@@ -39,235 +39,250 @@
        <attribute name="title">
         <string>Search</string>
        </attribute>
-       <layout class="QVBoxLayout" name="verticalLayout_12">
+       <layout class="QHBoxLayout" name="horizontalLayout_6">
         <item>
-         <layout class="QVBoxLayout" name="verticalLayout_13">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
-           <widget class="QComboBox" name="comboBoxDictionary">
+           <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,2">
             <item>
-             <property name="text">
-              <string>Eng-Eng-small</string>
-             </property>
+             <widget class="QComboBox" name="comboBoxDictionary">
+              <item>
+               <property name="text">
+                <string>Eng-Eng-small</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Eng-Eng</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Eng-Vie</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Vie-Eng</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Slang</string>
+               </property>
+              </item>
+              <item>
+               <property name="text">
+                <string>Emotional</string>
+               </property>
+              </item>
+             </widget>
             </item>
             <item>
-             <property name="text">
-              <string>Eng-Eng</string>
-             </property>
+             <widget class="QPushButton" name="pushButton">
+              <property name="text">
+               <string>Reset</string>
+              </property>
+             </widget>
             </item>
-            <item>
-             <property name="text">
-              <string>Eng-Vie</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Vie-Eng</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Slang</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>Emotional</string>
-             </property>
-            </item>
-           </widget>
+           </layout>
           </item>
           <item>
-           <layout class="QHBoxLayout" name="horizontalLayout">
+           <layout class="QVBoxLayout" name="verticalLayout_13">
             <item>
-             <layout class="QVBoxLayout" name="verticalLayout_10">
-              <property name="spacing">
-               <number>10</number>
-              </property>
+             <layout class="QHBoxLayout" name="horizontalLayout">
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_2">
+               <layout class="QVBoxLayout" name="verticalLayout_10">
                 <property name="spacing">
-                 <number>20</number>
+                 <number>10</number>
                 </property>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_8">
+                 <layout class="QHBoxLayout" name="horizontalLayout_2">
                   <property name="spacing">
-                   <number>3</number>
+                   <number>20</number>
                   </property>
                   <item>
-                   <widget class="QLabel" name="labelFind">
-                    <property name="text">
-                     <string>Find</string>
+                   <layout class="QVBoxLayout" name="verticalLayout_8">
+                    <property name="spacing">
+                     <number>3</number>
                     </property>
-                   </widget>
+                    <item>
+                     <widget class="QLabel" name="labelFind">
+                      <property name="text">
+                       <string>Find</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditFind"/>
+                    </item>
+                   </layout>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEditFind"/>
+                   <layout class="QVBoxLayout" name="verticalLayout_7">
+                    <property name="spacing">
+                     <number>3</number>
+                    </property>
+                    <item>
+                     <widget class="QLabel" name="labelFindPrefix">
+                      <property name="text">
+                       <string>Find prefix</string>
+                      </property>
+                     </widget>
+                    </item>
+                    <item>
+                     <widget class="QLineEdit" name="lineEditFindPrefix"/>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </item>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_7">
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
                   <property name="spacing">
-                   <number>3</number>
+                   <number>20</number>
                   </property>
                   <item>
-                   <widget class="QLabel" name="labelFindPrefix">
-                    <property name="text">
-                     <string>Find prefix</string>
+                   <layout class="QVBoxLayout" name="verticalLayout_3">
+                    <property name="spacing">
+                     <number>6</number>
                     </property>
-                   </widget>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout">
+                      <property name="spacing">
+                       <number>3</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="labelAddWord">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Add Word</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="lineEditAddWord"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_2">
+                      <property name="spacing">
+                       <number>3</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="labelAddWordDefinition">
+                        <property name="text">
+                         <string>Definition</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QTextEdit" name="textEditAddWordDefinition"/>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButtonAddWord">
+                        <property name="text">
+                         <string>Confirm Add</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
                   </item>
                   <item>
-                   <widget class="QLineEdit" name="lineEditFindPrefix"/>
+                   <layout class="QVBoxLayout" name="verticalLayout_6">
+                    <property name="spacing">
+                     <number>6</number>
+                    </property>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_4">
+                      <property name="spacing">
+                       <number>3</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="labelEditWord">
+                        <property name="sizePolicy">
+                         <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+                          <horstretch>0</horstretch>
+                          <verstretch>0</verstretch>
+                         </sizepolicy>
+                        </property>
+                        <property name="text">
+                         <string>Edit Word</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QLineEdit" name="lineEditEditWord"/>
+                      </item>
+                     </layout>
+                    </item>
+                    <item>
+                     <layout class="QVBoxLayout" name="verticalLayout_5">
+                      <property name="spacing">
+                       <number>3</number>
+                      </property>
+                      <item>
+                       <widget class="QLabel" name="labelEditWordDefinition">
+                        <property name="text">
+                         <string>New definition</string>
+                        </property>
+                       </widget>
+                      </item>
+                      <item>
+                       <widget class="QTextEdit" name="textEditEditWordDefinition"/>
+                      </item>
+                      <item>
+                       <widget class="QPushButton" name="pushButtonEditWord">
+                        <property name="text">
+                         <string>Confirm Edit</string>
+                        </property>
+                       </widget>
+                      </item>
+                     </layout>
+                    </item>
+                   </layout>
                   </item>
                  </layout>
                 </item>
                </layout>
               </item>
               <item>
-               <layout class="QHBoxLayout" name="horizontalLayout_3">
-                <property name="spacing">
-                 <number>20</number>
-                </property>
+               <layout class="QVBoxLayout" name="verticalLayout_11" stretch="2,3">
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_3">
-                  <property name="spacing">
-                   <number>6</number>
-                  </property>
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="labelAddWord">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="text">
-                       <string>Add Word</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEditAddWord"/>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_2">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="labelAddWordDefinition">
-                      <property name="text">
-                       <string>Definition</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="textEditAddWordDefinition"/>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pushButtonAddWord">
-                      <property name="text">
-                       <string>Confirm Add</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
+                 <widget class="QListWidget" name="listWidgetSearchResult"/>
                 </item>
                 <item>
-                 <layout class="QVBoxLayout" name="verticalLayout_6">
-                  <property name="spacing">
-                   <number>6</number>
+                 <widget class="QTabWidget" name="tabWidgetWordDefinition">
+                  <property name="currentIndex">
+                   <number>1</number>
                   </property>
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_4">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="labelEditWord">
-                      <property name="sizePolicy">
-                       <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
-                        <horstretch>0</horstretch>
-                        <verstretch>0</verstretch>
-                       </sizepolicy>
-                      </property>
-                      <property name="text">
-                       <string>Edit Word</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QLineEdit" name="lineEditEditWord"/>
-                    </item>
-                   </layout>
-                  </item>
-                  <item>
-                   <layout class="QVBoxLayout" name="verticalLayout_5">
-                    <property name="spacing">
-                     <number>3</number>
-                    </property>
-                    <item>
-                     <widget class="QLabel" name="labelEditWordDefinition">
-                      <property name="text">
-                       <string>New definition</string>
-                      </property>
-                     </widget>
-                    </item>
-                    <item>
-                     <widget class="QTextEdit" name="textEditEditWordDefinition"/>
-                    </item>
-                    <item>
-                     <widget class="QPushButton" name="pushButtonEditWord">
-                      <property name="text">
-                       <string>Confirm Edit</string>
-                      </property>
-                     </widget>
-                    </item>
-                   </layout>
-                  </item>
-                 </layout>
+                  <property name="tabsClosable">
+                   <bool>true</bool>
+                  </property>
+                  <property name="movable">
+                   <bool>true</bool>
+                  </property>
+                  <widget class="QWidget" name="tab">
+                   <attribute name="title">
+                    <string>Tab 1</string>
+                   </attribute>
+                  </widget>
+                  <widget class="QWidget" name="tab_2">
+                   <attribute name="title">
+                    <string>Tab 2</string>
+                   </attribute>
+                  </widget>
+                 </widget>
                 </item>
                </layout>
-              </item>
-             </layout>
-            </item>
-            <item>
-             <layout class="QVBoxLayout" name="verticalLayout_11" stretch="2,3">
-              <item>
-               <widget class="QListWidget" name="listWidgetSearchResult"/>
-              </item>
-              <item>
-               <widget class="QTabWidget" name="tabWidgetWordDefinition">
-                <property name="currentIndex">
-                 <number>1</number>
-                </property>
-                <property name="tabsClosable">
-                 <bool>true</bool>
-                </property>
-                <property name="movable">
-                 <bool>true</bool>
-                </property>
-                <widget class="QWidget" name="tab">
-                 <attribute name="title">
-                  <string>Tab 1</string>
-                 </attribute>
-                </widget>
-                <widget class="QWidget" name="tab_2">
-                 <attribute name="title">
-                  <string>Tab 2</string>
-                 </attribute>
-                </widget>
-               </widget>
               </item>
              </layout>
             </item>
