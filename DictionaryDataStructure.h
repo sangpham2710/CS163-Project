@@ -1,23 +1,24 @@
 #ifndef DICTIONARYDATASTRUCTURE_H
 #define DICTIONARYDATASTRUCTURE_H
 
-#include "Trie.h"
-#include "CSV.h"
+#include <QDebug>
 #include <QFile>
 #include <QTextStream>
+#include <chrono>
+#include <random>
+
+#include "CSV.h"
+#include "Trie.h"
 
 class DictionaryDataStructure {
-public:
+   public:
     DictionaryDataStructure() : trie{new Trie<QString>()} {}
-    DictionaryDataStructure(const QString& dictName) : trie{new Trie<QString>()}, dictName{dictName} {
+    DictionaryDataStructure(const QString& dictName)
+        : trie{new Trie<QString>()}, dictName{dictName} {
         loadWords();
     }
-    ~DictionaryDataStructure() {
-        delete trie;
-    }
-    QString getDictionaryName() {
-        return dictName;
-    }
+    ~DictionaryDataStructure() { delete trie; }
+    QString getDictionaryName() { return dictName; }
     bool loadWords() {
         trie->clear();
         QString wordPath = getFullWordPath();
@@ -34,28 +35,33 @@ public:
         fin.close();
         return true;
     }
-    QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
+    QList<QString> getListWordsWithPrefix(const QString& prefix,
+                                          int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
     bool addWord(const QString& word, const QString& definition) {
+        qDebug() << trie->contains(word) << '\n';
         if (trie->contains(word)) return false;
-        (*trie)[word] = "tmp.txt";
+        (*trie)[word] = "tmp";
         QString wordPath = getFullWordPath();
-        QString definitionPath = QString("D:/CS163-Project/data/dicts/%1/defis/tmp.csv").arg(dictName);
+        QString definitionPath =
+            QString("data/dicts/%1/defis/tmp.csv").arg(dictName);
 
         // append definition into word/index.csv and defis/tmp.csv
         QFile fout;
         QTextStream out;
 
         fout.setFileName(wordPath);
-        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
+        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append))
+            return false;
 
         out.setDevice(&fout);
-        out << CSV::writeLine(word, "tmp.txt") << '\n';
+        out << CSV::writeLine(word, "tmp") << '\n';
         fout.close();
 
         fout.setFileName(definitionPath);
-        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
+        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append))
+            return false;
         out.setDevice(&fout);
         out << CSV::writeLine(word, definition) << '\n';
         fout.close();
@@ -86,7 +92,7 @@ public:
         listDefinitions[wordIndex] = newDefinition;
 
         QFile fout(definitionPath);
-        if (!fin.open(QFile::WriteOnly | QFile::Text)) return false;
+        if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
         QTextStream out(&fout);
 
         for (int i = 0; i < listWords.size(); ++i) {
@@ -162,8 +168,31 @@ public:
         fout.close();
         return true;
     }
+    QString getRandomWord() {
+        std::mt19937 rng(
+            std::chrono::steady_clock::now().time_since_epoch().count());
+        int wordIndex = rng() % trie->size();
+        int currentIndex = 0;
+        QFile fin;
+        QTextStream in;
+        QString line, _word, _definition;
+        QString wordPath = getFullWordPath();
+        fin.setFileName(wordPath);
+        if (!fin.open(QFile::ReadOnly | QFile::Text)) return QString();
+        in.setDevice(&fin);
+        while (!in.atEnd()) {
+            line = in.readLine();
+            CSV::readLine(line, _word, _definition);
+            if (currentIndex++ == wordIndex) {
+                fin.close();
+                return _word;
+            }
+        }
+        fin.close();
+        return QString();
+    }
     QString getDefinition(const QString& word) {
-        if (!trie->contains(word)) return "";
+        if (!trie->contains(word)) return QString();
         QString path = getFullDefinitionPath(word);
         // get definition of word in file using path variable
         QFile fin(path);
@@ -173,25 +202,33 @@ public:
         while (!in.atEnd()) {
             line = in.readLine();
             CSV::readLine(line, _word, _definition);
-            if (_word == word) return _definition;
+            if (_word == word) {
+                fin.close();
+                return _definition;
+            }
         }
         fin.close();
         return QString();
     }
-    QList<QString> getListWordsHaveDefinition(const QString& token, int maxResultLength) {
+    QList<QString> getListWordsHaveDefinition(const QString& token,
+                                              int maxResultLength) {
         // NOT DONE
         return {};
     }
     QString getFullWordPath() {
-        return QString("D:/CS163-Project/data/dicts/%1/words/index.csv").arg(dictName);
+        return QString("data/dicts/%1/words/index.csv").arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
-        return QString("D:/CS163-Project/data/dicts/%1/defis/$2.csv").arg(dictName).arg((*trie)[word]);
+        QString definition = (*trie)[word];
+        return QString("data/dicts/%1/defis/%2.csv")
+            .arg(dictName)
+            .arg(definition);
     }
-private:
+
+   private:
     Trie<QString>* trie;
     QString dictName;
 };
 
-#endif // DICTIONARYDATASTRUCTURE_H
+#endif  // DICTIONARYDATASTRUCTURE_H

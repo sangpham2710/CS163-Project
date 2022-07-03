@@ -84,8 +84,10 @@ class CSV {
         QString line = "";
         bool first = true;
         for (const QString& value : values) {
-            if (first) first = false;
-            else line += ',';
+            if (first)
+                first = false;
+            else
+                line += ',';
             bool enclosed = false;
             for (const QChar& c : value)
                 if (c == ',' || c == '"') enclosed = true;
@@ -130,4 +132,4 @@ class CSV {
     }
 };
 
-#endif // CSV_H
+#endif  // CSV_H
