@@ -23,6 +23,7 @@ private:
     };
 
     TrieNode* root;
+    int trieSize;
 
     void clear(TrieNode*& root) {
         for (auto& ch : root->next.keys()) {
@@ -48,8 +49,11 @@ public:
         delete root;
     }
 
+    int size() const { return trieSize; }
+
     void clear() {
         clear(root);
+        trieSize = 0;
     }
 
     TrieNode* insert(const QString& word, const T& value) {
@@ -61,6 +65,7 @@ public:
         }
         ptr->flag = true;
         ptr->value = new T(value);
+        ++trieSize;
         return ptr;
     }
 
@@ -90,6 +95,7 @@ public:
                 delete cur;
             } else break;
         }
+        --trieSize;
         return true;
     }
 

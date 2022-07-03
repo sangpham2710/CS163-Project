@@ -67,8 +67,7 @@ public:
         return currentDict->getDefinition(word);
     }
     QString getRandomWord() {
-        // NOT DONE
-        return "";
+        return currentDict->getRandomWord();
     }
     QList<QString> getListWordsHaveDefinition(const QString &token, int maxResultLength) {
         return currentDict->getListWordsHaveDefinition(token, maxResultLength);
