@@ -6,41 +6,29 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>360</width>
-    <height>382</height>
+    <width>516</width>
+    <height>378</height>
    </rect>
-  </property>
-  <property name="sizePolicy">
-   <sizepolicy hsizetype="Preferred" vsizetype="Expanding">
-    <horstretch>0</horstretch>
-    <verstretch>0</verstretch>
-   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <layout class="QVBoxLayout" name="verticalLayoutParent">
-     <property name="spacing">
-      <number>0</number>
-     </property>
+    <layout class="QVBoxLayout" name="verticalLayout_3">
      <item>
-      <layout class="QVBoxLayout" name="verticalLayoutEditWord" stretch="0,0,0">
-       <property name="spacing">
-        <number>0</number>
-       </property>
+      <layout class="QVBoxLayout" name="verticalLayout_2">
        <item>
-        <layout class="QVBoxLayout" name="verticalLayoutWord">
+        <layout class="QHBoxLayout" name="horizontalLayoutEditWord">
          <item>
-          <widget class="QLabel" name="labelWord">
+          <widget class="QLabel" name="labelEditWord">
            <property name="text">
             <string>Word</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditWord"/>
+          <widget class="QLineEdit" name="lineEditEditWord"/>
          </item>
         </layout>
        </item>
@@ -61,23 +49,23 @@
         </spacer>
        </item>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayoutNewDefinition">
+        <layout class="QVBoxLayout" name="verticalLayoutEditDefinition">
          <item>
-          <widget class="QLabel" name="labelNewDefinition">
+          <widget class="QLabel" name="labelEditDefinition">
            <property name="text">
             <string>New Definition</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QTextEdit" name="textEditNewDefinition"/>
+          <widget class="QTextEdit" name="textEditEditDefinition"/>
          </item>
         </layout>
        </item>
       </layout>
      </item>
      <item>
-      <spacer name="verticalSpacer_3">
+      <spacer name="verticalSpacer">
        <property name="orientation">
         <enum>Qt::Vertical</enum>
        </property>
@@ -87,13 +75,13 @@
        <property name="sizeHint" stdset="0">
         <size>
          <width>20</width>
-         <height>20</height>
+         <height>40</height>
         </size>
        </property>
       </spacer>
      </item>
      <item>
-      <widget class="QDialogButtonBox" name="buttonBoxEditWord">
+      <widget class="QDialogButtonBox" name="buttonBox">
        <property name="orientation">
         <enum>Qt::Horizontal</enum>
        </property>
@@ -109,7 +97,7 @@
  <resources/>
  <connections>
   <connection>
-   <sender>buttonBoxEditWord</sender>
+   <sender>buttonBox</sender>
    <signal>accepted()</signal>
    <receiver>DialogEditWord</receiver>
    <slot>accept()</slot>
@@ -125,7 +113,7 @@
    </hints>
   </connection>
   <connection>
-   <sender>buttonBoxEditWord</sender>
+   <sender>buttonBox</sender>
    <signal>rejected()</signal>
    <receiver>DialogEditWord</receiver>
    <slot>reject()</slot>

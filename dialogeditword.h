@@ -15,8 +15,6 @@ public:
     explicit DialogEditWord(QWidget *parent = nullptr);
     ~DialogEditWord();
 
-private slots:
-
 private:
     Ui::DialogEditWord *ui;
 };

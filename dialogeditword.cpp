@@ -1,20 +1,16 @@
-#include "DialogEditWord.h"
-#include "ui_DialogEditWord.h"
+#include "dialogeditword.h"
+#include "ui_dialogeditword.h"
 
 DialogEditWord::DialogEditWord(QWidget *parent) :
     QDialog(parent),
     ui(new Ui::DialogEditWord)
 {
     ui->setupUi(this);
-    //this->setFixedSize(360,382);
-    this->setWindowTitle("Edit Word - Dictionary");
-    ui->lineEditWord->setText("New Word");
-    ui->lineEditWord->setEnabled(false);
+    ui->lineEditEditWord->setText("Word Name");
+    ui->lineEditEditWord->setEnabled(false);
 }
 
 DialogEditWord::~DialogEditWord()
 {
     delete ui;
 }
-
-

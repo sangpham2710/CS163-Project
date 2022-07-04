@@ -1,21 +1,19 @@
-#include "MainWindow.h"
-#include "./ui_MainWindow.h"
-#include "WidgetWordDefinition.h"
-#include <QMessageBox>
+#include "mainwindow.h"
+#include "./ui_mainwindow.h"
+#include "widgetsearch.h"
+#include "widgetfavouritelist.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-    ui->comboBoxSearch->addItem("Eng - Eng");
-    ui->comboBoxSearch->addItem("Viet - Eng");
-    ui->comboBoxSearch->addItem("Eng - Viet");
-    ui->comboBoxSearch->addItem("Slang");
-    ui->comboBoxSearch->addItem("Emoji");
-    ui->comboBoxSearch->addItem("Favourite");
-    this->setWindowTitle("Dictionary");
-    ui->tabWidgetDefinition->clear();
+    ui->tabWidgetDictionary->clear();
+    ui->tabWidgetDictionary->addTab(new WidgetSearch(), QString("Search").arg(ui->tabWidgetDictionary->count() + 1));
+    ui->tabWidgetDictionary->addTab(new WidgetFavouriteList(), QString("Favourite").arg(ui->tabWidgetDictionary->count() + 1));
+
+
+
 }
 
 MainWindow::~MainWindow()
@@ -25,42 +23,5 @@ MainWindow::~MainWindow()
 
 
 
-void MainWindow::on_pushButtonAdd_clicked()
-{
-    dialogAddNewWord = new DialogAddNewWord(this);
-    dialogAddNewWord->show();
-}
 
-
-void MainWindow::on_pushButtonRemove_clicked()
-{
-    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to remove this word from the dictionary ?", QMessageBox::Yes | QMessageBox::No);
-    if (confirm == QMessageBox::Yes)
-    {
-        //Delete the word
-    }
-    else
-    {
-        //Do nothing
-    }
-}
-
-
-void MainWindow::on_pushButtonEdit_clicked()
-{
-    dialogEditWord = new DialogEditWord(this);
-    dialogEditWord->show();
-}
-
-
-void MainWindow::on_tabWidgetDefinition_tabCloseRequested(int index)
-{
-    ui->tabWidgetDefinition->removeTab(index);
-}
-
-
-void MainWindow::on_pushButton_5_clicked()
-{
-    ui->tabWidgetDefinition->addTab(new WidgetWordDefinition(), QString("Word").arg(ui->tabWidgetDefinition->count() + 1));
-}
 
