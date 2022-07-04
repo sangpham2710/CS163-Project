@@ -75,7 +75,9 @@ class Dictionary : public IDictionary {
     QString getFullDefinitionPath(const QString &word) {
         return currentDict->getFullDefinitionPath(word);
     }
-
+    QString getCurrentDictionaryName() {
+        return currentDict->getDictionaryName();
+    }
    private:
     Map<QString, DictionaryDataStructure *> dictMap;
     DictionaryDataStructure *currentDict;
