@@ -14,7 +14,7 @@ class App {
     App& operator=(const App&) = delete;
     ~App() {
         delete dictionary;
-        //        delete favorite;
+        delete favorite;
         delete history;
     }
     static App& get() {
@@ -72,17 +72,20 @@ class App {
     }
     // favorite functionalities
     bool addWordToFavorite(const QString& word) {
-        return favorite->addWord(word, dictionary->getFullDefinitionPath(word));
+        return favorite->addWord(word, dictionary->getCurrentDictionaryName(), dictionary->getFullDefinitionPath(word));
     }
-    bool removeWordFromFavorite(const QString& word) {
-        return favorite->removeWord(word);
+    bool removeWordFromFavorite(const QString& word, const QString& dictName) {
+        return favorite->removeWord(word, dictName);
+    }
+    bool removeWordFromFavorite(const QString& wordDictName) {
+        return favorite->removeWord(wordDictName);
     }
     QList<QString> getFavoriteWordsWithPrefix(const QString& prefix) {
         return favorite->getFavoriteWordsWithPrefix(prefix);
     }
-    QString getFavoriteWordDefinition(const QString& word) {
-        history->add(word);
-        return favorite->getFavoriteWordDefinition(word);
+    QString getFavoriteWordDefinition(const QString& wordDictName) {
+        history->add(wordDictName);
+        return favorite->getFavoriteWordDefinition(wordDictName);
     }
     // history functionalities
     QList<QString> getHistory() { return history->getHistory(); }
@@ -90,7 +93,7 @@ class App {
    private:
     App() {
         dictionary = new Dictionary();
-        //        favorite = new Favorite();
+        favorite = new Favorite();
         history = new History();
     }
 

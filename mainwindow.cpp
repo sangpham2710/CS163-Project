@@ -108,3 +108,37 @@ void MainWindow::loadHistory() {
     }
 }
 
+
+void MainWindow::on_lineEditFavoriteFindPrefix_textChanged(const QString &prefix)
+{
+    auto result = App::get().getFavoriteWordsWithPrefix(prefix);
+    ui->listWidgetFavoriteSearchResult->clear();
+    for (auto& word : result) {
+        new QListWidgetItem(word, ui->listWidgetFavoriteSearchResult);
+    }
+}
+
+
+void MainWindow::on_listWidgetFavoriteSearchResult_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString wordDictName = item->text();
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWordDefinition->count(); ++tabIndex) {
+        if (ui->tabWidgetFavoriteWordDefinition->tabText(tabIndex) == wordDictName) {
+            ui->tabWidgetFavoriteWordDefinition->setCurrentIndex(tabIndex);
+            return;
+        }
+    }
+    auto newTab = new WordDefinitionWidget(this);
+    ui->tabWidgetFavoriteWordDefinition->addTab(newTab, wordDictName);
+    ui->tabWidgetFavoriteWordDefinition->setCurrentIndex(ui->tabWidgetFavoriteWordDefinition->count() - 1);
+    QString definition = App::get().getFavoriteWordDefinition(wordDictName);
+    newTab->setWord(wordDictName);
+    newTab->setDefinition(definition);
+}
+
+
+void MainWindow::on_tabWidgetFavoriteWordDefinition_tabCloseRequested(int index)
+{
+    ui->tabWidgetFavoriteWordDefinition->removeTab(index);
+}
+

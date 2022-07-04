@@ -41,7 +41,13 @@ class MainWindow : public QMainWindow {
 
     void on_tabWidgetWordDefinition_tabCloseRequested(int index);
 
-   private:
+    void on_lineEditFavoriteFindPrefix_textChanged(const QString &arg1);
+
+    void on_listWidgetFavoriteSearchResult_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_tabWidgetFavoriteWordDefinition_tabCloseRequested(int index);
+
+private:
     Ui::MainWindow *ui;
 };
 #endif  // MAINWINDOW_H

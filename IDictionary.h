@@ -19,6 +19,7 @@ class IDictionary {
     virtual QList<QString> getListWordsHaveDefinition(
         const QString& token, int maxResultLength = 20) = 0;
     virtual QString getFullDefinitionPath(const QString& word) = 0;
+    virtual QString getCurrentDictionaryName() = 0;
     virtual ~IDictionary() = default;
 };
 
