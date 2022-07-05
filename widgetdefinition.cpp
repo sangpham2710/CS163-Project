@@ -37,3 +37,18 @@ void WidgetDefinition::on_pushButtonSetFavourite_clicked()
     }
 }
 
+
+void WidgetDefinition::on_pushButtonRemoveWord_clicked()
+{
+    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Are you sure to remove this word", QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes)
+    {
+
+    }
+    else
+    {
+
+    }
+
+}
+

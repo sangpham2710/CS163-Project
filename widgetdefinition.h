@@ -22,6 +22,8 @@ private slots:
 
     void on_pushButtonSetFavourite_clicked();
 
+    void on_pushButtonRemoveWord_clicked();
+
 private:
     Ui::WidgetDefinition *ui;
     DialogEditWord *dialogEditWord;
