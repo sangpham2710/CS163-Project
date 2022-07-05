@@ -17,31 +17,32 @@ namespace fs = std::filesystem;
 
 class Dictionary : public IDictionary {
    public:
-    Dictionary() { allocate(); }
-    ~Dictionary() { deallocate(); }
-    void allocate() {
-        deallocate();
+    Dictionary() : dictsList{}, currentDict{nullptr} {
         for (auto &dirName : fs::directory_iterator{"data/dicts"}) {
             QString dictName =
                 QString::fromStdString(dirName.path().filename().string());
-            dictMap[dictName] = new DictionaryDataStructure(dictName);
+            dictsList.push_back(dictName);
         }
-        currentDict = dictMap["Eng-Eng-small"];
+        qDebug() << dictsList;
+        loadData(dictsList[0]);
     }
-    void deallocate() {
-        for (auto &dictName : dictMap.keys()) {
-            if (dictMap[dictName]) delete dictMap[dictName];
-        }
+    ~Dictionary() { delete currentDict; }
+    void loadData(const QString& dictName) {
+        if (currentDict) delete currentDict;
+        currentDict = new DictionaryDataStructure(dictName);
+    }
+    QList<QString> getListDictionaries() {
+        return dictsList;
+    }
+    bool changeDictionary(const QString &dictName) {
+        if (currentDict->getDictionaryName() == dictName) return true;
+        if (!dictsList.contains(dictName)) return false;
+        loadData(dictName);
+        return true;
     }
     QList<QString> getListWordsWithPrefix(const QString &prefix,
                                           int maxResultLength) {
         return currentDict->getListWordsWithPrefix(prefix, maxResultLength);
-    }
-    bool changeDictionary(const QString &dictName) {
-        if (currentDict->getDictionaryName() == dictName) return true;
-        if (!dictMap.contains(dictName)) return false;
-        currentDict = dictMap[dictName];
-        return true;
     }
     bool addWord(const QString &word, const QString &definition) {
         return currentDict->addWord(word, definition);
@@ -59,9 +60,7 @@ class Dictionary : public IDictionary {
         fs::copy("data/dicts-origin/" + dictNameStdString,
                  "data/dicts/" + dictNameStdString,
                  fs::copy_options::recursive);
-        delete dictMap[dictName];
-        dictMap[dictName] = new DictionaryDataStructure(dictName);
-        currentDict = dictMap[dictName];
+        loadData(dictName);
         return true;
     }
     QString getDefinition(const QString &word) {
@@ -79,8 +78,9 @@ class Dictionary : public IDictionary {
         return currentDict->getDictionaryName();
     }
    private:
-    Map<QString, DictionaryDataStructure *> dictMap;
+    QList<QString> dictsList;
     DictionaryDataStructure *currentDict;
+
 };
 
 #endif  // DICTIONARY_H

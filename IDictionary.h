@@ -6,9 +6,10 @@
 
 class IDictionary {
    public:
+    virtual QList<QString> getListDictionaries() = 0;
+    virtual bool changeDictionary(const QString& dictName) = 0;
     virtual QList<QString> getListWordsWithPrefix(const QString& prefix,
                                                   int maxResultLength = 20) = 0;
-    virtual bool changeDictionary(const QString& dictName) = 0;
     virtual bool addWord(const QString& word, const QString& definition) = 0;
     virtual bool editWord(const QString& word,
                           const QString& newDefinition) = 0;
