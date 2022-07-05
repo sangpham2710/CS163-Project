@@ -41,9 +41,9 @@ set(PROJECT_SOURCES
         dialogeditword.h
         dialogeditword.cpp
         dialogeditword.ui
-        widgetfavouritelist.h
-        widgetfavouritelist.cpp
-        widgetfavouritelist.ui
+        widgetfavourite.h
+        widgetfavourite.cpp
+        widgetfavourite.ui
 
 )
 

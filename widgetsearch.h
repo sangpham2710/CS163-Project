@@ -2,6 +2,7 @@
 #define WIDGETSEARCH_H
 
 #include <QWidget>
+#include <QListWidgetItem>
 #include "dialogaddnewword.h"
 
 namespace Ui {
@@ -17,9 +18,12 @@ public:
     ~WidgetSearch();
 
 private slots:
-    void on_tabWidgetDefinition_tabBarDoubleClicked(int index);
 
-    void on_pushButtonAddNewWord_clicked();
+    void on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item);
+
+    void on_tabWidgetDefinition_tabCloseRequested(int index);
+
+    void on_pushButtonRandomWord_clicked();
 
 private:
     Ui::WidgetSearch *ui;

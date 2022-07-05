@@ -20,6 +20,9 @@
       <layout class="QVBoxLayout" name="verticalLayoutSearch">
        <item>
         <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10,1">
+         <property name="spacing">
+          <number>5</number>
+         </property>
          <item>
           <widget class="QComboBox" name="comboBoxDictionaryType">
            <item>
@@ -109,22 +112,33 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_3" stretch="2,3">
+       <property name="spacing">
+        <number>20</number>
+       </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout">
+        <layout class="QVBoxLayout" name="verticalLayout" stretch="7,3">
+         <property name="spacing">
+          <number>20</number>
+         </property>
          <item>
-          <widget class="QListWidget" name="listWidgetHistory"/>
+          <widget class="QListWidget" name="listWidgetHistory">
+           <item>
+            <property name="text">
+             <string>hello</string>
+            </property>
+           </item>
+          </widget>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
            <item>
-            <widget class="QPushButton" name="pushButtonAddNewWord">
-             <property name="text">
-              <string>Add New Word</string>
-             </property>
-            </widget>
-           </item>
-           <item>
             <widget class="QPushButton" name="pushButtonRandomWord">
+             <property name="sizePolicy">
+              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+               <horstretch>0</horstretch>
+               <verstretch>0</verstretch>
+              </sizepolicy>
+             </property>
              <property name="text">
               <string>Random Word</string>
              </property>
@@ -136,6 +150,12 @@
        </item>
        <item>
         <widget class="QTabWidget" name="tabWidgetDefinition">
+         <property name="tabsClosable">
+          <bool>true</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
          <widget class="QWidget" name="tab">
           <attribute name="title">
            <string>Tab 1</string>

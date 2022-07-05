@@ -14,15 +14,20 @@ WidgetSearch::~WidgetSearch()
     delete ui;
 }
 
-void WidgetSearch::on_tabWidgetDefinition_tabBarDoubleClicked(int index)
+void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word").arg(ui->tabWidgetDefinition->count() + 1));
+    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString(item->text()).arg(ui->tabWidgetDefinition->count() + 1));
 }
 
 
-void WidgetSearch::on_pushButtonAddNewWord_clicked()
+void WidgetSearch::on_tabWidgetDefinition_tabCloseRequested(int index)
 {
-    dialogAddNewWord = new DialogAddNewWord(this);
-    dialogAddNewWord->show();
+    ui->tabWidgetDefinition->removeTab(index);
+}
+
+
+void WidgetSearch::on_pushButtonRandomWord_clicked()
+{
+    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word Name").arg(ui->tabWidgetDefinition->count() + 1));
 }
 

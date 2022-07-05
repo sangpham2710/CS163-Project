@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WidgetFavouriteList</class>
- <widget class="QWidget" name="WidgetFavouriteList">
+ <class>widgetfavourite</class>
+ <widget class="QWidget" name="widgetfavourite">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -16,8 +16,14 @@
   <layout class="QHBoxLayout" name="horizontalLayout_3">
    <item>
     <layout class="QVBoxLayout" name="verticalLayout">
+     <property name="spacing">
+      <number>30</number>
+     </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
+       <property name="spacing">
+        <number>5</number>
+       </property>
        <item>
         <widget class="QLineEdit" name="lineEditSearchFavourite"/>
        </item>
@@ -32,11 +38,26 @@
      </item>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="2,3">
+       <property name="spacing">
+        <number>20</number>
+       </property>
        <item>
-        <widget class="QListWidget" name="listWidgetFavouriteLWord"/>
+        <widget class="QListWidget" name="listWidgetFavouriteLWord">
+         <item>
+          <property name="text">
+           <string>hello</string>
+          </property>
+         </item>
+        </widget>
        </item>
        <item>
         <widget class="QTabWidget" name="tabWidgetFavouriteWord">
+         <property name="tabsClosable">
+          <bool>true</bool>
+         </property>
+         <property name="movable">
+          <bool>true</bool>
+         </property>
          <widget class="QWidget" name="tab">
           <attribute name="title">
            <string>Tab 1</string>

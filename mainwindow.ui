@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>973</width>
-    <height>611</height>
+    <width>833</width>
+    <height>501</height>
    </rect>
   </property>
   <property name="sizePolicy">
@@ -20,39 +20,35 @@
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QTabWidget" name="tabWidgetDictionary">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>0</y>
-      <width>971</width>
-      <height>581</height>
-     </rect>
-    </property>
-    <property name="tabPosition">
-     <enum>QTabWidget::West</enum>
-    </property>
-    <property name="currentIndex">
-     <number>1</number>
-    </property>
-    <widget class="QWidget" name="tabSearch">
-     <attribute name="title">
-      <string>Search</string>
-     </attribute>
-    </widget>
-    <widget class="QWidget" name="tabFavourite">
-     <attribute name="title">
-      <string>Favourite</string>
-     </attribute>
-    </widget>
-   </widget>
+   <layout class="QHBoxLayout" name="horizontalLayout">
+    <item>
+     <widget class="QTabWidget" name="tabWidgetDictionary">
+      <property name="tabPosition">
+       <enum>QTabWidget::West</enum>
+      </property>
+      <property name="currentIndex">
+       <number>1</number>
+      </property>
+      <widget class="QWidget" name="tabSearch">
+       <attribute name="title">
+        <string>Search</string>
+       </attribute>
+      </widget>
+      <widget class="QWidget" name="tabFavourite">
+       <attribute name="title">
+        <string>Favourite</string>
+       </attribute>
+      </widget>
+     </widget>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>973</width>
+     <width>833</width>
      <height>26</height>
     </rect>
    </property>
