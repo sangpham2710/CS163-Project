@@ -16,7 +16,7 @@ WidgetSearch::~WidgetSearch()
 
 void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString(item->text()).arg(ui->tabWidgetDefinition->count() + 1));
+    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString(item->text()));
 }
 
 
@@ -28,6 +28,6 @@ void WidgetSearch::on_tabWidgetDefinition_tabCloseRequested(int index)
 
 void WidgetSearch::on_pushButtonRandomWord_clicked()
 {
-    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word Name").arg(ui->tabWidgetDefinition->count() + 1));
+    ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word Name"));
 }
 

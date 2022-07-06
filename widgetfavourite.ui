@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>widgetfavourite</class>
- <widget class="QWidget" name="widgetfavourite">
+ <class>WidgetFavourite</class>
+ <widget class="QWidget" name="WidgetFavourite">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -42,7 +42,7 @@
         <number>20</number>
        </property>
        <item>
-        <widget class="QListWidget" name="listWidgetFavouriteLWord">
+        <widget class="QListWidget" name="listWidgetFavouriteWord">
          <item>
           <property name="text">
            <string>hello</string>

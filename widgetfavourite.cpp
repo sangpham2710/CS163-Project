@@ -2,26 +2,25 @@
 #include "ui_widgetfavourite.h"
 #include "widgetdefinition.h"
 
-widgetfavourite::widgetfavourite(QWidget *parent) :
+WidgetFavourite::WidgetFavourite(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::widgetfavourite)
+    ui(new Ui::WidgetFavourite)
 {
     ui->setupUi(this);
 }
 
-widgetfavourite::~widgetfavourite()
+WidgetFavourite::~WidgetFavourite()
 {
     delete ui;
 }
 
-
-void widgetfavourite::on_listWidgetFavouriteLWord_itemDoubleClicked(QListWidgetItem *item)
+void WidgetFavourite::on_listWidgetFavouriteWord_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->tabWidgetFavouriteWord->addTab(new WidgetDefinition(), QString(item->text().arg(ui->tabWidgetFavouriteWord->count() + 1)));
+    ui->tabWidgetFavouriteWord->addTab(new WidgetDefinition(), QString(item->text()));
 }
 
 
-void widgetfavourite::on_tabWidgetFavouriteWord_tabCloseRequested(int index)
+void WidgetFavourite::on_tabWidgetFavouriteWord_tabCloseRequested(int index)
 {
     ui->tabWidgetFavouriteWord->removeTab(index);
 }
