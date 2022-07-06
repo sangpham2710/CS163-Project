@@ -11,22 +11,32 @@
 #include "DictionaryDataStructure.h"
 #include "IDictionary.h"
 #include "Map.h"
+#include <QDebug>
+#include <QElapsedTimer>
 
 using std::string;
 namespace fs = std::filesystem;
 
 class Dictionary : public IDictionary {
    public:
-    Dictionary() { allocate(); }
+    Dictionary() : dictMap{}, currentDict{nullptr} { allocate(); }
     ~Dictionary() { deallocate(); }
     void allocate() {
+        QElapsedTimer totalTimer;
+        totalTimer.start();
         deallocate();
+        QElapsedTimer timer;
+        QString firstDictName = "";
         for (auto &dirName : fs::directory_iterator{"data/dicts"}) {
             QString dictName =
                 QString::fromStdString(dirName.path().filename().string());
+            timer.start();
             dictMap[dictName] = new DictionaryDataStructure(dictName);
+            qDebug() << "Loaded " << dictName << " dictionary in " << timer.restart() << " ms";
+            if (firstDictName == "") firstDictName = dictName;
         }
-        currentDict = dictMap["Eng-Eng-small"];
+        currentDict = dictMap[firstDictName];
+        qDebug() << "Total time to load all dictionaries: " << totalTimer.elapsed() << " ms";
     }
     void deallocate() {
         for (auto &dictName : dictMap.keys()) {
@@ -36,6 +46,9 @@ class Dictionary : public IDictionary {
     QList<QString> getListWordsWithPrefix(const QString &prefix,
                                           int maxResultLength) {
         return currentDict->getListWordsWithPrefix(prefix, maxResultLength);
+    }
+    QList<QString> getListDictionaries() {
+        return dictMap.keys();
     }
     bool changeDictionary(const QString &dictName) {
         if (currentDict->getDictionaryName() == dictName) return true;

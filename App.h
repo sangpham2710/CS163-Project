@@ -25,6 +25,9 @@ class App {
     QList<QString> getListWordsWithPrefix(const QString& prefix) {
         return dictionary->getListWordsWithPrefix(prefix);
     }
+    QList<QString> getListDictionaries() {
+        return dictionary->getListDictionaries();
+    }
     bool changeDictionary(const QString& dictName) {
         return dictionary->changeDictionary(dictName);
     }

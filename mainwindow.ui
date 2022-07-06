@@ -24,7 +24,7 @@
        <enum>QTabWidget::Rounded</enum>
       </property>
       <property name="currentIndex">
-       <number>1</number>
+       <number>0</number>
       </property>
       <property name="tabsClosable">
        <bool>false</bool>
@@ -45,38 +45,7 @@
           <item>
            <layout class="QHBoxLayout" name="horizontalLayout_4" stretch="10,2">
             <item>
-             <widget class="QComboBox" name="comboBoxDictionary">
-              <item>
-               <property name="text">
-                <string>Eng-Eng-small</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Eng-Eng</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Eng-Vie</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Vie-Eng</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Slang</string>
-               </property>
-              </item>
-              <item>
-               <property name="text">
-                <string>Emotional</string>
-               </property>
-              </item>
-             </widget>
+             <widget class="QComboBox" name="comboBoxDictionary"/>
             </item>
             <item>
              <widget class="QPushButton" name="pushButtonReset">

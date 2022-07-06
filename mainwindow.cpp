@@ -11,6 +11,8 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     App::get();
+    for (auto& dictName : App::get().getListDictionaries())
+            ui->comboBoxDictionary->addItem(dictName);
 }
 
 MainWindow::~MainWindow()
