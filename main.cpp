@@ -4,6 +4,7 @@
 #include <filesystem>
 #include <QFile>
 #include <QTextStream>
+#include <CSV.h>
 
 using namespace std;
 
@@ -12,19 +13,14 @@ const QString dictsPath = "input/";
 
 
 QString readWordInLine(QString line) {
-    QString word = "";
-    word.push_back(line[0]);
-    int i = 1;
-    while (line[i] != '<' && i < line.length()) {
-        word.push_back(line[i++]);
-    }
-    if (word[word.size() - 1] == '"') word = word.left(word.size() - 1);
+    QString word, defi;
+    CSV::readLine(line, word, defi);
     return word;
 }
 
 bool createDictionary(QString dictName) {
-    QString defisPath = "data/" + dictName + "/defis/";
-    QString wordsPath = "data/" + dictName + "/words/";
+    QString defisPath = "data/dicts/" + dictName + "/defis/";
+    QString wordsPath = "data/dicts/" + dictName + "/words/";
 
     filesystem::create_directories(defisPath.toStdString());
     filesystem::create_directories(wordsPath.toStdString());
@@ -54,7 +50,7 @@ bool createDictionary(QString dictName) {
         word = readWordInLine(line);
         fout.setFileName(wordsPath + "index.csv");
         if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
-        out << word << c << "\n";
+        out << CSV::writeLine(word,c) << "\n";
         fout.close();
 
         i = (i + 1) % 1000;
@@ -80,8 +76,20 @@ bool createDictionary(QString dictName) {
 
 int main() {
 
-    createDictionary("Eng-Eng");
-
+    createDictionary("Emotional");
+    createDictionary("Eng-Fre");
+    createDictionary("Eng-Ger");
+    createDictionary("Eng-Ita");
+    createDictionary("Eng-Por");
+    createDictionary("Eng-Spa");
+    createDictionary("Eng-Vie");
+    createDictionary("Fre-Eng");
+    createDictionary("Ger-Eng");
+    createDictionary("Ita-Eng");
+    createDictionary("Por-Eng");
+    createDictionary("Slang");
+    createDictionary("Spa-Eng");
+    createDictionary("Vie-Eng");
 
     return 0;
 }
