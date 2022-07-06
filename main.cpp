@@ -2,62 +2,76 @@
 #include <fstream>
 #include <string>
 #include <filesystem>
+#include <QFile>
+#include <QTextStream>
 
 using namespace std;
 
-const string dictsPath = "dicts/";
+const QString dictsPath = "input/";
 
-string readWordInLine(string line) {
-    string word = "";
+
+
+QString readWordInLine(QString line) {
+    QString word = "";
     word.push_back(line[0]);
     int i = 1;
     while (line[i] != '<' && i < line.length()) {
         word.push_back(line[i++]);
     }
-    if (word[word.size() - 1] == '"') word = word.substr(0, word.size() - 1);
+    if (word[word.size() - 1] == '"') word = word.left(word.size() - 1);
     return word;
 }
 
-bool createDictionary(string dictName) {
-    string defisPath = "data/" + dictName + "/defis/";
-    string wordsPath = "data/" + dictName + "/words/";
+bool createDictionary(QString dictName) {
+    QString defisPath = "data/" + dictName + "/defis/";
+    QString wordsPath = "data/" + dictName + "/words/";
 
-    filesystem::create_directories(defisPath);
-    filesystem::create_directories(wordsPath);
+    filesystem::create_directories(defisPath.toStdString());
+    filesystem::create_directories(wordsPath.toStdString());
 
     int len = 0;
     int i = 0;
-    ifstream fin(dictsPath + dictName + ".csv");
-    if(!fin.is_open()) return false;
-    string line;
-    while (getline(fin, line)) {
+    QFile fin;
+    fin.setFileName(dictsPath + dictName + ".csv");
+    if(!fin.open(QFile::ReadOnly | QFile::Text)) return false;
+    QString line;
+    QTextStream in;
+    in.setDevice(&fin);
+    while (!in.atEnd()) {
+        line = in.readLine();
         len++;
-        string c = to_string(i);
-        string word;
-        ofstream fout;
-
-        fout.open(defisPath + c + ".csv", ios::app);
-        fout << line << endl;
+        QString c = QString::number(i);
+        QString word;
+        QFile fout;
+        fout.setFileName(defisPath + c + ".csv");
+        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
+        QTextStream out;
+        out.setDevice(&fout);
+        out << line << "\n";
         fout.close();
 
 
         word = readWordInLine(line);
-        fout.open(wordsPath + "index.csv", ios::app);
-        fout << word << c << endl;
+        fout.setFileName(wordsPath + "index.csv");
+        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
+        out << word << c << "\n";
         fout.close();
 
         i = (i + 1) % 1000;
     }
     fin.close();
 
-    ofstream fout;
-
-    fout.open(defisPath + "info.txt");
-    fout << len / 1000 + 1 << endl << 1000;
+    QFile fout;
+    QTextStream out;
+    fout.setFileName(defisPath + "info.txt");
+    if(!fout.open(QFile::WriteOnly | QFile::Text)) return false;
+    out.setDevice(&fout);
+    out << len / 1000 + 1 << "\n" << 1000;
     fout.close();
 
-    fout.open(wordsPath + "info.txt");
-    fout << len;
+    fout.setFileName(wordsPath + "info.txt");
+    if(!fout.open(QFile::WriteOnly | QFile::Text)) return false;
+    out << len;
     fout.close();
 
     return true;
@@ -67,18 +81,7 @@ bool createDictionary(string dictName) {
 int main() {
 
     createDictionary("Eng-Eng");
-    createDictionary("Eng-Fre");
-    createDictionary("Eng-Ger");
-    createDictionary("Eng-Ita");
-    createDictionary("Eng-Por");
-    createDictionary("Eng-Spa");
-    createDictionary("Eng-Vie");
-    createDictionary("Fre-Eng");
-    createDictionary("Ger-Eng");
-    createDictionary("Ita-Eng");
-    createDictionary("Por-Eng");
-    createDictionary("Spa-Eng");
-    createDictionary("Vie-Eng");
+
 
     return 0;
 }
