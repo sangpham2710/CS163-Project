@@ -19,6 +19,7 @@ class DictionaryDataStructure {
     }
     ~DictionaryDataStructure() { delete trie; }
     QString getDictionaryName() { return dictName; }
+    int getNumWords() { return trie->size(); }
     bool loadWords() {
         trie->clear();
         QString wordPath = getFullWordPath();

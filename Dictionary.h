@@ -23,6 +23,7 @@ class Dictionary : public IDictionary {
     ~Dictionary() { deallocate(); }
     void allocate() {
         QElapsedTimer totalTimer;
+        int totalNumWords = 0;
         totalTimer.start();
         deallocate();
         QElapsedTimer timer;
@@ -32,11 +33,13 @@ class Dictionary : public IDictionary {
                 QString::fromStdString(dirName.path().filename().string());
             timer.start();
             dictMap[dictName] = new DictionaryDataStructure(dictName);
-            qDebug() << "Loaded " << dictName << " dictionary in " << timer.restart() << " ms";
+            qDebug() << QString("Loaded %1 dictionary in %2 ms (%3 words)").arg(dictName).arg(timer.restart()).arg(dictMap[dictName]->getNumWords());
+            totalNumWords += dictMap[dictName]->getNumWords();
             if (firstDictName == "") firstDictName = dictName;
         }
         currentDict = dictMap[firstDictName];
-        qDebug() << "Total time to load all dictionaries: " << totalTimer.elapsed() << " ms";
+        qDebug() << QString("Total time to load all dictionaries: %1 ms").arg(totalTimer.elapsed());
+        qDebug() << QString("Loaded %1 words").arg(totalNumWords);
     }
     void deallocate() {
         for (auto &dictName : dictMap.keys()) {
