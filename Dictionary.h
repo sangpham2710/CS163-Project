@@ -1,31 +1,57 @@
 #ifndef DICTIONARY_H
 #define DICTIONARY_H
 
+#include <QDebug>
+#include <QDir>
 #include <QList>
-#include "Map.h"
-#include "IDictionary.h"
+#include <QString>
+#include <filesystem>
+#include <string>
+
 #include "DictionaryDataStructure.h"
+#include "IDictionary.h"
+#include "Map.h"
+#include <QDebug>
+#include <QElapsedTimer>
+
+using std::string;
+namespace fs = std::filesystem;
 
 class Dictionary : public IDictionary {
-public:
-    Dictionary() {
-        QList<QString> dictNames = {
-            "Eng-Eng-small",
-            "Eng-Eng",
-            "Eng-Vie",
-            "Vie-Eng",
-            "Slang",
-            "Emotional"
-        };
-        for (auto& dictName : dictNames) {
+   public:
+    Dictionary() : dictMap{}, currentDict{nullptr} { allocate(); }
+    ~Dictionary() { deallocate(); }
+    void allocate() {
+        QElapsedTimer totalTimer;
+        int totalNumWords = 0;
+        totalTimer.start();
+        deallocate();
+        QElapsedTimer timer;
+        QString firstDictName = "";
+        for (auto &dirName : fs::directory_iterator{"data/dicts"}) {
+            QString dictName =
+                QString::fromStdString(dirName.path().filename().string());
+            timer.start();
             dictMap[dictName] = new DictionaryDataStructure(dictName);
+            qDebug() << QString("Loaded %1 dictionary in %2 ms (%3 words)").arg(dictName).arg(timer.restart()).arg(dictMap[dictName]->getNumWords());
+            totalNumWords += dictMap[dictName]->getNumWords();
+            if (firstDictName == "") firstDictName = dictName;
+        }
+        currentDict = dictMap[firstDictName];
+        qDebug() << QString("Total time to load all dictionaries: %1 ms").arg(totalTimer.elapsed());
+        qDebug() << QString("Loaded %1 words").arg(totalNumWords);
+    }
+    void deallocate() {
+        for (auto &dictName : dictMap.keys()) {
+            if (dictMap[dictName]) delete dictMap[dictName];
         }
     }
-    ~Dictionary() {
-        for (auto& dictName : dictMap.keys()) delete dictMap[dictName];
-    }
-    QList<QString> getListWordsWithPrefix(const QString &prefix, int maxResultLength) {
+    QList<QString> getListWordsWithPrefix(const QString &prefix,
+                                          int maxResultLength) {
         return currentDict->getListWordsWithPrefix(prefix, maxResultLength);
+    }
+    QList<QString> getListDictionaries() {
+        return dictMap.keys();
     }
     bool changeDictionary(const QString &dictName) {
         if (currentDict->getDictionaryName() == dictName) return true;
@@ -43,25 +69,34 @@ public:
         return currentDict->removeWord(word);
     }
     bool reset() {
-        // NOT DONE
+        QString dictName = currentDict->getDictionaryName();
+        string dictNameStdString = dictName.toStdString();
+        QDir("data/dicts/" + dictName).removeRecursively();
+        fs::copy("data/dicts-origin/" + dictNameStdString,
+                 "data/dicts/" + dictNameStdString,
+                 fs::copy_options::recursive);
+        delete dictMap[dictName];
+        dictMap[dictName] = new DictionaryDataStructure(dictName);
+        currentDict = dictMap[dictName];
         return true;
     }
     QString getDefinition(const QString &word) {
         return currentDict->getDefinition(word);
     }
-    QString getRandomWord() {
-        // NOT DONE
-        return "";
-    }
-    QList<QString> getListWordsHaveDefinition(const QString &token, int maxResultLength) {
+    QString getRandomWord() { return currentDict->getRandomWord(); }
+    QList<QString> getListWordsHaveDefinition(const QString &token,
+                                              int maxResultLength) {
         return currentDict->getListWordsHaveDefinition(token, maxResultLength);
     }
     QString getFullDefinitionPath(const QString &word) {
         return currentDict->getFullDefinitionPath(word);
     }
-private:
-    Map<QString, DictionaryDataStructure*> dictMap;
-    DictionaryDataStructure* currentDict;
+    QString getCurrentDictionaryName() {
+        return currentDict->getDictionaryName();
+    }
+   private:
+    Map<QString, DictionaryDataStructure *> dictMap;
+    DictionaryDataStructure *currentDict;
 };
 
-#endif // DICTIONARY_H
+#endif  // DICTIONARY_H

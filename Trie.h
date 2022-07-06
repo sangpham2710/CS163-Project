@@ -16,21 +16,22 @@ private:
         bool flag;
         T* value;
         Map<QChar, TrieNode*> next;
-        TrieNode() : flag{0}, next{} {}
+        TrieNode() : flag{0}, value{nullptr}, next{} {}
         bool isLeaf() {
             return next.empty();
         }
     };
 
     TrieNode* root;
+    int trieSize;
 
     void clear(TrieNode*& root) {
         for (auto& ch : root->next.keys()) {
             clear(root->next[ch]);
             delete root->next[ch];
             root->next[ch] = nullptr;
-            if (root->value) delete root->value;
         }
+        if (root->value) delete root->value;
     }
 
     TrieNode* find(const QString& word) {
@@ -48,8 +49,11 @@ public:
         delete root;
     }
 
+    int size() const { return trieSize; }
+
     void clear() {
         clear(root);
+        trieSize = 0;
     }
 
     TrieNode* insert(const QString& word, const T& value) {
@@ -61,6 +65,7 @@ public:
         }
         ptr->flag = true;
         ptr->value = new T(value);
+        ++trieSize;
         return ptr;
     }
 
@@ -79,21 +84,24 @@ public:
             ptr = ptr->next[ch];
             stackNodes.push_back(ptr);
         }
+        if (!ptr->flag) return false;
+        ptr->flag = false;
         for (int i = stackNodes.size() - 1; i > 0; --i) {
             TrieNode* cur = stackNodes[i];
             TrieNode* par = stackNodes[i - 1];
             QChar curChar = word[i - 1];
-            if (cur->isLeaf()) {
+            if (cur->isLeaf() && !cur->flag) {
                 par->next.remove(curChar);
                 delete cur;
             } else break;
         }
+        --trieSize;
         return true;
     }
 
     T& value(const QString& word) {
         auto res = find(word);
-        if (res) {
+        if (res && res->value) {
             return *res->value;
         } else {
             return *insert(word, T{})->value;
@@ -104,23 +112,17 @@ public:
         return this->value(word);
     }
 
-    QList<QString> searchPrefix(const QString& prefix, int maxResultLength) {
+    QList<QString> searchPrefix(const QString& prefix, int maxResultLength) const {
         QList<QString> result;
         TrieNode* ptr = root;
         for (auto& ch : prefix) {
             if (!ptr->next.contains(ch)) return result;
             ptr = ptr->next[ch];
         }
-
         std::function<void(TrieNode*, const QString&)> dfs = [&](TrieNode* root, const QString& suffix) {
             if (root == nullptr) return;
-
             if (result.size() >= maxResultLength) return;
-
-            if (root->flag) {
-                result.push_back(prefix + suffix);
-            }
-
+            if (root->flag) result.push_back(prefix + suffix);
             for (auto& ch : root->next.keys()) {
                 dfs(root->next[ch], suffix + ch);
             }

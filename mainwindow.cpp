@@ -1,7 +1,10 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
+
 #include "widgetsearch.h"
 #include "widgetfavourite.h"
+
+#include "App.h"
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -12,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->tabWidgetDictionary->addTab(new WidgetSearch(), QString("Search").arg(ui->tabWidgetDictionary->count() + 1));
     ui->tabWidgetDictionary->addTab(new widgetfavourite(), QString("Favourite").arg(ui->tabWidgetDictionary->count() + 1));
 
+    App::get();
 
 
 }

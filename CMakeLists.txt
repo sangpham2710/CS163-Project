@@ -19,32 +19,41 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+
         Trie.h
+        Map.h
+        CSV.h
+
         IDictionary.h
         IFavorite.h
         IHistory.h
-        Map.h
+
         Dictionary.h
         DictionaryDataStructure.h
-        App.h
         Favorite.h
         History.h
+
+        App.h
+
         widgetsearch.h
         widgetsearch.cpp
         widgetsearch.ui
+
         widgetdefinition.h
         widgetdefinition.cpp
         widgetdefinition.ui
-        dialogaddnewword.h
-        dialogaddnewword.cpp
-        dialogaddnewword.ui
-        dialogeditword.h
-        dialogeditword.cpp
-        dialogeditword.ui
+
         widgetfavourite.h
         widgetfavourite.cpp
         widgetfavourite.ui
 
+        dialogaddnewword.h
+        dialogaddnewword.cpp
+        dialogaddnewword.ui
+
+        dialogeditword.h
+        dialogeditword.cpp
+        dialogeditword.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)

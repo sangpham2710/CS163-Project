@@ -6,17 +6,17 @@
 
 template <typename Key, typename T>
 class Map {
-public:
+   public:
     struct Node {
         Key key;
-        T* value;
+        T *value;
         Node *left;
         Node *right;
         int height;
         Node(const Key &ele, T *val, Node *lt, Node *rt, int h = 0)
-                : key{ele}, value{val}, left{lt}, right{rt}, height{h} {}
+            : key{ele}, value{val}, left{lt}, right{rt}, height{h} {}
         Node(Key &&ele, T *val, Node *lt, Node *rt, int h = 0)
-                : key{std::move(ele)}, value{val}, left{lt}, right{rt}, height{h} {}
+            : key{std::move(ele)}, value{val}, left{lt}, right{rt}, height{h} {}
     };
     Map() : root{nullptr} {}
     ~Map() { clear(root); }
@@ -26,7 +26,7 @@ public:
     bool contains(const Key &x) const { return contains(root, x); }
     void insert(const Key &x, const T &value) { insert(root, x, value); }
     void remove(const Key &x) { remove(root, x); }
-    T& value(const Key &x) {
+    T &value(const Key &x) {
         auto res = find(root, x);
         if (res) {
             return *res->value;
@@ -34,16 +34,14 @@ public:
             return *insert(root, x, T{})->value;
         }
     }
-    T& operator[](const Key &x) {
-        return this->value(x);
-    }
+    T &operator[](const Key &x) { return this->value(x); }
     QList<Key> keys() {
         QList<Key> result;
         getKeys(root, result);
         return result;
     }
 
-private:
+   private:
     Node *root;
     static const int ALLOWED_IMBALANCE = 1;
 
@@ -102,7 +100,7 @@ private:
         delete t;
         t = nullptr;
     }
-    void getKeys(Node *t, QList<Key>& result) {
+    void getKeys(Node *t, QList<Key> &result) {
         if (t == nullptr) return;
         getKeys(t->left, result);
         result.push_back(t->key);
@@ -159,4 +157,4 @@ private:
     }
 };
 
-#endif // MAP_H
+#endif  // MAP_H
