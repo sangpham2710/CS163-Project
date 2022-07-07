@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WidgetDefinition</class>
- <widget class="QWidget" name="WidgetDefinition">
+ <class>WidgetFavoriteDefinition</class>
+ <widget class="QWidget" name="WidgetFavoriteDefinition">
   <property name="geometry">
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>524</width>
-    <height>409</height>
+    <width>541</width>
+    <height>413</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -15,9 +15,9 @@
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <layout class="QHBoxLayout" name="horizontalLayoutDefinition" stretch="10,4">
+    <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,4">
      <item>
-      <widget class="QLabel" name="labelDefinition">
+      <widget class="QLabel" name="labelFavoriteDefinition">
        <property name="text">
         <string>TextLabel</string>
        </property>
@@ -35,20 +35,6 @@
         <widget class="QPushButton" name="pushButtonSetFavorite">
          <property name="text">
           <string>Like</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonEditWord">
-         <property name="text">
-          <string>Edit Word</string>
-         </property>
-        </widget>
-       </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonRemoveWord">
-         <property name="text">
-          <string>Remove Word</string>
          </property>
         </widget>
        </item>

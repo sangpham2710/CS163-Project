@@ -1,6 +1,6 @@
 #include "widgetfavorite.h"
 #include "ui_widgetfavorite.h"
-#include "widgetdefinition.h"
+#include "widgetfavoritedefinition.h"
 
 WidgetFavorite::WidgetFavorite(QWidget *parent) :
     QWidget(parent),
@@ -16,7 +16,7 @@ WidgetFavorite::~WidgetFavorite()
 
 void WidgetFavorite::on_listWidgetFavoriteWord_itemDoubleClicked(QListWidgetItem *item)
 {
-    ui->tabWidgetFavoriteWord->addTab(new WidgetDefinition(), QString(item->text()));
+    ui->tabWidgetFavoriteWord->addTab(new WidgetFavoriteDefinition(), QString(item->text()));
 }
 
 

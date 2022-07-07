@@ -28,16 +28,16 @@ void WidgetDefinition::on_pushButtonEditWord_clicked()
 
 void WidgetDefinition::on_pushButtonSetFavorite_clicked()
 {
-    if (ui->pushButtonSetFavorite->text() == "Set Favorite")
+    if (ui->pushButtonSetFavorite->text() == "Like")
     {
         //Set Favorite for the word
-        ui->pushButtonSetFavorite->setText("Remove Favorite");
+        ui->pushButtonSetFavorite->setText("Unlike");
 
     }
     else
     {
         //Remove favorite for the word
-        ui->pushButtonSetFavorite->setText("Set Favorite");
+        ui->pushButtonSetFavorite->setText("Like");
     }
 }
 
