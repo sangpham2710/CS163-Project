@@ -16,6 +16,7 @@ class WidgetSearch : public QWidget
 public:
     explicit WidgetSearch(QWidget *parent = nullptr);
     ~WidgetSearch();
+    void loadHistory();
 
 private slots:
 
@@ -28,6 +29,10 @@ private slots:
 
     void on_comboBoxDictionaryType_currentTextChanged(const QString &arg1);
 
+
+    void on_lineEditSearch_textChanged(const QString &arg1);
+
+    void on_pushButtonReset_clicked();
 
 private:
     Ui::WidgetSearch *ui;

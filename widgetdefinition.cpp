@@ -14,6 +14,10 @@ WidgetDefinition::~WidgetDefinition()
     delete ui;
 }
 
+void WidgetDefinition::setDefinition(const QString &definition)
+{
+    ui->labelDefinition->setText(definition);
+}
 
 void WidgetDefinition::on_pushButtonEditWord_clicked()
 {

@@ -15,6 +15,7 @@ class WidgetDefinition : public QWidget
 public:
     explicit WidgetDefinition(QWidget *parent = nullptr);
     ~WidgetDefinition();
+    void setDefinition(const QString &definition);
 
 private slots:
 

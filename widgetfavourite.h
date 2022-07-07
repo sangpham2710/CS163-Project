@@ -16,6 +16,7 @@ public:
     explicit WidgetFavourite(QWidget *parent = nullptr);
     ~WidgetFavourite();
 
+
 private slots:
 
 

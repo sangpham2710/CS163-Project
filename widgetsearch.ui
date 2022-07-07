@@ -27,33 +27,7 @@
           <widget class="QLineEdit" name="lineEditSearch"/>
          </item>
          <item>
-          <widget class="QComboBox" name="comboBoxDictionaryType">
-           <item>
-            <property name="text">
-             <string>Eng - Eng</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Eng - Viet</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Viet - Eng</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Slang</string>
-            </property>
-           </item>
-           <item>
-            <property name="text">
-             <string>Emoji</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QComboBox" name="comboBoxDictionaryType"/>
          </item>
          <item>
           <widget class="QPushButton" name="pushButtonAddWord">
@@ -127,17 +101,17 @@
          <property name="spacing">
           <number>20</number>
          </property>
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
          <item>
-          <widget class="QListWidget" name="listWidgetHistory">
-           <item>
-            <property name="text">
-             <string>hello</string>
-            </property>
-           </item>
-          </widget>
+          <widget class="QListWidget" name="listWidgetHistory"/>
          </item>
          <item>
           <layout class="QHBoxLayout" name="horizontalLayout_2">
+           <property name="spacing">
+            <number>7</number>
+           </property>
            <item>
             <widget class="QPushButton" name="pushButtonRandomWord">
              <property name="sizePolicy">
