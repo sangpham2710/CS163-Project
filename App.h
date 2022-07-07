@@ -80,15 +80,15 @@ class App {
     bool addWordToFavorite(const QString& word) {
         return favorite->addWord(word, getCurrentDictionaryName(), dictionary->getFullDefinitionPath(word));
     }
+    bool isWordInFavorite(const QString& word) {
+        return favorite->containsWord(word, getCurrentDictionaryName());
+    }
     bool removeWordFromFavorite(const QString& word, bool containsDictName = false) {
         if (containsDictName) {
             return favorite->removeWord(word);
         } else {
             return favorite->removeWord(QString("%1 (%2)").arg(word).arg(getCurrentDictionaryName()));
         }
-    }
-    bool removeWordFromFavorite(const QString& wordDictName) {
-        return favorite->removeWord(wordDictName);
     }
     QList<QString> getFavoriteWordsWithPrefix(const QString& prefix) {
         return favorite->getFavoriteWordsWithPrefix(prefix);
