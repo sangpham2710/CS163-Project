@@ -19,10 +19,13 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayoutSearch">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="1,10,1">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,1,1,1">
          <property name="spacing">
           <number>5</number>
          </property>
+         <item>
+          <widget class="QLineEdit" name="lineEditSearch"/>
+         </item>
          <item>
           <widget class="QComboBox" name="comboBoxDictionaryType">
            <item>
@@ -53,12 +56,16 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEditSearch"/>
+          <widget class="QPushButton" name="pushButtonAddWord">
+           <property name="text">
+            <string>Add Word</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <widget class="QPushButton" name="pushButtonSearch">
+          <widget class="QPushButton" name="pushButtonReset">
            <property name="text">
-            <string>Search</string>
+            <string>Reset</string>
            </property>
           </widget>
          </item>
@@ -105,13 +112,6 @@
             </size>
            </property>
           </spacer>
-         </item>
-         <item>
-          <widget class="QPushButton" name="pushButtonReset">
-           <property name="text">
-            <string>Reset</string>
-           </property>
-          </widget>
          </item>
         </layout>
        </item>

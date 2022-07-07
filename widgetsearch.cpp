@@ -1,12 +1,19 @@
 #include "widgetsearch.h"
 #include "ui_widgetsearch.h"
 #include "widgetdefinition.h"
+#include "App.h"
 
+#include <QDebug>
 WidgetSearch::WidgetSearch(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetSearch)
 {
     ui->setupUi(this);
+    App::get();
+    for (auto& dictName : App::get().getListDictionaries())
+    {
+        ui->comboBoxDictionaryType->addItem(dictName);
+    }
 }
 
 WidgetSearch::~WidgetSearch()
@@ -30,4 +37,7 @@ void WidgetSearch::on_pushButtonRandomWord_clicked()
 {
     ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word Name"));
 }
+
+
+
 

@@ -25,6 +25,7 @@ private slots:
 
     void on_pushButtonRandomWord_clicked();
 
+
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;
