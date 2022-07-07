@@ -26,6 +26,9 @@ private slots:
     void on_pushButtonRandomWord_clicked();
 
 
+    void on_comboBoxDictionaryType_currentTextChanged(const QString &arg1);
+
+
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;

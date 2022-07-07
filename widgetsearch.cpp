@@ -38,6 +38,12 @@ void WidgetSearch::on_pushButtonRandomWord_clicked()
     ui->tabWidgetDefinition->addTab(new WidgetDefinition(), QString("Word Name"));
 }
 
+void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &arg1)
+{
+    QString dictName = ui->comboBoxDictionaryType->currentText();
+    App::get().changeDictionary(dictName);
+    ui->lineEditSearch->clear();
+}
 
 
 

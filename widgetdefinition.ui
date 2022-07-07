@@ -13,60 +13,55 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QHBoxLayout" name="horizontalLayout">
+  <layout class="QHBoxLayout" name="horizontalLayout_2">
    <item>
-    <widget class="QGroupBox" name="groupBoxDefinition">
-     <property name="title">
-      <string>GroupBox</string>
-     </property>
-     <layout class="QHBoxLayout" name="horizontalLayout_3">
-      <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="10,4">
-        <item>
-         <widget class="QTextEdit" name="textEditDefinition"/>
-        </item>
-        <item>
-         <layout class="QVBoxLayout" name="verticalLayoutButtons">
-          <item>
-           <widget class="QPushButton" name="pushButtonSetFavourite">
-            <property name="text">
-             <string>Set Favourite</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonEditWord">
-            <property name="text">
-             <string>Edit Word</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pushButtonRemoveWord">
-            <property name="text">
-             <string>Remove Word</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <spacer name="verticalSpacer1">
-            <property name="orientation">
-             <enum>Qt::Vertical</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>20</width>
-              <height>40</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-         </layout>
-        </item>
-       </layout>
-      </item>
-     </layout>
-    </widget>
+    <layout class="QHBoxLayout" name="horizontalLayoutDefinition" stretch="10,4">
+     <item>
+      <widget class="QLabel" name="labelDefinition">
+       <property name="text">
+        <string>TextLabel</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <layout class="QVBoxLayout" name="verticalLayout">
+       <item>
+        <widget class="QPushButton" name="pushButtonSetFavourite">
+         <property name="text">
+          <string>Set Favourite</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonEditWord">
+         <property name="text">
+          <string>Edit Word</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QPushButton" name="pushButtonRemoveWord">
+         <property name="text">
+          <string>Remove Word</string>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <spacer name="verticalSpacer">
+         <property name="orientation">
+          <enum>Qt::Vertical</enum>
+         </property>
+         <property name="sizeHint" stdset="0">
+          <size>
+           <width>20</width>
+           <height>40</height>
+          </size>
+         </property>
+        </spacer>
+       </item>
+      </layout>
+     </item>
+    </layout>
    </item>
   </layout>
  </widget>
