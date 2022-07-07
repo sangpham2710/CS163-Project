@@ -2,7 +2,7 @@
 #include "./ui_mainwindow.h"
 
 #include "widgetsearch.h"
-#include "widgetfavourite.h"
+#include "widgetfavorite.h"
 #include "widgetgame.h"
 
 #include "App.h"
@@ -14,7 +14,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->tabWidgetDictionary->clear();
     ui->tabWidgetDictionary->addTab(new WidgetSearch(), QString("Search"));
-    ui->tabWidgetDictionary->addTab(new WidgetFavourite(), QString("Favourite"));
+    ui->tabWidgetDictionary->addTab(new WidgetFavorite(), QString("Favorite"));
     ui->tabWidgetDictionary->addTab(new WidgetGame(), QString("Game"));
 
     App::get();

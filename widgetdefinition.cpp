@@ -26,18 +26,18 @@ void WidgetDefinition::on_pushButtonEditWord_clicked()
 }
 
 
-void WidgetDefinition::on_pushButtonSetFavourite_clicked()
+void WidgetDefinition::on_pushButtonSetFavorite_clicked()
 {
-    if (ui->pushButtonSetFavourite->text() == "Set Favourite")
+    if (ui->pushButtonSetFavorite->text() == "Set Favorite")
     {
-        //Set Favourite for the word
-        ui->pushButtonSetFavourite->setText("Remove Favourite");
+        //Set Favorite for the word
+        ui->pushButtonSetFavorite->setText("Remove Favorite");
 
     }
     else
     {
-        //Remove favourite for the word
-        ui->pushButtonSetFavourite->setText("Set Favourite");
+        //Remove favorite for the word
+        ui->pushButtonSetFavorite->setText("Set Favorite");
     }
 }
 

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
- <class>WidgetFavourite</class>
- <widget class="QWidget" name="WidgetFavourite">
+ <class>WidgetFavorite</class>
+ <widget class="QWidget" name="WidgetFavorite">
   <property name="geometry">
    <rect>
     <x>0</x>
@@ -25,10 +25,10 @@
         <number>5</number>
        </property>
        <item>
-        <widget class="QLineEdit" name="lineEditSearchFavourite"/>
+        <widget class="QLineEdit" name="lineEditSearchFavorite"/>
        </item>
        <item>
-        <widget class="QPushButton" name="pushButtonSearchFavourite">
+        <widget class="QPushButton" name="pushButtonSearchFavorite">
          <property name="text">
           <string>Search</string>
          </property>
@@ -42,7 +42,7 @@
         <number>20</number>
        </property>
        <item>
-        <widget class="QListWidget" name="listWidgetFavouriteWord">
+        <widget class="QListWidget" name="listWidgetFavoriteWord">
          <item>
           <property name="text">
            <string>hello</string>
@@ -51,7 +51,7 @@
         </widget>
        </item>
        <item>
-        <widget class="QTabWidget" name="tabWidgetFavouriteWord">
+        <widget class="QTabWidget" name="tabWidgetFavoriteWord">
          <property name="tabsClosable">
           <bool>true</bool>
          </property>

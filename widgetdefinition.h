@@ -21,7 +21,7 @@ private slots:
 
     void on_pushButtonEditWord_clicked();
 
-    void on_pushButtonSetFavourite_clicked();
+    void on_pushButtonSetFavorite_clicked();
 
     void on_pushButtonRemoveWord_clicked();
 

@@ -43,9 +43,9 @@ set(PROJECT_SOURCES
         widgetdefinition.cpp
         widgetdefinition.ui
 
-        widgetfavourite.h
-        widgetfavourite.cpp
-        widgetfavourite.ui
+        widgetfavorite.h
+        widgetfavorite.cpp
+        widgetfavorite.ui
 
         widgetgame.h
         widgetgame.cpp

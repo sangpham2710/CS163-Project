@@ -34,9 +34,9 @@
         <string>Search</string>
        </attribute>
       </widget>
-      <widget class="QWidget" name="tabFavourite">
+      <widget class="QWidget" name="tabFavorite">
        <attribute name="title">
-        <string>Favourite</string>
+        <string>Favorite</string>
        </attribute>
       </widget>
      </widget>
