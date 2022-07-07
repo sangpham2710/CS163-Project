@@ -54,6 +54,9 @@ class Favorite : public IFavorite {
         fout.close();
         return true;
     }
+    bool containsWord(const QString& word, const QString& dictName) {
+        return trie->contains(QString("%1 (%2)").arg(word).arg(dictName));
+    }
     bool removeWord(const QString &wordDictName) {
         if (!trie->contains(wordDictName)) return false;
         trie->remove(wordDictName);
@@ -89,10 +92,6 @@ class Favorite : public IFavorite {
         }
         fout.close();
         return true;
-    }
-    bool removeWord(const QString &word, const QString &dictName) {
-        QString wordDictName = QString("%1 (%2)").arg(word).arg(dictName);
-        return removeWord(wordDictName);
     }
     QList<QString> getFavoriteWordsWithPrefix(const QString &prefix, int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);

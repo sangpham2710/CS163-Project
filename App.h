@@ -25,6 +25,9 @@ class App {
     QList<QString> getListWordsWithPrefix(const QString& prefix) {
         return dictionary->getListWordsWithPrefix(prefix);
     }
+    QString getCurrentDictionaryName() {
+        return dictionary->getCurrentDictionaryName();
+    }
     QList<QString> getListDictionaries() {
         return dictionary->getListDictionaries();
     }
@@ -75,13 +78,17 @@ class App {
     }
     // favorite functionalities
     bool addWordToFavorite(const QString& word) {
-        return favorite->addWord(word, dictionary->getCurrentDictionaryName(), dictionary->getFullDefinitionPath(word));
+        return favorite->addWord(word, getCurrentDictionaryName(), dictionary->getFullDefinitionPath(word));
     }
-    bool removeWordFromFavorite(const QString& word, const QString& dictName) {
-        return favorite->removeWord(word, dictName);
+    bool isWordInFavorite(const QString& word) {
+        return favorite->containsWord(word, getCurrentDictionaryName());
     }
-    bool removeWordFromFavorite(const QString& wordDictName) {
-        return favorite->removeWord(wordDictName);
+    bool removeWordFromFavorite(const QString& word, bool containsDictName = false) {
+        if (containsDictName) {
+            return favorite->removeWord(word);
+        } else {
+            return favorite->removeWord(QString("%1 (%2)").arg(word).arg(getCurrentDictionaryName()));
+        }
     }
     QList<QString> getFavoriteWordsWithPrefix(const QString& prefix) {
         return favorite->getFavoriteWordsWithPrefix(prefix);
