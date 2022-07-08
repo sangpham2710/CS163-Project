@@ -71,10 +71,9 @@ class App {
         }
         return {defis[0], words[0], words[1], words[2], words[3]};
     }
-    QList<QString> getListWordsHaveDefinition(const QString& token,
-                                              int maxResultLength) {
+    QList<QString> getListWordsHaveDefinition(const QString& token) {
         history->add(token);
-        return dictionary->getListWordsHaveDefinition(token, maxResultLength);
+        return dictionary->getListWordsHaveDefinition(token);
     }
     // favorite functionalities
     bool addWordToFavorite(const QString& word) {
