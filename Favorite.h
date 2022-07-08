@@ -1,22 +1,19 @@
 #ifndef FAVORITE_H
 #define FAVORITE_H
 
+#include <QFile>
+#include <QList>
+#include <QString>
+#include <QTextStream>
+
+#include "CSV.h"
 #include "IFavorite.h"
 #include "Trie.h"
-#include "CSV.h"
-#include <QString>
-#include <QFile>
-#include <QTextStream>
-#include <QList>
 
 class Favorite : public IFavorite {
    public:
-    Favorite() : trie{new Trie<QString>()} {
-        loadData();
-    }
-    ~Favorite() {
-        delete trie;
-    }
+    Favorite() : trie{new Trie<QString>()} { loadData(); }
+    ~Favorite() { delete trie; }
 
     bool loadData() {
         QString favoritePath = getFavoritePath();
@@ -28,7 +25,7 @@ class Favorite : public IFavorite {
         in.setDevice(&fin);
 
         QString line, _wordDictName, _defiPath;
-        while(!in.atEnd()) {
+        while (!in.atEnd()) {
             line = in.readLine();
             CSV::readLine(line, _wordDictName, _defiPath);
             (*trie)[_wordDictName] = _defiPath;
@@ -36,7 +33,8 @@ class Favorite : public IFavorite {
         fin.close();
         return true;
     }
-    bool addWord(const QString &word, const QString &dictName, const QString& filePath) {
+    bool addWord(const QString& word, const QString& dictName,
+                 const QString& filePath) {
         QString wordDictName = QString("%1 (%2)").arg(word).arg(dictName);
         if (trie->contains(wordDictName)) return false;
 
@@ -47,7 +45,8 @@ class Favorite : public IFavorite {
         QTextStream out;
 
         fout.setFileName(favoritePath);
-        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return false;
+        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append))
+            return false;
 
         out.setDevice(&fout);
         out << CSV::writeLine(wordDictName, filePath) << '\n';
@@ -57,7 +56,7 @@ class Favorite : public IFavorite {
     bool containsWord(const QString& word, const QString& dictName) {
         return trie->contains(QString("%1 (%2)").arg(word).arg(dictName));
     }
-    bool removeWord(const QString &wordDictName) {
+    bool removeWord(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return false;
         trie->remove(wordDictName);
 
@@ -88,15 +87,17 @@ class Favorite : public IFavorite {
         if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
         out.setDevice(&fout);
         for (int i = 0; i < listWordDictNames.size(); ++i) {
-            out << CSV::writeLine(listWordDictNames[i], listDefinitionPaths[i]) << '\n';
+            out << CSV::writeLine(listWordDictNames[i], listDefinitionPaths[i])
+                << '\n';
         }
         fout.close();
         return true;
     }
-    QList<QString> getFavoriteWordsWithPrefix(const QString &prefix, int maxResultLength) {
+    QList<QString> getFavoriteWordsWithPrefix(const QString& prefix,
+                                              int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
-    QString getFavoriteWordDefinition(const QString &wordDictName) {
+    QString getFavoriteWordDefinition(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return QString();
         QString defiPath = (*trie)[wordDictName];
         QString word = getWord(wordDictName);
@@ -121,8 +122,11 @@ class Favorite : public IFavorite {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
     }
     QString getFavoritePath() {
-        return "./data/favorite/index.csv";
+        return "/Users/tranhainam/Documents/"
+               "build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/favorite/"
+               "index.csv";
     }
+
    private:
     Trie<QString>* trie;
 };
