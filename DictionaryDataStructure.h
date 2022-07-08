@@ -46,7 +46,7 @@ class DictionaryDataStructure {
         (*trie)[word] = "tmp";
         QString wordPath = getFullWordPath();
         QString definitionPath =
-            QString("data/dicts/%1/defis/tmp.csv").arg(dictName);
+            QString("./data/dicts/%1/defis/tmp.csv").arg(dictName);
 
         // append definition into word/index.csv and defis/tmp.csv
         QFile fout;
@@ -217,12 +217,12 @@ class DictionaryDataStructure {
         return {};
     }
     QString getFullWordPath() {
-        return QString("data/dicts/%1/words/index.csv").arg(dictName);
+        return QString("./data/dicts/%1/words/index.csv").arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
         QString definition = (*trie)[word];
-        return QString("data/dicts/%1/defis/%2.csv")
+        return QString("./data/dicts/%1/defis/%2.csv")
             .arg(dictName)
             .arg(definition);
     }

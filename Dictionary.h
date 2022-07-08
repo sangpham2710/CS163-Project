@@ -28,7 +28,7 @@ class Dictionary : public IDictionary {
         deallocate();
         QElapsedTimer timer;
         QString firstDictName = "";
-        for (auto &dirName : fs::directory_iterator{"data/dicts"}) {
+        for (auto &dirName : fs::directory_iterator{"./data/dicts"}) {
             QString dictName =
                 QString::fromStdString(dirName.path().filename().string());
             timer.start();
@@ -71,9 +71,9 @@ class Dictionary : public IDictionary {
     bool reset() {
         QString dictName = currentDict->getDictionaryName();
         string dictNameStdString = dictName.toStdString();
-        QDir("data/dicts/" + dictName).removeRecursively();
-        fs::copy("data/dicts-origin/" + dictNameStdString,
-                 "data/dicts/" + dictNameStdString,
+        QDir("./data/dicts/" + dictName).removeRecursively();
+        fs::copy("./data/dicts-origin/" + dictNameStdString,
+                 "./data/dicts/" + dictNameStdString,
                  fs::copy_options::recursive);
         delete dictMap[dictName];
         dictMap[dictName] = new DictionaryDataStructure(dictName);

@@ -121,7 +121,7 @@ class Favorite : public IFavorite {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
     }
     QString getFavoritePath() {
-        return "data/favorite/index.csv";
+        return "./data/favorite/index.csv";
     }
    private:
     Trie<QString>* trie;

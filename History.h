@@ -51,7 +51,7 @@ class History : public IHistory {
         return *list;
     }
     QString getHistoryPath() {
-        return "data/history/index.csv";
+        return "./data/history/index.csv";
     }
    private:
     QList <QString>* list;
