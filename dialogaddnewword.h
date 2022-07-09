@@ -14,6 +14,7 @@ class DialogAddNewWord : public QDialog
 public:
     explicit DialogAddNewWord(QWidget *parent = nullptr);
     ~DialogAddNewWord();
+    void setData(const QString &newWord);
 
 private:
     Ui::DialogAddNewWord *ui;

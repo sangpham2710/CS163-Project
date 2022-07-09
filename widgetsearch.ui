@@ -97,35 +97,28 @@
         <number>20</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout" stretch="7,3">
+        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,7">
          <property name="spacing">
-          <number>20</number>
+          <number>5</number>
          </property>
          <property name="leftMargin">
           <number>5</number>
          </property>
          <item>
-          <widget class="QListWidget" name="listWidgetHistory"/>
+          <widget class="QPushButton" name="pushButtonRandomWord">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+           <property name="text">
+            <string>Random Word</string>
+           </property>
+          </widget>
          </item>
          <item>
-          <layout class="QHBoxLayout" name="horizontalLayout_2">
-           <property name="spacing">
-            <number>7</number>
-           </property>
-           <item>
-            <widget class="QPushButton" name="pushButtonRandomWord">
-             <property name="sizePolicy">
-              <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
-               <horstretch>0</horstretch>
-               <verstretch>0</verstretch>
-              </sizepolicy>
-             </property>
-             <property name="text">
-              <string>Random Word</string>
-             </property>
-            </widget>
-           </item>
-          </layout>
+          <widget class="QListWidget" name="listWidgetHistory"/>
          </item>
         </layout>
        </item>

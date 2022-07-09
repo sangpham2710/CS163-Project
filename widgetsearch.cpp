@@ -2,6 +2,7 @@
 #include "ui_widgetsearch.h"
 #include "widgetdefinition.h"
 #include "App.h"
+#include <QMessageBox>
 
 #include <QDebug>
 WidgetSearch::WidgetSearch(QWidget *parent) :
@@ -14,6 +15,9 @@ WidgetSearch::WidgetSearch(QWidget *parent) :
     {
         ui->comboBoxDictionaryType->addItem(dictName);
     }
+    ui->tabWidgetDefinition->clear();
+    ui->radioButtonSearchKeyword->setChecked(true);
+    ui->pushButtonAddWord->setEnabled(false);
 }
 
 WidgetSearch::~WidgetSearch()
@@ -71,7 +75,10 @@ void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
     if (result.size() == 0)
     {
         //Add new word enabled
+        ui->pushButtonAddWord->setEnabled(true);
     }
+    else ui->pushButtonAddWord->setEnabled(false);
+
     if (prefix == "") {
         loadHistory();
         return;
@@ -100,5 +107,25 @@ void WidgetSearch::on_pushButtonReset_clicked()
 {
     ui->listWidgetHistory->clear();
     App::get().resetDictionary();
+}
+
+void WidgetSearch::openDialogAddNewWord()
+{
+    QString newWord = ui->lineEditSearch->text();
+    DialogAddNewWord dialogAddNewWord;
+    dialogAddNewWord.setData(newWord);
+    dialogAddNewWord.exec();
+}
+
+//Press add new word button
+void WidgetSearch::on_pushButtonAddWord_clicked()
+{
+    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to add this word to your dictionary ?", QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes)
+    {
+        openDialogAddNewWord();
+    }
+
+
 }
 
