@@ -41,7 +41,7 @@ void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
     ui->tabWidgetDefinition->addTab(newTab, word);
     ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
     //set title of the definition
-
+    newTab->setWord(word);
     //set definition of the definition
     QString definition = App::get().getDefinition(word);
     newTab->setDefinition(definition);
@@ -101,19 +101,22 @@ void WidgetSearch::loadHistory() {
     }
 }
 
-
 //Press reset button
 void WidgetSearch::on_pushButtonReset_clicked()
 {
-    ui->listWidgetHistory->clear();
-    App::get().resetDictionary();
+    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to reset your dictionary ?", QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes)
+    {
+        ui->listWidgetHistory->clear();
+        App::get().resetDictionary();
+    }
 }
 
 void WidgetSearch::openDialogAddNewWord()
 {
     QString newWord = ui->lineEditSearch->text();
     DialogAddNewWord dialogAddNewWord;
-    dialogAddNewWord.setData(newWord);
+    dialogAddNewWord.setDataAddNewWord(newWord);
     dialogAddNewWord.exec();
 }
 
@@ -125,7 +128,5 @@ void WidgetSearch::on_pushButtonAddWord_clicked()
     {
         openDialogAddNewWord();
     }
-
-
 }
 

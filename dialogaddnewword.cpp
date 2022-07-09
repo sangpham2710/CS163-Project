@@ -16,7 +16,7 @@ DialogAddNewWord::~DialogAddNewWord()
     delete ui;
 }
 
-void DialogAddNewWord::setData(const QString &newWord)
+void DialogAddNewWord::setDataAddNewWord(const QString &newWord)
 {
     ui->lineEditNewWord->setText(newWord);
 }

@@ -14,6 +14,10 @@ class DialogEditWord : public QDialog
 public:
     explicit DialogEditWord(QWidget *parent = nullptr);
     ~DialogEditWord();
+    void setDataEditWord(const QString &word, const QString &definition);
+
+private slots:
+    void on_DialogEditWord_accepted();
 
 private:
     Ui::DialogEditWord *ui;

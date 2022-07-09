@@ -14,7 +14,7 @@ class DialogAddNewWord : public QDialog
 public:
     explicit DialogAddNewWord(QWidget *parent = nullptr);
     ~DialogAddNewWord();
-    void setData(const QString &newWord);
+    void setDataAddNewWord(const QString &newWord);
 
 private slots:
     void on_buttonBoxConfirm_accepted();

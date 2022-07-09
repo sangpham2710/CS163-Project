@@ -16,6 +16,7 @@ public:
     explicit WidgetDefinition(QWidget *parent = nullptr);
     ~WidgetDefinition();
     void setDefinition(const QString &definition);
+    void setWord(const QString &word);
 
 private slots:
 
@@ -24,6 +25,8 @@ private slots:
     void on_pushButtonSetFavorite_clicked();
 
     void on_pushButtonRemoveWord_clicked();
+
+    void openDialogEditWord();
 
 private:
     Ui::WidgetDefinition *ui;
