@@ -18,6 +18,22 @@ public:
 private slots:
     void on_pushButtonStartGame_clicked();
 
+
+    void on_pushButtonReset_clicked();
+
+
+    void on_pushButtonContinue_clicked();
+
+    void on_pushButtonAnswer1_clicked();
+
+    void on_pushButtonAnswer2_clicked();
+
+    void on_pushButtonAnswer3_clicked();
+
+    void on_pushButtonAnswer4_clicked();
+
+    void on_pushButtonRestart_clicked();
+
 private:
     Ui::WidgetGame *ui;
 };
