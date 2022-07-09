@@ -16,6 +16,9 @@ public:
     ~DialogAddNewWord();
     void setData(const QString &newWord);
 
+private slots:
+    void on_buttonBoxConfirm_accepted();
+
 private:
     Ui::DialogAddNewWord *ui;
 };
