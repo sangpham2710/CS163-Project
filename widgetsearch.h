@@ -38,6 +38,8 @@ private slots:
 
     void openDialogAddNewWord();
 
+
+
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;

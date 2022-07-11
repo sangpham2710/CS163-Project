@@ -44,21 +44,36 @@ void WidgetDefinition::on_pushButtonEditWord_clicked()
     }
 }
 
-
-void WidgetDefinition::on_pushButtonSetFavorite_clicked()
+void WidgetDefinition::setFavorite(const QString &word)
 {
-    if (ui->pushButtonSetFavorite->text() == "Like")
+    bool state = App::get().isWordInFavorite(word);
+    if (state)
     {
-        //Set Favorite for the word
         ui->pushButtonSetFavorite->setText("Unlike");
-
     }
     else
     {
-        //Remove favorite for the word
         ui->pushButtonSetFavorite->setText("Like");
     }
 }
+
+void WidgetDefinition::on_pushButtonSetFavorite_clicked()
+{
+
+    QString word = ui->labelWord->text();
+    bool state = App::get().isWordInFavorite(word);
+    if (state)
+    {
+        App::get().removeWordFromFavorite(word);
+        ui->pushButtonSetFavorite->setText("Like");
+    }
+    else
+    {
+        App::get().addWordToFavorite(word);
+        ui->pushButtonSetFavorite->setText("Unike");
+    }
+}
+
 
 
 void WidgetDefinition::on_pushButtonRemoveWord_clicked()
@@ -67,11 +82,8 @@ void WidgetDefinition::on_pushButtonRemoveWord_clicked()
                                                                 QMessageBox::Yes | QMessageBox::No);
     if (confirm == QMessageBox::Yes)
     {
-
-    }
-    else
-    {
-
+        QString removeWord = ui->labelWord->text();
+        App::get().removeWord(removeWord);
     }
 
 }

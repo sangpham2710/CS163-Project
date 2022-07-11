@@ -18,6 +18,7 @@ WidgetSearch::WidgetSearch(QWidget *parent) :
     ui->tabWidgetDefinition->clear();
     ui->radioButtonSearchKeyword->setChecked(true);
     ui->pushButtonAddWord->setEnabled(false);
+    loadHistory();
 }
 
 WidgetSearch::~WidgetSearch()
@@ -42,9 +43,13 @@ void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
     ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
     //set title of the definition
     newTab->setWord(word);
+
     //set definition of the definition
     QString definition = App::get().getDefinition(word);
     newTab->setDefinition(definition);
+
+    //set favorite
+    newTab->setFavorite(word);
 }
 
 
@@ -66,6 +71,7 @@ void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &t
     QString dictName = ui->comboBoxDictionaryType->currentText();
     App::get().changeDictionary(dictName);
     ui->lineEditSearch->clear();
+    loadHistory();
 }
 
 //Change text in searching bar -> change text in history widget
@@ -108,6 +114,8 @@ void WidgetSearch::on_pushButtonReset_clicked()
     if (confirm == QMessageBox::Yes)
     {
         ui->listWidgetHistory->clear();
+        ui->tabWidgetDefinition->clear();
+        ui->lineEditSearch->clear();
         App::get().resetDictionary();
     }
 }
@@ -129,4 +137,5 @@ void WidgetSearch::on_pushButtonAddWord_clicked()
         openDialogAddNewWord();
     }
 }
+
 

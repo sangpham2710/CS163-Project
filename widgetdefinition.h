@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include "dialogeditword.h"
+#include "widgetsearch.h"
 
 namespace Ui {
 class WidgetDefinition;
@@ -17,6 +18,7 @@ public:
     ~WidgetDefinition();
     void setDefinition(const QString &definition);
     void setWord(const QString &word);
+    void setFavorite(const QString &word);
 
 private slots:
 
@@ -28,9 +30,11 @@ private slots:
 
     void openDialogEditWord();
 
+
 private:
     Ui::WidgetDefinition *ui;
     DialogEditWord *dialogEditWord;
+    WidgetSearch *widgetSearch;
 };
 
 #endif // WIDGETDEFINITION_H
