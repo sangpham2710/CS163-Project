@@ -48,7 +48,7 @@ void WidgetDefinition::on_pushButtonEditWord_clicked()
     }
 }
 
-void WidgetDefinition::setFavorite(const QString &word)
+void WidgetDefinition::setFavoriteState(const QString &word)
 {
     bool state = App::get().isWordInFavorite(word);
     if (state)
@@ -88,8 +88,8 @@ void WidgetDefinition::on_pushButtonRemoveWord_clicked()
     {
         QString removeWord = ui->labelWord->text();
         App::get().removeWord(removeWord);
-        widgetSearch->removeTabDefinition();
         widgetSearch->clearLineEditSearch();
+        widgetSearch->removeCurrentTabDefinition();
         widgetSearch->clearWidgetHistory();
         widgetSearch->loadHistory();
     }

@@ -18,7 +18,7 @@ public:
     ~WidgetDefinition();
     void setDefinition(const QString &definition);
     void setWord(const QString &word);
-    void setFavorite(const QString &word);
+    void setFavoriteState(const QString &word);
 
 private slots:
 

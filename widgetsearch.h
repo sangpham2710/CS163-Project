@@ -17,9 +17,9 @@ public:
     explicit WidgetSearch(QWidget *parent = nullptr);
     ~WidgetSearch();
     void loadHistory();
-    void removeTabDefinition();
-    void clearWidgetHistory();
     void clearLineEditSearch();
+    void clearWidgetHistory();
+    void removeCurrentTabDefinition();
 
 private slots:
 
