@@ -53,6 +53,9 @@ class App {
         history->add(word);
         return dictionary->getDefinition(word);
     }
+    QString getRandomWord() {
+        return dictionary->getRandomWord();
+    }
     QList<QString> getWordAnd4Definitions() {
         QList<QString> words;
         QList<QString> defis;
