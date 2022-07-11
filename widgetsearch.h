@@ -17,6 +17,9 @@ public:
     explicit WidgetSearch(QWidget *parent = nullptr);
     ~WidgetSearch();
     void loadHistory();
+    void removeTabDefinition();
+    void clearWidgetHistory();
+    void clearLineEditSearch();
 
 private slots:
 
@@ -26,9 +29,7 @@ private slots:
 
     void on_pushButtonRandomWord_clicked();
 
-
     void on_comboBoxDictionaryType_currentTextChanged(const QString &arg1);
-
 
     void on_lineEditSearch_textChanged(const QString &arg1);
 

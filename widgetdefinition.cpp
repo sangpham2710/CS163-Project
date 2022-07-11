@@ -8,6 +8,7 @@ WidgetDefinition::WidgetDefinition(QWidget *parent) :
     ui(new Ui::WidgetDefinition)
 {
     ui->setupUi(this);
+    widgetSearch = reinterpret_cast<WidgetSearch*>(parent);
 }
 
 WidgetDefinition::~WidgetDefinition()
@@ -41,6 +42,9 @@ void WidgetDefinition::on_pushButtonEditWord_clicked()
     if (confirm == QMessageBox::Yes)
     {
         openDialogEditWord();
+        QString word = ui->labelWord->text();
+        QString definition = App::get().getDefinition(word);
+        ui->labelDefinition->setText(definition);
     }
 }
 
@@ -84,6 +88,10 @@ void WidgetDefinition::on_pushButtonRemoveWord_clicked()
     {
         QString removeWord = ui->labelWord->text();
         App::get().removeWord(removeWord);
+        widgetSearch->removeTabDefinition();
+        widgetSearch->clearLineEditSearch();
+        widgetSearch->clearWidgetHistory();
+        widgetSearch->loadHistory();
     }
 
 }

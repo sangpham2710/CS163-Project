@@ -52,6 +52,21 @@ void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
     newTab->setFavorite(word);
 }
 
+void WidgetSearch::removeTabDefinition()
+{
+    int index = ui->tabWidgetDefinition->currentIndex();
+    ui->tabWidgetDefinition->removeTab(index);
+}
+
+void WidgetSearch::clearWidgetHistory()
+{
+    ui->listWidgetHistory->clear();
+}
+
+void WidgetSearch::clearLineEditSearch()
+{
+    ui->lineEditSearch->clear();
+}
 
 
 void WidgetSearch::on_tabWidgetDefinition_tabCloseRequested(int index)
