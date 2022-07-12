@@ -24,6 +24,8 @@ private slots:
 
     void on_tabWidgetFavoriteWord_tabCloseRequested(int index);
 
+    void on_lineEditSearchFavorite_textChanged(const QString &arg1);
+
 private:
     Ui::WidgetFavorite *ui;
 };

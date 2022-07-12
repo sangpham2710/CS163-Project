@@ -27,13 +27,6 @@
        <item>
         <widget class="QLineEdit" name="lineEditSearchFavorite"/>
        </item>
-       <item>
-        <widget class="QPushButton" name="pushButtonSearchFavorite">
-         <property name="text">
-          <string>Search</string>
-         </property>
-        </widget>
-       </item>
       </layout>
      </item>
      <item>
@@ -41,14 +34,14 @@
        <property name="spacing">
         <number>20</number>
        </property>
+       <property name="leftMargin">
+        <number>5</number>
+       </property>
+       <property name="topMargin">
+        <number>3</number>
+       </property>
        <item>
-        <widget class="QListWidget" name="listWidgetFavoriteWord">
-         <item>
-          <property name="text">
-           <string>hello</string>
-          </property>
-         </item>
-        </widget>
+        <widget class="QListWidget" name="listWidgetFavoriteWord"/>
        </item>
        <item>
         <widget class="QTabWidget" name="tabWidgetFavoriteWord">
