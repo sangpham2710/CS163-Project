@@ -1,5 +1,6 @@
 #include "dialogeditword.h"
 #include "ui_dialogeditword.h"
+#include <QMessageBox>
 #include "App.h"
 
 DialogEditWord::DialogEditWord(QWidget *parent) :
@@ -21,12 +22,28 @@ void DialogEditWord::setDataEditWord(const QString &word, const QString &definit
     ui->textEditEditDefinition->setText(definition);
 }
 
-void DialogEditWord::on_DialogEditWord_accepted()
+void DialogEditWord::on_pushButtonAccept_clicked()
 {
-    QString word = ui->lineEditEditWord->text();
-    QString newDefinition = ui->textEditEditDefinition->toPlainText();
-    qDebug() << App::get().editWord(word, newDefinition);
-    ui->lineEditEditWord->clear();
-    ui->textEditEditDefinition->clear();
+    QMessageBox::StandardButton confirmAccept = QMessageBox::question(this, "Title", "Are you sure to edit this word ?",
+                                                                QMessageBox::Yes | QMessageBox::No);
+    if (confirmAccept == QMessageBox::Yes)
+    {
+        QString word = ui->lineEditEditWord->text();
+        QString newDefinition = ui->textEditEditDefinition->toPlainText();
+        qDebug() << App::get().editWord(word, newDefinition);
+        ui->lineEditEditWord->clear();
+        ui->textEditEditDefinition->clear();
+        this->close();
+    }
+}
+
+void DialogEditWord::on_pushButtonReject_clicked()
+{
+    QMessageBox::StandardButton confirmReject = QMessageBox::question(this, "Title", "Are you sure to stop the process ?",
+                                                                QMessageBox::Yes | QMessageBox::No);
+    if (confirmReject == QMessageBox::Yes)
+    {
+        this->close();
+    }
 }
 

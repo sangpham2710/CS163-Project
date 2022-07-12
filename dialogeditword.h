@@ -17,7 +17,10 @@ public:
     void setDataEditWord(const QString &word, const QString &definition);
 
 private slots:
-    void on_DialogEditWord_accepted();
+
+    void on_pushButtonAccept_clicked();
+
+    void on_pushButtonReject_clicked();
 
 private:
     Ui::DialogEditWord *ui;

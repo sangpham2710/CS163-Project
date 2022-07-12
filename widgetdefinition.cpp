@@ -37,15 +37,10 @@ void WidgetDefinition::openDialogEditWord()
 
 void WidgetDefinition::on_pushButtonEditWord_clicked()
 {
-    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to edit this word",
-                                                                QMessageBox::Yes | QMessageBox::No);
-    if (confirm == QMessageBox::Yes)
-    {
-        openDialogEditWord();
-        QString word = ui->labelWord->text();
-        QString definition = App::get().getDefinition(word);
-        ui->labelDefinition->setText(definition);
-    }
+    openDialogEditWord();
+    QString word = ui->labelWord->text();
+    QString definition = App::get().getDefinition(word);
+    ui->labelDefinition->setText(definition);
 }
 
 void WidgetDefinition::setFavoriteState(const QString &word)

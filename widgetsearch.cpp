@@ -167,11 +167,7 @@ void WidgetSearch::openDialogAddNewWord()
 //Press add new word button
 void WidgetSearch::on_pushButtonAddWord_clicked()
 {
-    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to add this word to your dictionary ?", QMessageBox::Yes | QMessageBox::No);
-    if (confirm == QMessageBox::Yes)
-    {
-        openDialogAddNewWord();
-    }
+    openDialogAddNewWord();
 }
 
 

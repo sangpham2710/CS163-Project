@@ -17,7 +17,10 @@ public:
     void setDataAddNewWord(const QString &newWord);
 
 private slots:
-    void on_buttonBoxConfirm_accepted();
+
+    void on_pushButtonAccept_clicked();
+
+    void on_pushButtonReject_clicked();
 
 private:
     Ui::DialogAddNewWord *ui;
