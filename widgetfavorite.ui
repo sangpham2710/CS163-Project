@@ -38,7 +38,7 @@
         <number>5</number>
        </property>
        <property name="topMargin">
-        <number>3</number>
+        <number>5</number>
        </property>
        <item>
         <widget class="QListWidget" name="listWidgetFavoriteWord"/>

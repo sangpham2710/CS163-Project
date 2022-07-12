@@ -23,6 +23,12 @@
          <property name="spacing">
           <number>5</number>
          </property>
+         <property name="leftMargin">
+          <number>0</number>
+         </property>
+         <property name="topMargin">
+          <number>0</number>
+         </property>
          <item>
           <widget class="QLineEdit" name="lineEditSearch"/>
          </item>

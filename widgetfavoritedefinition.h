@@ -14,7 +14,8 @@ class WidgetFavoriteDefinition : public QWidget
 public:
     explicit WidgetFavoriteDefinition(QWidget *parent = nullptr);
     ~WidgetFavoriteDefinition();
-
+    void setWord(QString &word);
+    void setDefinition(QString &definition);
 private:
     Ui::WidgetFavoriteDefinition *ui;
 };

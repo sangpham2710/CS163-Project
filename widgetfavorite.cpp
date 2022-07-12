@@ -9,6 +9,7 @@ WidgetFavorite::WidgetFavorite(QWidget *parent) :
 {
     ui->setupUi(this);
     auto result = App::get().getFavoriteWordsWithPrefix("");
+    ui->tabWidgetFavoriteWord->clear();
     for (auto& word : result)
     {
         new QListWidgetItem(word, ui->listWidgetFavoriteWord);
@@ -20,18 +21,13 @@ WidgetFavorite::~WidgetFavorite()
     delete ui;
 }
 
-void WidgetFavorite::on_listWidgetFavoriteWord_itemDoubleClicked(QListWidgetItem *item)
-{
-    ui->tabWidgetFavoriteWord->addTab(new WidgetFavoriteDefinition(), QString(item->text()));
-}
-
 
 void WidgetFavorite::on_tabWidgetFavoriteWord_tabCloseRequested(int index)
 {
     ui->tabWidgetFavoriteWord->removeTab(index);
 }
 
-
+//Text change in search bar
 void WidgetFavorite::on_lineEditSearchFavorite_textChanged(const QString &prefix)
 {
     auto result = App::get().getFavoriteWordsWithPrefix(prefix);
@@ -42,3 +38,24 @@ void WidgetFavorite::on_lineEditSearchFavorite_textChanged(const QString &prefix
     }
 }
 
+//Double click to word in history
+void WidgetFavorite::on_listWidgetFavoriteWord_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString word = item->text();
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWord->count(); ++tabIndex)
+    {
+        if (ui->tabWidgetFavoriteWord->tabText(tabIndex) == word)
+        {
+            ui->tabWidgetFavoriteWord->setCurrentIndex(tabIndex);
+            return;
+        }
+    }
+    auto newTab = new WidgetFavoriteDefinition(this);
+    ui->tabWidgetFavoriteWord->addTab(newTab, word);
+    ui->tabWidgetFavoriteWord->setCurrentIndex(ui->tabWidgetFavoriteWord->count() - 1);
+    //Set word
+    newTab->setWord(word);
+    //Set definition
+    QString definition = App::get().getDefinition(word);
+    newTab->setDefinition(definition);
+}

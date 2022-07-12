@@ -12,3 +12,13 @@ WidgetFavoriteDefinition::~WidgetFavoriteDefinition()
 {
     delete ui;
 }
+
+void WidgetFavoriteDefinition::setWord(QString &word)
+{
+    ui->labelFavoriteWord->setText(word);
+}
+
+void WidgetFavoriteDefinition::setDefinition(QString &definition)
+{
+    ui->labelFavoriteDefinition->setText(definition);
+}
