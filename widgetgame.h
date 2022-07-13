@@ -7,20 +7,17 @@ namespace Ui {
 class WidgetGame;
 }
 
-class WidgetGame : public QWidget
-{
+class WidgetGame : public QWidget {
     Q_OBJECT
 
-public:
+   public:
     explicit WidgetGame(QWidget *parent = nullptr);
     ~WidgetGame();
 
-private slots:
+   private slots:
     void on_pushButtonStartGame_clicked();
 
-
     void on_pushButtonReset_clicked();
-
 
     void on_pushButtonContinue_clicked();
 
@@ -34,8 +31,8 @@ private slots:
 
     void on_pushButtonRestart_clicked();
 
-private:
+   private:
     Ui::WidgetGame *ui;
 };
 
-#endif // WIDGETGAME_H
+#endif  // WIDGETGAME_H
