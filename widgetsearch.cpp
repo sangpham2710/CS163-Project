@@ -151,6 +151,7 @@ void WidgetSearch::on_pushButtonReset_clicked()
     {
         ui->listWidgetHistory->clear();
         ui->tabWidgetDefinition->clear();
+        loadHistory();
         ui->lineEditSearch->clear();
         App::get().resetDictionary();
     }

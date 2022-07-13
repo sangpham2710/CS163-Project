@@ -2,6 +2,7 @@
 #define WIDGETFAVORITEDEFINITION_H
 
 #include <QWidget>
+#include "widgetfavorite.h"
 
 namespace Ui {
 class WidgetFavoriteDefinition;
@@ -16,8 +17,14 @@ public:
     ~WidgetFavoriteDefinition();
     void setWord(QString &word);
     void setDefinition(QString &definition);
+    void setFavoriteState(QString &word);
+
+private slots:
+    void on_pushButtonSetFavorite_clicked();
+
 private:
     Ui::WidgetFavoriteDefinition *ui;
+    WidgetFavorite *widgetFavorite;
 };
 
 #endif // WIDGETFAVORITEDEFINITION_H

@@ -1,11 +1,13 @@
 #include "widgetfavoritedefinition.h"
 #include "ui_widgetfavoritedefinition.h"
+#include "App.h"
 
 WidgetFavoriteDefinition::WidgetFavoriteDefinition(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetFavoriteDefinition)
 {
     ui->setupUi(this);
+    widgetFavorite = reinterpret_cast<WidgetFavorite*>(parent);
 }
 
 WidgetFavoriteDefinition::~WidgetFavoriteDefinition()
@@ -22,3 +24,18 @@ void WidgetFavoriteDefinition::setDefinition(QString &definition)
 {
     ui->labelFavoriteDefinition->setText(definition);
 }
+
+void WidgetFavoriteDefinition::setFavoriteState(QString &word)
+{
+    ui->pushButtonSetFavorite->setText("Unlike");
+}
+
+void WidgetFavoriteDefinition::on_pushButtonSetFavorite_clicked()
+{
+    QString word = ui->labelFavoriteWord->text();
+    App::get().removeWordFromFavorite(word, true);
+    widgetFavorite->clearListWidgetFavorite();
+    widgetFavorite->clearLineEditSearchFavorite();
+    widgetFavorite->removeCurrentTabFavorite();
+}
+

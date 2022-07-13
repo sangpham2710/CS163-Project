@@ -15,6 +15,9 @@ class WidgetFavorite : public QWidget
 public:
     explicit WidgetFavorite(QWidget *parent = nullptr);
     ~WidgetFavorite();
+    void clearLineEditSearchFavorite();
+    void clearListWidgetFavorite();
+    void removeCurrentTabFavorite();
 
 
 private slots:

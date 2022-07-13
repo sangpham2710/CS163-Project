@@ -58,4 +58,27 @@ void WidgetFavorite::on_listWidgetFavoriteWord_itemDoubleClicked(QListWidgetItem
     //Set definition
     QString definition = App::get().getDefinition(word);
     newTab->setDefinition(definition);
+    //Set favorite state
+    newTab->setFavoriteState(word);
+}
+
+void WidgetFavorite::clearLineEditSearchFavorite()
+{
+    ui->lineEditSearchFavorite->clear();
+}
+
+void WidgetFavorite::clearListWidgetFavorite()
+{
+    auto result = App::get().getFavoriteWordsWithPrefix("");
+    ui->tabWidgetFavoriteWord->clear();
+    for (auto& word : result)
+    {
+        new QListWidgetItem(word, ui->listWidgetFavoriteWord);
+    }
+}
+
+void WidgetFavorite::removeCurrentTabFavorite()
+{
+    int index = ui->tabWidgetFavoriteWord->currentIndex();
+    ui->tabWidgetFavoriteWord->removeTab(index);
 }

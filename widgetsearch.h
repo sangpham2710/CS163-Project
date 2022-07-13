@@ -39,8 +39,6 @@ private slots:
 
     void openDialogAddNewWord();
 
-
-
     void on_lineEditSearch_returnPressed();
 
 private:
