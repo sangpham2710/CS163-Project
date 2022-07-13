@@ -4,21 +4,21 @@
 #include <QDebug>
 #include <QFile>
 #include <QTextStream>
-#include <chrono>
-#include <random>
 #include <algorithm>
-#include <string>
+#include <chrono>
 #include <fstream>
+#include <random>
+#include <string>
 #include <vector>
 
 #include "CSV.h"
 #include "Trie.h"
 
-using std::string;
 using std::ifstream;
-using std::vector;
 using std::pair;
 using std::sort;
+using std::string;
+using std::vector;
 
 class DictionaryDataStructure {
    public:
@@ -224,7 +224,8 @@ class DictionaryDataStructure {
     QList<QString> getListWordsHaveDefinition(const QString& token,
                                               int maxResultLength) {
         // read the number of files first
-        string defiInfoPath = QString("data/dicts/%1/defis/info.txt").arg(dictName).toStdString();
+        string defiInfoPath =
+            QString("data/dicts/%1/defis/info.txt").arg(dictName).toStdString();
         ifstream ifs;
         ifs.open(defiInfoPath);
         if (!ifs.is_open()) return {};
@@ -234,7 +235,9 @@ class DictionaryDataStructure {
         vector<pair<int, QString>> listOccurences;
         // then read each of the definition files
         for (int fileId = 0; fileId < numFiles; ++fileId) {
-            QFile fin(QString("data/dicts/%1/defis/%2.csv").arg(dictName).arg(QString::number(fileId)));
+            QFile fin(QString("data/dicts/%1/defis/%2.csv")
+                          .arg(dictName)
+                          .arg(QString::number(fileId)));
             if (!fin.open(QFile::ReadOnly | QFile::Text)) return {};
             QTextStream in(&fin);
             QString line, _word, _definition;
@@ -249,22 +252,20 @@ class DictionaryDataStructure {
         }
         sort(listOccurences.rbegin(), listOccurences.rend());
         QList<QString> result;
-        for (int i = 0; i < std::min((int)listOccurences.size(), maxResultLength); ++i) {
+        for (int i = 0;
+             i < std::min((int)listOccurences.size(), maxResultLength); ++i) {
             result.push_back(listOccurences[i].second);
         }
         return result;
     }
     int countOccurences(const QString& pattern, const QString& text) {
         QString s = pattern + "☺" + text;
-        int n = (int) s.size();
+        int n = (int)s.size();
         QList<int> z(n);
         for (int i = 1, l = 0, r = 0; i < n; ++i) {
-            if (i <= r)
-                z[i] = std::min(r - i + 1, z[i - l]);
-            while (i + z[i] < n && s[z[i]] == s[i + z[i]])
-                ++z[i];
-            if (i + z[i] - 1 > r)
-                l = i, r = i + z[i] - 1;
+            if (i <= r) z[i] = std::min(r - i + 1, z[i - l]);
+            while (i + z[i] < n && s[z[i]] == s[i + z[i]]) ++z[i];
+            if (i + z[i] - 1 > r) l = i, r = i + z[i] - 1;
         }
         int result = 0;
         for (int i = 0; i < text.size(); ++i) {
@@ -273,17 +274,12 @@ class DictionaryDataStructure {
         return result;
     }
     QString getFullWordPath() {
-        return QString(
-                   "data/dicts/%1/"
-                   "words/index.csv")
-            .arg(dictName);
+        return QString("data/dicts/%1/words/index.csv").arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
         QString definition = (*trie)[word];
-        return QString(
-                   "data/dicts/%1/"
-                   "defis/%2.csv")
+        return QString("data/dicts/%1/defis/%2.csv")
             .arg(dictName)
             .arg(definition);
     }
