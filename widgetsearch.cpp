@@ -113,6 +113,14 @@ void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &t
 //Change text in searching bar -> change text in history widget
 void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
 {
+    if (prefix == "") {
+        ui->pushButtonAddWord->setEnabled(false);
+        loadHistory();
+        return;
+    }
+    if (!ui->radioButtonSearchKeyword->isChecked()) {
+        return;
+    }
     auto result = App::get().getListWordsWithPrefix(prefix);
     if (result.size() == 0)
     {
@@ -121,10 +129,6 @@ void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
     }
     else ui->pushButtonAddWord->setEnabled(false);
 
-    if (prefix == "") {
-        loadHistory();
-        return;
-    }
     ui->listWidgetHistory->clear();
     for (auto& word : result) {
         new QListWidgetItem(word, ui->listWidgetHistory);
@@ -146,7 +150,7 @@ void WidgetSearch::loadHistory() {
 //Press reset button
 void WidgetSearch::on_pushButtonReset_clicked()
 {
-    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to reset your dictionary ?", QMessageBox::Yes | QMessageBox::No);
+    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to reset the current dictionary ?", QMessageBox::Yes | QMessageBox::No);
     if (confirm == QMessageBox::Yes)
     {
         ui->listWidgetHistory->clear();

@@ -82,8 +82,12 @@ class App {
     bool addWordToFavorite(const QString& word) {
         return favorite->addWord(word, getCurrentDictionaryName(), dictionary->getFullDefinitionPath(word));
     }
-    bool isWordInFavorite(const QString& word) {
-        return favorite->containsWord(word, getCurrentDictionaryName());
+    bool isWordInFavorite(const QString& word, bool containsDictName = false) {
+        if (containsDictName) {
+            return favorite->containsWord(word);
+        } else {
+            return favorite->containsWord(QString("%1 (%2)").arg(word).arg(getCurrentDictionaryName()));
+        }
     }
     bool removeWordFromFavorite(const QString& word, bool containsDictName = false) {
         if (containsDictName) {

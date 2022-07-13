@@ -27,7 +27,11 @@ void WidgetFavoriteDefinition::setDefinition(QString &definition)
 
 void WidgetFavoriteDefinition::setFavoriteState(QString &word)
 {
-    ui->pushButtonSetFavorite->setText("Unlike");
+    if (App::get().isWordInFavorite(word, true)) {
+        ui->pushButtonSetFavorite->setText("Unlike");
+    } else {
+        ui->pushButtonSetFavorite->setText("Like");
+    }
 }
 
 void WidgetFavoriteDefinition::on_pushButtonSetFavorite_clicked()

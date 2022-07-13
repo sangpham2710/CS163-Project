@@ -56,7 +56,7 @@ void WidgetFavorite::on_listWidgetFavoriteWord_itemDoubleClicked(QListWidgetItem
     //Set word
     newTab->setWord(word);
     //Set definition
-    QString definition = App::get().getDefinition(word);
+    QString definition = App::get().getFavoriteWordDefinition(word);
     newTab->setDefinition(definition);
     //Set favorite state
     newTab->setFavoriteState(word);
@@ -70,7 +70,7 @@ void WidgetFavorite::clearLineEditSearchFavorite()
 void WidgetFavorite::clearListWidgetFavorite()
 {
     auto result = App::get().getFavoriteWordsWithPrefix("");
-    ui->tabWidgetFavoriteWord->clear();
+    ui->listWidgetFavoriteWord->clear();
     for (auto& word : result)
     {
         new QListWidgetItem(word, ui->listWidgetFavoriteWord);

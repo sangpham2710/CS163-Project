@@ -7,7 +7,7 @@
 class IFavorite {
    public:
     virtual bool addWord(const QString& word, const QString& dictName, const QString& filePath) = 0;
-    virtual bool containsWord(const QString& word, const QString& dictName) = 0;
+    virtual bool containsWord(const QString& word) = 0;
     virtual bool removeWord(const QString& wordDictName) = 0;
     virtual QList<QString> getFavoriteWordsWithPrefix(
         const QString& prefix, int maxResultLength = 20) = 0;
