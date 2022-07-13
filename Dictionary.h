@@ -3,6 +3,7 @@
 
 #include <QDebug>
 #include <QDir>
+#include <QElapsedTimer>
 #include <QList>
 #include <QString>
 #include <filesystem>
@@ -11,8 +12,6 @@
 #include "DictionaryDataStructure.h"
 #include "IDictionary.h"
 #include "Map.h"
-#include <QDebug>
-#include <QElapsedTimer>
 
 using std::string;
 namespace fs = std::filesystem;
@@ -33,12 +32,16 @@ class Dictionary : public IDictionary {
                 QString::fromStdString(dirName.path().filename().string());
             timer.start();
             dictMap[dictName] = new DictionaryDataStructure(dictName);
-            qDebug() << QString("Loaded %1 dictionary in %2 ms (%3 words)").arg(dictName).arg(timer.restart()).arg(dictMap[dictName]->getNumWords());
+            qDebug() << QString("Loaded %1 dictionary in %2 ms (%3 words)")
+                            .arg(dictName)
+                            .arg(timer.restart())
+                            .arg(dictMap[dictName]->getNumWords());
             totalNumWords += dictMap[dictName]->getNumWords();
             if (firstDictName == "") firstDictName = dictName;
         }
         currentDict = dictMap[firstDictName];
-        qDebug() << QString("Total time to load all dictionaries: %1 ms").arg(totalTimer.elapsed());
+        qDebug() << QString("Total time to load all dictionaries: %1 ms")
+                        .arg(totalTimer.elapsed());
         qDebug() << QString("Loaded %1 words").arg(totalNumWords);
     }
     void deallocate() {
@@ -50,9 +53,7 @@ class Dictionary : public IDictionary {
                                           int maxResultLength) {
         return currentDict->getListWordsWithPrefix(prefix, maxResultLength);
     }
-    QList<QString> getListDictionaries() {
-        return dictMap.keys();
-    }
+    QList<QString> getListDictionaries() { return dictMap.keys(); }
     bool changeDictionary(const QString &dictName) {
         if (currentDict->getDictionaryName() == dictName) return true;
         if (!dictMap.contains(dictName)) return false;
@@ -94,6 +95,7 @@ class Dictionary : public IDictionary {
     QString getCurrentDictionaryName() {
         return currentDict->getDictionaryName();
     }
+
    private:
     Map<QString, DictionaryDataStructure *> dictMap;
     DictionaryDataStructure *currentDict;

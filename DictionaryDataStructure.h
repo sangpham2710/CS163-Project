@@ -273,12 +273,17 @@ class DictionaryDataStructure {
         return result;
     }
     QString getFullWordPath() {
-        return QString("data/dicts/%1/words/index.csv").arg(dictName);
+        return QString(
+                   "data/dicts/%1/"
+                   "words/index.csv")
+            .arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
         QString definition = (*trie)[word];
-        return QString("data/dicts/%1/defis/%2.csv")
+        return QString(
+                   "data/dicts/%1/"
+                   "defis/%2.csv")
             .arg(dictName)
             .arg(definition);
     }
