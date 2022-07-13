@@ -56,7 +56,7 @@ class DictionaryDataStructure {
         (*trie)[word] = "tmp";
         QString wordPath = getFullWordPath();
         QString definitionPath =
-            QString("data/dicts/%1/defis/tmp.csv").arg(dictName);
+            QString("/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/dicts/%1/defis/tmp.csv").arg(dictName);
 
         // append definition into word/index.csv and defis/tmp.csv
         QFile fout;
@@ -225,7 +225,7 @@ class DictionaryDataStructure {
                                               int maxResultLength) {
         // read the number of files first
         string defiInfoPath =
-            QString("data/dicts/%1/defis/info.txt").arg(dictName).toStdString();
+            QString("/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/dicts/%1/defis/info.txt").arg(dictName).toStdString();
         ifstream ifs;
         ifs.open(defiInfoPath);
         if (!ifs.is_open()) return {};
@@ -235,7 +235,7 @@ class DictionaryDataStructure {
         vector<pair<int, QString>> listOccurences;
         // then read each of the definition files
         for (int fileId = 0; fileId < numFiles; ++fileId) {
-            QFile fin(QString("data/dicts/%1/defis/%2.csv")
+            QFile fin(QString("/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/dicts/%1/defis/%2.csv")
                           .arg(dictName)
                           .arg(QString::number(fileId)));
             if (!fin.open(QFile::ReadOnly | QFile::Text)) return {};
@@ -274,12 +274,12 @@ class DictionaryDataStructure {
         return result;
     }
     QString getFullWordPath() {
-        return QString("data/dicts/%1/words/index.csv").arg(dictName);
+        return QString("/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/dicts/%1/words/index.csv").arg(dictName);
     }
     QString getFullDefinitionPath(const QString& word) {
         if (!trie->contains(word)) return "";
         QString definition = (*trie)[word];
-        return QString("data/dicts/%1/defis/%2.csv")
+        return QString("/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/dicts/%1/defis/%2.csv")
             .arg(dictName)
             .arg(definition);
     }

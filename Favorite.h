@@ -122,7 +122,7 @@ class Favorite : public IFavorite {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
     }
     QString getFavoritePath() {
-        return "data/favorite/"
+        return "/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/favorite/"
                "index.csv";
     }
 
