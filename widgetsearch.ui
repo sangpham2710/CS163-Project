@@ -10,6 +10,12 @@
     <height>488</height>
    </rect>
   </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
+  </property>
   <property name="windowTitle">
    <string>Form</string>
   </property>
@@ -24,7 +30,7 @@
           <number>5</number>
          </property>
          <property name="leftMargin">
-          <number>0</number>
+          <number>5</number>
          </property>
          <property name="topMargin">
           <number>0</number>
@@ -53,6 +59,9 @@
        </item>
        <item>
         <layout class="QHBoxLayout" name="horizontalLayoutSearchType">
+         <property name="leftMargin">
+          <number>5</number>
+         </property>
          <item>
           <spacer name="horizontalSpacer_2">
            <property name="orientation">
@@ -103,7 +112,7 @@
         <number>20</number>
        </property>
        <item>
-        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,7">
+        <layout class="QVBoxLayout" name="verticalLayout" stretch="0,12">
          <property name="spacing">
           <number>5</number>
          </property>
@@ -113,7 +122,7 @@
          <item>
           <widget class="QPushButton" name="pushButtonRandomWord">
            <property name="sizePolicy">
-            <sizepolicy hsizetype="Minimum" vsizetype="Preferred">
+            <sizepolicy hsizetype="Minimum" vsizetype="Minimum">
              <horstretch>0</horstretch>
              <verstretch>0</verstretch>
             </sizepolicy>
@@ -124,12 +133,25 @@
           </widget>
          </item>
          <item>
-          <widget class="QListWidget" name="listWidgetHistory"/>
+          <widget class="QListWidget" name="listWidgetHistory">
+           <property name="sizePolicy">
+            <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+             <horstretch>0</horstretch>
+             <verstretch>0</verstretch>
+            </sizepolicy>
+           </property>
+          </widget>
          </item>
         </layout>
        </item>
        <item>
         <widget class="QTabWidget" name="tabWidgetDefinition">
+         <property name="sizePolicy">
+          <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+           <horstretch>0</horstretch>
+           <verstretch>0</verstretch>
+          </sizepolicy>
+         </property>
          <property name="tabsClosable">
           <bool>true</bool>
          </property>
