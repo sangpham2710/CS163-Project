@@ -179,9 +179,9 @@ void WidgetSearch::on_pushButtonAddWord_clicked()
 
 void WidgetSearch::on_lineEditSearch_returnPressed()
 {
-    ui->listWidgetHistory->clear();
     if (ui->radioButtonSearchDictionary->isChecked()) {
         auto result = App::get().getListWordsHaveDefinition(ui->lineEditSearch->text());
+        ui->listWidgetHistory->clear();
         for (auto& word : result) {
             new QListWidgetItem(word, ui->listWidgetHistory);
         }
