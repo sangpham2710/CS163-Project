@@ -17,8 +17,6 @@ class WidgetGame : public QWidget {
    private slots:
     void on_pushButtonStartGame_clicked();
 
-    void on_pushButtonReset_clicked();
-
     void on_pushButtonContinue_clicked();
 
     void on_pushButtonAnswer1_clicked();
@@ -31,7 +29,20 @@ class WidgetGame : public QWidget {
 
     void on_pushButtonRestart_clicked();
 
-   private:
+    void QuestionPopUp ();
+
+    void restart (QString lang);
+
+    void setAnswerkeyState (bool set);
+
+    void on_comboBoxChooseLang_currentIndexChanged(int index);
+
+    void on_comboBoxChooseMode_currentIndexChanged(int index);
+
+    void gameFinish();
+
+    void setDefautAnswerBackGround();
+private:
     Ui::WidgetGame *ui;
 };
 

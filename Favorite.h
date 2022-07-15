@@ -53,9 +53,7 @@ class Favorite : public IFavorite {
         fout.close();
         return true;
     }
-    bool containsWord(const QString& word) {
-        return trie->contains(word);
-    }
+    bool containsWord(const QString& word) { return trie->contains(word); }
     bool removeWord(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return false;
         trie->remove(wordDictName);
