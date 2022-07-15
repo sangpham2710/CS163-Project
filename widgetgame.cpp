@@ -170,6 +170,8 @@ void WidgetGame::on_pushButtonRestart_clicked() {
         ui->labelScore->setText(QString::number(score));
         App::get().changeDictionary(lang);
         QuestionPopUp();
+        ui->labelQuestionCount->setText ("");
+        questionDone=0;
     }
 
 }
