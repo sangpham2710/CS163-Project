@@ -45,10 +45,7 @@ class History : public IHistory {
         return true;
     }
     QList<QString> getHistory() { return *list; }
-    QString getHistoryPath() {
-        return "/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/history/"
-               "index.csv";
-    }
+    QString getHistoryPath() { return "data/history/index.csv"; }
 
    private:
     QList<QString>* list;

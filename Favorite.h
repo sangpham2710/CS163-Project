@@ -53,9 +53,7 @@ class Favorite : public IFavorite {
         fout.close();
         return true;
     }
-    bool containsWord(const QString& word) {
-        return trie->contains(word);
-    }
+    bool containsWord(const QString& word) { return trie->contains(word); }
     bool removeWord(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return false;
         trie->remove(wordDictName);
@@ -121,10 +119,7 @@ class Favorite : public IFavorite {
     QString getWord(const QString& wordDictName) {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
     }
-    QString getFavoritePath() {
-        return "/Users/tranhainam/Documents/build-CS163-Project-Qt_6_3_0_for_macOS-Debug/data/favorite/"
-               "index.csv";
-    }
+    QString getFavoritePath() { return "data/favorite/index.csv"; }
 
    private:
     Trie<QString>* trie;
