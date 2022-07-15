@@ -46,6 +46,7 @@ void WidgetGame::on_pushButtonStartGame_clicked() {
     ui->pushButtonStartGame->setEnabled(false);
     setAnswerkeyState(true);
     ui->labelScore->setText(QString::number(score));
+    ui->labelQuestionCount->setText("0/20");
     App::get().changeDictionary(lang);
     QuestionPopUp();
 }
@@ -162,7 +163,7 @@ void WidgetGame::on_pushButtonRestart_clicked() {
     if (reply == QMessageBox::Yes) {
         ui->pushButtonContinue->setEnabled(false);
         ui->labelScore->setText("");
-        ui->labelQuestionEdit->setText("");
+        ui->labelQuestionEdit->setText("QUESTION");
         ui->labelGameState->setText("");
         score = 0;
         ui->pushButtonStartGame->setEnabled(false);
@@ -170,7 +171,7 @@ void WidgetGame::on_pushButtonRestart_clicked() {
         ui->labelScore->setText(QString::number(score));
         App::get().changeDictionary(lang);
         QuestionPopUp();
-        ui->labelQuestionCount->setText ("");
+        ui->labelQuestionCount->setText ("0/20");
         questionDone=0;
     }
 
@@ -178,14 +179,14 @@ void WidgetGame::on_pushButtonRestart_clicked() {
 
 void WidgetGame::QuestionPopUp()
 {
-    if (mode == "Play by defination") {
+    if (mode == "Play by definition") {
         play = App::get().getDefinitionAnd4Words();
         ans = play[1];
         int ran = rand() % 4;
         ran += 1;
         QString temp = play[1];
         play[1] = play[ran];
-        play[ran] = play[1];
+        play[ran] = temp;
         ui->labelQuestionEdit->setText(play[0]);
         ui->labelAnswer1->setText(play[1]);
         ui->labelAnswer2->setText(play[2]);
@@ -198,7 +199,7 @@ void WidgetGame::QuestionPopUp()
         ran += 1;
         QString temp = play[1];
         play[1] = play[ran];
-        play[ran] = play[1];
+        play[ran] = temp;
         ui->labelQuestionEdit->setText(play[0]);
         ui->labelAnswer1->setText(play[1]);
         ui->labelAnswer2->setText(play[2]);
@@ -215,8 +216,14 @@ void WidgetGame::restart(QString lang)
     ui->labelScore->setText("");
     ui->pushButtonStartGame->setEnabled(true);
     ui->labelGameState->setText("");
-    ui->labelQuestionEdit->setText("");
+    ui->labelQuestionEdit->setText("QUESTION");
+    ui->labelQuestionCount->setText("");
     setDefautAnswerBackGround();
+    ui->labelAnswer1->setText("A");
+    ui->labelAnswer2->setText("B");
+    ui->labelAnswer3->setText("C");
+    ui->labelAnswer4->setText("D");
+    setAnswerkeyState(false);
 }
 
 void WidgetGame::setAnswerkeyState (bool set)
@@ -241,7 +248,7 @@ void WidgetGame::on_comboBoxChooseLang_currentIndexChanged(int index)
     if (ui->comboBoxChooseLang->currentIndex() != langPreviousIndex) {
         if (isplay) {
             QMessageBox::StandardButton reply = QMessageBox::question(
-                this, "You are changing the language of game, do you want to reset game?", "Your game score will be return to 0",
+                this, "Title", "You are changing game language \nYour game score will be return to 0",
                 QMessageBox::Yes | QMessageBox::No);
             if (reply==QMessageBox::Yes) {
                 lang=ui->comboBoxChooseLang->currentText();
@@ -264,7 +271,7 @@ void WidgetGame::on_comboBoxChooseMode_currentIndexChanged(int index)
     if (ui->comboBoxChooseMode->currentIndex() != modePreviousIndex) {
         if (isplay) {
             QMessageBox::StandardButton reply = QMessageBox::question(
-                this, "You are changing the mode of game, do you want to reset game?", "Your game score will be return to 0",
+                this, "Title", "You are changing game mode \nYour game score will be return to 0",
                 QMessageBox::Yes | QMessageBox::No);
             if (reply==QMessageBox::Yes) {
                 mode=ui->comboBoxChooseMode->currentText();
@@ -284,7 +291,7 @@ void WidgetGame::on_comboBoxChooseMode_currentIndexChanged(int index)
 void WidgetGame::gameFinish()
 {
     QMessageBox::StandardButton reply = QMessageBox::question(
-        this, "", "You have finished the game "  "\n" "Your score is: " + QString::number(score) + "/20" "\n" "Do you want to restart?" ,
+        this, "Do you want to restart?", "You have finished the game "  "\n" "Your score is: " + QString::number(score) + "/20" ,
         QMessageBox::Yes | QMessageBox::No);
     if (reply == QMessageBox::Yes) {
         restart(lang);
