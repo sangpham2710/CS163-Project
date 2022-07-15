@@ -292,12 +292,12 @@ void WidgetGame::gameFinish()
 void WidgetGame::setDefautAnswerBackGround()
 {
     ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: white; }\n"
-                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+                                         "QPushButton:enabled { background-color: rgb(255, 255, 255); }\n");
     ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: white; }\n"
-                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+                                         "QPushButton:enabled { background-color: rgb(255, 255, 255); }\n");
     ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: white; }\n"
-                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+                                         "QPushButton:enabled { background-color: rgb(255, 255 , 255); }\n");
     ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: white; }\n"
-                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+                                         "QPushButton:enabled { background-color: rgb(255,255,255); }\n");
 }
 
