@@ -31,8 +31,15 @@ class WidgetGame : public QWidget {
 
     void QuestionPopUp ();
 
+    void restart (QString lang);
+
     void setAnswerkeyState (bool set);
-    void on_comboBoxChooseLang_currentTextChanged(const QString &arg1);
+
+    void on_comboBoxChooseLang_currentIndexChanged(int index);
+
+    void on_comboBoxChooseMode_currentIndexChanged(int index);
+
+    void gameFinish();
 
 private:
     Ui::WidgetGame *ui;

@@ -13,7 +13,7 @@
   <property name="windowTitle">
    <string>Form</string>
   </property>
-  <layout class="QVBoxLayout" name="verticalLayout_4">
+  <layout class="QVBoxLayout" name="verticalLayout_5">
    <property name="spacing">
     <number>0</number>
    </property>
@@ -87,11 +87,11 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>70</height>
+         <height>50</height>
         </size>
        </property>
        <property name="text">
-        <string>Question</string>
+        <string>Question:</string>
        </property>
       </widget>
      </item>
@@ -106,7 +106,7 @@
        <property name="minimumSize">
         <size>
          <width>0</width>
-         <height>90</height>
+         <height>50</height>
         </size>
        </property>
        <property name="font">
@@ -128,6 +128,85 @@
     </layout>
    </item>
    <item>
+    <layout class="QVBoxLayout" name="verticalLayout_4">
+     <property name="spacing">
+      <number>0</number>
+     </property>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_2">
+       <item>
+        <widget class="QLabel" name="labelAnswer1">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelAnswer2">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+     <item>
+      <layout class="QHBoxLayout" name="horizontalLayout_4">
+       <item>
+        <widget class="QLabel" name="labelAnswer3">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+       <item>
+        <widget class="QLabel" name="labelAnswer4">
+         <property name="minimumSize">
+          <size>
+           <width>0</width>
+           <height>40</height>
+          </size>
+         </property>
+         <property name="text">
+          <string/>
+         </property>
+         <property name="wordWrap">
+          <bool>true</bool>
+         </property>
+        </widget>
+       </item>
+      </layout>
+     </item>
+    </layout>
+   </item>
+   <item>
     <layout class="QHBoxLayout" name="horizontalLayout_6">
      <item>
       <widget class="QLabel" name="labelScoreTitle">
@@ -138,7 +217,7 @@
         </sizepolicy>
        </property>
        <property name="text">
-        <string>Score</string>
+        <string>Score:</string>
        </property>
       </widget>
      </item>
@@ -150,6 +229,26 @@
          <height>30</height>
         </size>
        </property>
+       <property name="text">
+        <string/>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelQuestionDone">
+       <property name="sizePolicy">
+        <sizepolicy hsizetype="Fixed" vsizetype="Preferred">
+         <horstretch>0</horstretch>
+         <verstretch>0</verstretch>
+        </sizepolicy>
+       </property>
+       <property name="text">
+        <string>Question done:</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QLabel" name="labelQuestionCount">
        <property name="text">
         <string/>
        </property>
@@ -177,7 +276,7 @@
      </property>
      <item>
       <layout class="QGridLayout" name="gridLayout_2">
-       <item row="0" column="1">
+       <item row="0" column="0">
         <layout class="QGridLayout" name="gridLayout">
          <property name="spacing">
           <number>10</number>
@@ -209,7 +308,7 @@
             <bool>false</bool>
            </property>
            <property name="text">
-            <string>Answer1</string>
+            <string>A</string>
            </property>
           </widget>
          </item>
@@ -228,7 +327,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Answer2</string>
+            <string>B</string>
            </property>
           </widget>
          </item>
@@ -247,7 +346,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Answer3</string>
+            <string>C</string>
            </property>
           </widget>
          </item>
@@ -266,7 +365,7 @@
             </size>
            </property>
            <property name="text">
-            <string>Answer4</string>
+            <string>D</string>
            </property>
           </widget>
          </item>
