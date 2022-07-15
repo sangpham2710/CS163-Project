@@ -28,15 +28,12 @@ class History : public IHistory {
         return true;
     }
     bool add(const QString& token, int maxSize) {
-        for (int i = 0; i < list->size(); ++i) {
-            if (token == (*list)[i]) {
-                for (int j = i; j < list->size() - 1; ++j) {
-                    (*list)[j] = (*list)[j + 1];
-                }
-                list->push_front(token);
-                return true;
-            }
+        if (list->contains(token)) {
+            list->removeOne(token);
+            list->push_front(token);
+            return true;
         }
+
         if (list->size() == maxSize) list->pop_back();
         list->push_front(token);
 
