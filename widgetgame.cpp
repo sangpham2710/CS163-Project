@@ -46,6 +46,7 @@ void WidgetGame::on_pushButtonStartGame_clicked() {
     ui->pushButtonStartGame->setEnabled(false);
     setAnswerkeyState(true);
     ui->labelScore->setText(QString::number(score));
+    ui->labelQuestionCount->setText("0/20");
     App::get().changeDictionary(lang);
     QuestionPopUp();
 }
@@ -170,7 +171,7 @@ void WidgetGame::on_pushButtonRestart_clicked() {
         ui->labelScore->setText(QString::number(score));
         App::get().changeDictionary(lang);
         QuestionPopUp();
-        ui->labelQuestionCount->setText ("");
+        ui->labelQuestionCount->setText ("0/20");
         questionDone=0;
     }
 
@@ -216,7 +217,12 @@ void WidgetGame::restart(QString lang)
     ui->pushButtonStartGame->setEnabled(true);
     ui->labelGameState->setText("");
     ui->labelQuestionEdit->setText("");
+    ui->labelQuestionCount->setText("");
     setDefautAnswerBackGround();
+    ui->labelAnswer1->setText("");
+    ui->labelAnswer2->setText("");
+    ui->labelAnswer3->setText("");
+    ui->labelAnswer4->setText("");
 }
 
 void WidgetGame::setAnswerkeyState (bool set)
