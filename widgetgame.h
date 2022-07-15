@@ -41,6 +41,7 @@ class WidgetGame : public QWidget {
 
     void gameFinish();
 
+    void setDefautAnswerBackGround();
 private:
     Ui::WidgetGame *ui;
 };

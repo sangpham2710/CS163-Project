@@ -31,6 +31,7 @@ WidgetGame::WidgetGame(QWidget *parent)
     modePreviousIndex=ui->comboBoxChooseMode->currentIndex();
     isplay=false;
     questionDone=0;
+    setDefautAnswerBackGround();
 }
 WidgetGame::~WidgetGame() {
     delete ui;
@@ -38,6 +39,7 @@ WidgetGame::~WidgetGame() {
 
 void WidgetGame::on_pushButtonStartGame_clicked() {
     isplay=true;
+    setDefautAnswerBackGround();
     lang = ui->comboBoxChooseLang->currentText();
     mode = ui->comboBoxChooseMode->currentText();
     ui->pushButtonRestart->setEnabled(true);
@@ -49,6 +51,7 @@ void WidgetGame::on_pushButtonStartGame_clicked() {
 }
 
 void WidgetGame::on_pushButtonContinue_clicked() {
+    setDefautAnswerBackGround();
     setAnswerkeyState(true);
     ui->pushButtonContinue->setEnabled(false);
     ui->labelGameState->setText("");
@@ -82,11 +85,15 @@ void WidgetGame::on_pushButtonAnswer2_clicked() {
     questionDone+=1;
     ui->labelQuestionCount->setText (QString::number(questionDone) +"/20");
     if (ans == ui->labelAnswer2->text()) {
+        ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: green; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         score += 1;
         ui->labelScore->setText(QString::number(score));
         ui->pushButtonContinue->setEnabled(true);
         ui->labelGameState->setText("Correct answer, please click continue");
     } else {
+        ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: red; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText(
             "Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
@@ -103,11 +110,15 @@ void WidgetGame::on_pushButtonAnswer3_clicked() {
     questionDone+=1;
     ui->labelQuestionCount->setText (QString::number(questionDone) +"/20");
     if (ans == ui->labelAnswer3->text()) {
+        ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: green; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         score += 1;
         ui->labelScore->setText(QString::number(score));
         ui->pushButtonContinue->setEnabled(true);
         ui->labelGameState->setText("Correct answer, please click continue");
     } else {
+        ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: red; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText(
             "Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
@@ -124,11 +135,15 @@ void WidgetGame::on_pushButtonAnswer4_clicked() {
     questionDone+=1;
     ui->labelQuestionCount->setText (QString::number(questionDone) +"/20");
     if (ans == ui->labelAnswer4->text()) {
+        ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: green; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         score += 1;
         ui->labelScore->setText(QString::number(score));
         ui->pushButtonContinue->setEnabled(true);
         ui->labelGameState->setText("Correct answer, please click continue");
     } else {
+        ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: red; }\n"
+                                             "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText("Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
         setAnswerkeyState(false);
@@ -140,6 +155,7 @@ void WidgetGame::on_pushButtonAnswer4_clicked() {
 }
 
 void WidgetGame::on_pushButtonRestart_clicked() {
+    setDefautAnswerBackGround();
     QMessageBox::StandardButton reply = QMessageBox::question(
         this, "Do you want to restart?", "Your game score will be return to 0",
         QMessageBox::Yes | QMessageBox::No);
@@ -198,6 +214,7 @@ void WidgetGame::restart(QString lang)
     ui->pushButtonStartGame->setEnabled(true);
     ui->labelGameState->setText("");
     ui->labelQuestionEdit->setText("");
+    setDefautAnswerBackGround();
 }
 
 void WidgetGame::setAnswerkeyState (bool set)
@@ -270,5 +287,17 @@ void WidgetGame::gameFinish()
     if (reply == QMessageBox::Yes) {
         restart(lang);
     }
+}
+
+void WidgetGame::setDefautAnswerBackGround()
+{
+    ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: white; }\n"
+                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+    ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: white; }\n"
+                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+    ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: white; }\n"
+                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+    ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: white; }\n"
+                                         "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
 }
 
