@@ -19,6 +19,49 @@ set(PROJECT_SOURCES
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+
+        Trie.h
+        Map.h
+        CSV.h
+
+        IDictionary.h
+        IFavorite.h
+        IHistory.h
+
+        Dictionary.h
+        DictionaryDataStructure.h
+        Favorite.h
+        History.h
+
+        App.h
+
+        widgetsearch.h
+        widgetsearch.cpp
+        widgetsearch.ui
+
+        widgetdefinition.h
+        widgetdefinition.cpp
+        widgetdefinition.ui
+
+        widgetfavorite.h
+        widgetfavorite.cpp
+        widgetfavorite.ui
+
+        widgetfavoritedefinition.h
+        widgetfavoritedefinition.cpp
+        widgetfavoritedefinition.ui
+
+        widgetgame.h
+        widgetgame.cpp
+        widgetgame.ui
+
+        dialogaddnewword.h
+        dialogaddnewword.cpp
+        dialogaddnewword.ui
+
+        dialogeditword.h
+        dialogeditword.cpp
+        dialogeditword.ui
 )
 
 if(${QT_VERSION_MAJOR} GREATER_EQUAL 6)
@@ -57,3 +100,5 @@ set_target_properties(CS163-Project PROPERTIES
 if(QT_VERSION_MAJOR EQUAL 6)
     qt_finalize_executable(CS163-Project)
 endif()
+
+
