@@ -22,6 +22,9 @@ class App {
         return app;
     }
     // dictionary functionalities
+    bool addDictionary(const QString& dictName) {
+        return dictionary->addDictionary(dictName);
+    }
     QList<QString> getListWordsWithPrefix(const QString& prefix) {
         return dictionary->getListWordsWithPrefix(prefix);
     }
