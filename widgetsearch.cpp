@@ -3,8 +3,11 @@
 #include "widgetdefinition.h"
 #include "App.h"
 #include <QMessageBox>
-
+#include <QFileDialog>
 #include <QDebug>
+#include <filesystem>
+#include "Dictionary.h"
+
 WidgetSearch::WidgetSearch(QWidget *parent) :
     QWidget(parent),
     ui(new Ui::WidgetSearch)
@@ -217,5 +220,70 @@ void WidgetSearch::on_lineEditSearch_returnPressed()
 const QString &WidgetSearch::getCurrentDictName() const
 {
     return currentDictName;
+}
+
+void WidgetSearch::on_pushButton_clicked()
+{
+    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://");
+
+    qDebug() << "Loading";
+
+    int index = path.lastIndexOf('/');
+    QString dictName = path.mid(index + 1, path.length() - index - 5);
+
+    QString defisPath = "data/dicts/" + dictName + "/defis/";
+    QString wordsPath = "data/dicts/" + dictName + "/words/";
+
+    std::filesystem::create_directories(defisPath.toStdString());
+    std::filesystem::create_directories(wordsPath.toStdString());
+
+    int len = 0;
+    int i = 0;
+    QFile fin;
+    fin.setFileName(path);
+    if(!fin.open(QFile::ReadOnly | QFile::Text)) return;
+    QString line;
+    QTextStream in;
+    in.setDevice(&fin);
+    while (!in.atEnd()) {
+        line = in.readLine();
+        len++;
+        QString c = QString::number(i);
+        QString word;
+        QFile fout;
+        fout.setFileName(defisPath + c + ".csv");
+        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
+        QTextStream out;
+        out.setDevice(&fout);
+        out << line << "\n";
+        fout.close();
+
+
+        word = CSV::readWordInLine(line);
+        fout.setFileName(wordsPath + "index.csv");
+        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
+        out << CSV::writeLine(word,c) << "\n";
+        fout.close();
+
+        i = (i + 1) % 1000;
+    }
+    fin.close();
+
+    QFile fout;
+    QTextStream out;
+    fout.setFileName(defisPath + "info.txt");
+    if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
+    out.setDevice(&fout);
+    out << len / 1000 + 1 << "\n" << 1000;
+    fout.close();
+
+    fout.setFileName(wordsPath + "info.txt");
+    if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
+    out << len;
+    fout.close();
+
+     qDebug() << "Done";
+     ui->comboBoxDictionaryType->addItem(dictName);
+     return;
 }
 

@@ -25,7 +25,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayoutSearch">
        <item>
-        <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,1,1,1">
+        <layout class="QHBoxLayout" name="horizontalLayout" stretch="10,1,1,0,1">
          <property name="spacing">
           <number>5</number>
          </property>
@@ -45,6 +45,13 @@
           <widget class="QPushButton" name="pushButtonAddWord">
            <property name="text">
             <string>Add Word</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pushButton">
+           <property name="text">
+            <string>Add Dictionary</string>
            </property>
           </widget>
          </item>

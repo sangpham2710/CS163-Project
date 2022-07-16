@@ -6,6 +6,13 @@
 
 class CSV {
    public:
+
+    static QString readWordInLine(QString line) {
+        QString word, defi;
+        CSV::readLine(line, word, defi);
+        return word;
+    }
+
     static void _readLine(const QString& line, QList<QString>& values) {
         QString value = "";
         int state = 0;

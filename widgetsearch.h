@@ -44,6 +44,8 @@ private slots:
 
     void on_lineEditSearch_returnPressed();
 
+    void on_pushButton_clicked();
+
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;
