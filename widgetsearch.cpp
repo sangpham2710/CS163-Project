@@ -224,12 +224,19 @@ const QString &WidgetSearch::getCurrentDictName() const
 
 void WidgetSearch::on_pushButton_clicked()
 {
-    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://");
+    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://", tr("csv files (*.csv)"));
 
     qDebug() << "Loading";
 
     int index = path.lastIndexOf('/');
     QString dictName = path.mid(index + 1, path.length() - index - 5);
+
+    for( auto it : App::get().getListDictionaries()) {
+        if (it ==  dictName) {
+            QMessageBox::warning(this, "Add Dictionary", "This dictionary already exists!");
+            return;
+        }
+    }
 
     QString defisPath = "data/dicts/" + dictName + "/defis/";
     QString wordsPath = "data/dicts/" + dictName + "/words/";
@@ -281,9 +288,13 @@ void WidgetSearch::on_pushButton_clicked()
     if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
     out << len;
     fout.close();
+    qDebug() << "Done";
 
-     qDebug() << "Done";
-     ui->comboBoxDictionaryType->addItem(dictName);
-     return;
+    ui->comboBoxDictionaryType->addItem(dictName);
+    App::get().addDictionary(dictName);
+    ui->lineEditSearch->clear();
+    ui->tabWidgetDefinition->clear();
+    loadHistory();
+    return;
 }
 
