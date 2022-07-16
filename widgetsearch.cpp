@@ -19,6 +19,7 @@ WidgetSearch::WidgetSearch(QWidget *parent) :
     ui->radioButtonSearchKeyword->setChecked(true);
     ui->pushButtonAddWord->setEnabled(false);
     loadHistory();
+
 }
 
 WidgetSearch::~WidgetSearch()
@@ -176,7 +177,6 @@ void WidgetSearch::on_pushButtonAddWord_clicked()
 }
 
 
-
 void WidgetSearch::on_lineEditSearch_returnPressed()
 {
     ui->listWidgetHistory->clear();
@@ -186,5 +186,37 @@ void WidgetSearch::on_lineEditSearch_returnPressed()
             new QListWidgetItem(word, ui->listWidgetHistory);
         }
     }
+}
+
+const QString &WidgetSearch::getPreviousDictionaryName() const
+{
+    return previousDictionaryName;
+}
+
+void WidgetSearch::setPreviousDictionaryName(const QString &newPreviousDictionaryName)
+{
+    previousDictionaryName = newPreviousDictionaryName;
+}
+
+void WidgetSearch::reload()
+{
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); tabIndex++)
+    {
+        QString word = ui->tabWidgetDefinition->tabText(tabIndex);
+        ui->tabWidgetDefinition->removeTab(tabIndex);
+        auto newTab = new WidgetDefinition(this);
+        ui->tabWidgetDefinition->addTab(newTab, word);
+        ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
+        //set title of the definition
+        newTab->setWord(word);
+
+        //set definition of the definition
+        QString definition = App::get().getDefinition(word);
+        newTab->setDefinition(definition);
+
+        //set favorite
+        newTab->setFavoriteState(word);
+    }
+
 }
 

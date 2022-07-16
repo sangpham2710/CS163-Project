@@ -13,13 +13,11 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     ui->tabWidgetDictionary->clear();
-    ui->tabWidgetDictionary->addTab(new WidgetSearch(), QString("Search"));
     ui->tabWidgetDictionary->addTab(new WidgetFavorite(), QString("Favorite"));
+    ui->tabWidgetDictionary->addTab(new WidgetSearch(), QString("Search"));
     ui->tabWidgetDictionary->addTab(new WidgetGame(), QString("Game"));
-
+    this->setWindowTitle("Dictionary");
     App::get();
-
-
 }
 
 MainWindow::~MainWindow()
@@ -28,6 +26,11 @@ MainWindow::~MainWindow()
 }
 
 
-
-
+void MainWindow::on_tabWidgetDictionary_currentChanged(int index)
+{
+    if (index == 1)
+    {
+        widgetSearch->reload();
+    }
+}
 

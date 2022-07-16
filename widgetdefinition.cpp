@@ -26,6 +26,11 @@ void WidgetDefinition::setWord(const QString &word)
     ui->labelWord->setText(word);
 }
 
+QString WidgetDefinition::getWord()
+{
+    return ui->labelWord->text();
+}
+
 void WidgetDefinition::openDialogEditWord()
 {
     QString word = ui->labelWord->text();

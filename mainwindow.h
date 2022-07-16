@@ -2,6 +2,8 @@
 #define MAINWINDOW_H
 
 #include <QMainWindow>
+#include "widgetsearch.h"
+#include "widgetfavorite.h"
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -18,8 +20,11 @@ public:
 private slots:
 
 
+    void on_tabWidgetDictionary_currentChanged(int index);
 
 private:
     Ui::MainWindow *ui;
+    WidgetSearch *widgetSearch;
+    WidgetFavorite *widgetFavorite;
 };
 #endif // MAINWINDOW_H

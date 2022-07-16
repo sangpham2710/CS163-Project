@@ -19,7 +19,7 @@ public:
     void setDefinition(const QString &definition);
     void setWord(const QString &word);
     void setFavoriteState(const QString &word);
-
+    QString getWord();
 private slots:
 
     void on_pushButtonEditWord_clicked();

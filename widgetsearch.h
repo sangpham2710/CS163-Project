@@ -20,6 +20,10 @@ public:
     void clearLineEditSearch();
     void clearWidgetHistory();
     void removeCurrentTabDefinition();
+    void reload();
+
+    const QString &getPreviousDictionaryName() const;
+    void setPreviousDictionaryName(const QString &newPreviousDictionaryName);
 
 private slots:
 
@@ -44,6 +48,7 @@ private slots:
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;
+    QString previousDictionaryName;
 };
 
 #endif // WIDGETSEARCH_H
