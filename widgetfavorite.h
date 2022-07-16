@@ -18,7 +18,8 @@ public:
     void clearLineEditSearchFavorite();
     void clearListWidgetFavorite();
     void removeCurrentTabFavorite();
-
+    void reloadDefinitionTabs();
+    void reloadListWidgetFavorite();
 
 private slots:
 

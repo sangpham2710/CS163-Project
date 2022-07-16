@@ -9,7 +9,7 @@ DialogAddNewWord::DialogAddNewWord(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEditNewWord->setEnabled(false);
-
+    this->setWindowTitle("Dictionary - Add New Word");
 }
 
 DialogAddNewWord::~DialogAddNewWord()

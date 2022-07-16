@@ -82,3 +82,23 @@ void WidgetFavorite::removeCurrentTabFavorite()
     int index = ui->tabWidgetFavoriteWord->currentIndex();
     ui->tabWidgetFavoriteWord->removeTab(index);
 }
+
+void WidgetFavorite::reloadDefinitionTabs()
+{
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWord->count(); ) {
+        auto tab = reinterpret_cast<WidgetFavoriteDefinition*>(ui->tabWidgetFavoriteWord->widget(tabIndex));
+        QString word = tab->getWord(); // wordDictName
+        if (App::get().isWordInFavorite(word, true)) {
+            tab->setDefinition(App::get().getFavoriteWordDefinition(word));
+            ++tabIndex;
+        } else {
+            // Delete current tab
+            ui->tabWidgetFavoriteWord->removeTab(tabIndex);
+        }
+    }
+}
+
+void WidgetFavorite::reloadListWidgetFavorite()
+{
+    clearListWidgetFavorite();
+}

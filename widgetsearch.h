@@ -4,6 +4,7 @@
 #include <QWidget>
 #include <QListWidgetItem>
 #include "dialogaddnewword.h"
+#include <QString>
 
 namespace Ui {
 class WidgetSearch;
@@ -20,6 +21,8 @@ public:
     void clearLineEditSearch();
     void clearWidgetHistory();
     void removeCurrentTabDefinition();
+    void reloadFavoriteStates();
+    const QString &getCurrentDictName() const;
 
 private slots:
 
@@ -44,6 +47,7 @@ private slots:
 private:
     Ui::WidgetSearch *ui;
     DialogAddNewWord *dialogAddNewWord;
+    QString currentDictName;
 };
 
 #endif // WIDGETSEARCH_H

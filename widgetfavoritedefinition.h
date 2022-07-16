@@ -15,10 +15,10 @@ class WidgetFavoriteDefinition : public QWidget
 public:
     explicit WidgetFavoriteDefinition(QWidget *parent = nullptr);
     ~WidgetFavoriteDefinition();
-    void setWord(QString &word);
-    void setDefinition(QString &definition);
-    void setFavoriteState(QString &word);
-
+    void setWord(const QString &word);
+    void setDefinition(const QString &definition);
+    void setFavoriteState(const QString &word);
+    const QString& getWord() const;
 private slots:
     void on_pushButtonSetFavorite_clicked();
 

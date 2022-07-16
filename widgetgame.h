@@ -2,6 +2,7 @@
 #define WIDGETGAME_H
 
 #include <QWidget>
+#include <QString>
 
 namespace Ui {
 class WidgetGame;
@@ -14,7 +15,10 @@ class WidgetGame : public QWidget {
     explicit WidgetGame(QWidget *parent = nullptr);
     ~WidgetGame();
 
-   private slots:
+    const QString &getCurrentDictName() const;
+    void resetGame();
+
+private slots:
     void on_pushButtonStartGame_clicked();
 
     void on_pushButtonContinue_clicked();
@@ -42,8 +46,10 @@ class WidgetGame : public QWidget {
     void gameFinish();
 
     void setDefautAnswerBackGround();
+
 private:
     Ui::WidgetGame *ui;
+    QString currentDictName;
 };
 
 #endif  // WIDGETGAME_H
