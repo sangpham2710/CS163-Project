@@ -36,7 +36,7 @@ void WidgetFavoriteDefinition::setFavoriteState(const QString &word)
 
 const QString &WidgetFavoriteDefinition::getWord() const
 {
-    return ui->labelFavoriteWord->text();
+    return QString(ui->labelFavoriteWord->text());
 }
 
 void WidgetFavoriteDefinition::on_pushButtonSetFavorite_clicked()
