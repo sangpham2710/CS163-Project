@@ -19,6 +19,7 @@ public:
     void setDefinition(const QString &definition);
     void setWord(const QString &word);
     void setFavoriteState(const QString &word);
+    const QString& getWord() const;
 
 private slots:
 

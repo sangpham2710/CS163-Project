@@ -15,23 +15,28 @@ WidgetFavoriteDefinition::~WidgetFavoriteDefinition()
     delete ui;
 }
 
-void WidgetFavoriteDefinition::setWord(QString &word)
+void WidgetFavoriteDefinition::setWord(const QString &word)
 {
     ui->labelFavoriteWord->setText(word);
 }
 
-void WidgetFavoriteDefinition::setDefinition(QString &definition)
+void WidgetFavoriteDefinition::setDefinition(const QString &definition)
 {
     ui->labelFavoriteDefinition->setText(definition);
 }
 
-void WidgetFavoriteDefinition::setFavoriteState(QString &word)
+void WidgetFavoriteDefinition::setFavoriteState(const QString &word)
 {
     if (App::get().isWordInFavorite(word, true)) {
         ui->pushButtonSetFavorite->setText("Unlike");
     } else {
         ui->pushButtonSetFavorite->setText("Like");
     }
+}
+
+const QString &WidgetFavoriteDefinition::getWord() const
+{
+    return QString(ui->labelFavoriteWord->text());
 }
 
 void WidgetFavoriteDefinition::on_pushButtonSetFavorite_clicked()

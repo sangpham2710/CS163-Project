@@ -9,6 +9,7 @@ DialogEditWord::DialogEditWord(QWidget *parent) :
 {
     ui->setupUi(this);
     ui->lineEditEditWord->setEnabled(false);
+    this->setWindowTitle("Dictionary - Edit Word");
 }
 
 DialogEditWord::~DialogEditWord()

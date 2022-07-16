@@ -82,3 +82,30 @@ void WidgetFavorite::removeCurrentTabFavorite()
     int index = ui->tabWidgetFavoriteWord->currentIndex();
     ui->tabWidgetFavoriteWord->removeTab(index);
 }
+
+void WidgetFavorite::reloadDefinitionTabs()
+{
+    QList<QString> words;
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWord->count(); ++tabIndex) {
+        words.push_back(ui->tabWidgetFavoriteWord->tabText(tabIndex));
+    }
+    ui->tabWidgetFavoriteWord->clear();
+    for (auto& word : words) {
+        if (!App::get().isWordInFavorite(word, true)) continue;
+        auto newTab = new WidgetFavoriteDefinition(this);
+        ui->tabWidgetFavoriteWord->addTab(newTab, word);
+        ui->tabWidgetFavoriteWord->setCurrentIndex(ui->tabWidgetFavoriteWord->count() - 1);
+        //Set word
+        newTab->setWord(word);
+        //Set definition
+        QString definition = App::get().getFavoriteWordDefinition(word);
+        newTab->setDefinition(definition);
+        //Set favorite state
+        newTab->setFavoriteState(word);
+    }
+}
+
+void WidgetFavorite::reloadListWidgetFavorite()
+{
+    clearListWidgetFavorite();
+}

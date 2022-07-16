@@ -15,6 +15,8 @@ WidgetSearch::WidgetSearch(QWidget *parent) :
     {
         ui->comboBoxDictionaryType->addItem(dictName);
     }
+    currentDictName = ui->comboBoxDictionaryType->currentText();
+
     ui->tabWidgetDefinition->clear();
     ui->radioButtonSearchKeyword->setChecked(true);
     ui->pushButtonAddWord->setEnabled(false);
@@ -56,6 +58,29 @@ void WidgetSearch::removeCurrentTabDefinition()
 {
     int index = ui->tabWidgetDefinition->currentIndex();
     ui->tabWidgetDefinition->removeTab(index);
+}
+
+void WidgetSearch::reloadFavoriteStates()
+{
+    QList<QString> words;
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); ++tabIndex) {
+        words.push_back(ui->tabWidgetDefinition->tabText(tabIndex));
+    }
+    ui->tabWidgetDefinition->clear();
+    for (auto& word : words) {
+        auto newTab = new WidgetDefinition(this);
+        ui->tabWidgetDefinition->addTab(newTab, word);
+        ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
+        //set title of the definition
+        newTab->setWord(word);
+
+        //set definition of the definition
+        QString definition = App::get().getDefinition(word);
+        newTab->setDefinition(definition);
+
+        //set favorite
+        newTab->setFavoriteState(word);
+    }
 }
 
 void WidgetSearch::clearWidgetHistory()
@@ -105,6 +130,7 @@ void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &t
 {
     QString dictName = ui->comboBoxDictionaryType->currentText();
     App::get().changeDictionary(dictName);
+    currentDictName = dictName;
     ui->lineEditSearch->clear();
     ui->tabWidgetDefinition->clear();
     loadHistory();
@@ -186,5 +212,10 @@ void WidgetSearch::on_lineEditSearch_returnPressed()
             new QListWidgetItem(word, ui->listWidgetHistory);
         }
     }
+}
+
+const QString &WidgetSearch::getCurrentDictName() const
+{
+    return currentDictName;
 }
 

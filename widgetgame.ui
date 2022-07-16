@@ -253,7 +253,7 @@
         </size>
        </property>
        <property name="text">
-        <string/>
+        <string>N/A</string>
        </property>
       </widget>
      </item>
@@ -273,7 +273,7 @@
      <item>
       <widget class="QLabel" name="labelQuestionCount">
        <property name="text">
-        <string/>
+        <string>N/A</string>
        </property>
       </widget>
      </item>

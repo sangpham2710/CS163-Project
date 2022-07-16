@@ -48,6 +48,7 @@ void WidgetGame::on_pushButtonStartGame_clicked() {
     ui->labelScore->setText(QString::number(score));
     ui->labelQuestionCount->setText("0/20");
     App::get().changeDictionary(lang);
+    currentDictName = lang;
     QuestionPopUp();
 }
 
@@ -170,6 +171,7 @@ void WidgetGame::on_pushButtonRestart_clicked() {
         setAnswerkeyState(true);
         ui->labelScore->setText(QString::number(score));
         App::get().changeDictionary(lang);
+        currentDictName = lang;
         QuestionPopUp();
         ui->labelQuestionCount->setText ("0/20");
         questionDone=0;
@@ -211,6 +213,7 @@ void WidgetGame::QuestionPopUp()
 void WidgetGame::restart(QString lang)
 {
     App::get().changeDictionary(lang);
+    currentDictName = lang;
     score=0;
     questionDone=0;
     ui->labelScore->setText("");
@@ -308,5 +311,15 @@ void WidgetGame::setDefautAnswerBackGround()
                                          "QPushButton:enabled { background-color: rgb(255, 255 , 255); }\n");
     ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: white; }\n"
                                          "QPushButton:enabled { background-color: rgb(255,255,255); }\n");
+}
+
+void WidgetGame::resetGame()
+{
+    restart(lang);
+}
+
+const QString &WidgetGame::getCurrentDictName() const
+{
+    return currentDictName;
 }
 
