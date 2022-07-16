@@ -62,13 +62,24 @@ void WidgetSearch::removeCurrentTabDefinition()
 
 void WidgetSearch::reloadFavoriteStates()
 {
-    qDebug() << "HERE3";
+    QList<QString> words;
     for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); ++tabIndex) {
-        qDebug() << "HERE4";
-        auto tab = dynamic_cast<WidgetDefinition*>(ui->tabWidgetDefinition->widget(tabIndex));
-        QString word = tab->getWord(); // word
-        qDebug() << word;
-        tab->setFavoriteState(word);
+        words.push_back(ui->tabWidgetDefinition->tabText(tabIndex));
+    }
+    ui->tabWidgetDefinition->clear();
+    for (auto& word : words) {
+        auto newTab = new WidgetDefinition(this);
+        ui->tabWidgetDefinition->addTab(newTab, word);
+        ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
+        //set title of the definition
+        newTab->setWord(word);
+
+        //set definition of the definition
+        QString definition = App::get().getDefinition(word);
+        newTab->setDefinition(definition);
+
+        //set favorite
+        newTab->setFavoriteState(word);
     }
 }
 

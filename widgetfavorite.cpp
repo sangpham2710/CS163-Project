@@ -85,16 +85,23 @@ void WidgetFavorite::removeCurrentTabFavorite()
 
 void WidgetFavorite::reloadDefinitionTabs()
 {
-    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWord->count(); ) {
-        auto tab = reinterpret_cast<WidgetFavoriteDefinition*>(ui->tabWidgetFavoriteWord->widget(tabIndex));
-        QString word = tab->getWord(); // wordDictName
-        if (App::get().isWordInFavorite(word, true)) {
-            tab->setDefinition(App::get().getFavoriteWordDefinition(word));
-            ++tabIndex;
-        } else {
-            // Delete current tab
-            ui->tabWidgetFavoriteWord->removeTab(tabIndex);
-        }
+    QList<QString> words;
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetFavoriteWord->count(); ++tabIndex) {
+        words.push_back(ui->tabWidgetFavoriteWord->tabText(tabIndex));
+    }
+    ui->tabWidgetFavoriteWord->clear();
+    for (auto& word : words) {
+        if (!App::get().isWordInFavorite(word, true)) continue;
+        auto newTab = new WidgetFavoriteDefinition(this);
+        ui->tabWidgetFavoriteWord->addTab(newTab, word);
+        ui->tabWidgetFavoriteWord->setCurrentIndex(ui->tabWidgetFavoriteWord->count() - 1);
+        //Set word
+        newTab->setWord(word);
+        //Set definition
+        QString definition = App::get().getFavoriteWordDefinition(word);
+        newTab->setDefinition(definition);
+        //Set favorite state
+        newTab->setFavoriteState(word);
     }
 }
 
