@@ -222,27 +222,30 @@ const QString &WidgetSearch::getCurrentDictName() const
     return currentDictName;
 }
 
-void WidgetSearch::on_pushButton_clicked()
-{
-    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://", tr("csv files (*.csv)"));
+namespace fs = std::filesystem;
 
-    qDebug() << "Loading";
+void WidgetSearch::on_pushButtonAddDictionary_clicked()
+{
+    const int NUM_PARTS = 1000;
+
+    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://", tr("CSV files (*.csv)"));
+
+    qDebug() << path;
+    if (path == "") return;
 
     int index = path.lastIndexOf('/');
     QString dictName = path.mid(index + 1, path.length() - index - 5);
 
-    for( auto it : App::get().getListDictionaries()) {
-        if (it ==  dictName) {
-            QMessageBox::warning(this, "Add Dictionary", "This dictionary already exists!");
-            return;
-        }
+    if (App::get().getListDictionaries().contains(dictName)) {
+        QMessageBox::critical(this, "Add Dictionary", "This dictionary already exists!");
+        return;
     }
 
     QString defisPath = "data/dicts/" + dictName + "/defis/";
     QString wordsPath = "data/dicts/" + dictName + "/words/";
 
-    std::filesystem::create_directories(defisPath.toStdString());
-    std::filesystem::create_directories(wordsPath.toStdString());
+    fs::create_directories(defisPath.toStdString());
+    fs::create_directories(wordsPath.toStdString());
 
     int len = 0;
     int i = 0;
@@ -255,10 +258,9 @@ void WidgetSearch::on_pushButton_clicked()
     while (!in.atEnd()) {
         line = in.readLine();
         len++;
-        QString c = QString::number(i);
         QString word;
         QFile fout;
-        fout.setFileName(defisPath + c + ".csv");
+        fout.setFileName(defisPath + QString::number(i) + ".csv");
         if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
         QTextStream out;
         out.setDevice(&fout);
@@ -269,10 +271,10 @@ void WidgetSearch::on_pushButton_clicked()
         word = CSV::readWordInLine(line);
         fout.setFileName(wordsPath + "index.csv");
         if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
-        out << CSV::writeLine(word,c) << "\n";
+        out << CSV::writeLine(word, QString::number(i)) << "\n";
         fout.close();
 
-        i = (i + 1) % 1000;
+        i = (i + 1) % NUM_PARTS;
     }
     fin.close();
 
@@ -281,20 +283,24 @@ void WidgetSearch::on_pushButton_clicked()
     fout.setFileName(defisPath + "info.txt");
     if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
     out.setDevice(&fout);
-    out << len / 1000 + 1 << "\n" << 1000;
+    out << len / NUM_PARTS + 1 << '\n' << NUM_PARTS;
     fout.close();
 
     fout.setFileName(wordsPath + "info.txt");
     if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
     out << len;
     fout.close();
+
+    fs::copy("data/dicts/" + dictName.toStdString(),
+             "data/dicts-origin/" + dictName.toStdString(),
+             fs::copy_options::recursive);
+
     qDebug() << "Done";
 
     ui->comboBoxDictionaryType->addItem(dictName);
     App::get().addDictionary(dictName);
-    ui->lineEditSearch->clear();
-    ui->tabWidgetDefinition->clear();
-    loadHistory();
+
+    ui->comboBoxDictionaryType->setCurrentText(dictName);
     return;
 }
 

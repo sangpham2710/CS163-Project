@@ -7,7 +7,7 @@
 class CSV {
    public:
 
-    static QString readWordInLine(QString line) {
+    static QString readWordInLine(const QString& line) {
         QString word, defi;
         CSV::readLine(line, word, defi);
         return word;
