@@ -20,7 +20,7 @@ DialogEditWord::~DialogEditWord()
 void DialogEditWord::setDataEditWord(const QString &word, const QString &definition)
 {
     ui->lineEditEditWord->setText(word);
-    ui->textEditEditDefinition->setText(definition);
+    ui->textEditEditDefinition->setPlainText(definition);
 }
 
 void DialogEditWord::on_pushButtonAccept_clicked()
