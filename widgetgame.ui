@@ -17,7 +17,7 @@
    <item>
     <layout class="QVBoxLayout" name="verticalLayout_5" stretch="1,1,6,1,1">
      <property name="spacing">
-      <number>15</number>
+      <number>10</number>
      </property>
      <item>
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -136,13 +136,19 @@
          </item>
          <item>
           <widget class="QLabel" name="labelQuestionCount">
+           <property name="minimumSize">
+            <size>
+             <width>40</width>
+             <height>30</height>
+            </size>
+           </property>
            <property name="font">
             <font>
              <pointsize>10</pointsize>
             </font>
            </property>
            <property name="text">
-            <string>N/A</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -172,7 +178,7 @@
           <widget class="QLabel" name="labelScore">
            <property name="minimumSize">
             <size>
-             <width>0</width>
+             <width>40</width>
              <height>30</height>
             </size>
            </property>
@@ -182,7 +188,7 @@
             </font>
            </property>
            <property name="text">
-            <string>N/A</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -193,7 +199,7 @@
      <item>
       <layout class="QVBoxLayout" name="verticalLayout_2">
        <property name="spacing">
-        <number>25</number>
+        <number>20</number>
        </property>
        <item>
         <widget class="QLabel" name="labelQuestionEdit">
@@ -206,7 +212,7 @@
          <property name="minimumSize">
           <size>
            <width>0</width>
-           <height>70</height>
+           <height>100</height>
           </size>
          </property>
          <property name="font">

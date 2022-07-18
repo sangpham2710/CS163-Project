@@ -218,6 +218,8 @@ void WidgetGame::restart(QString lang)
     questionDone=0;
     ui->labelScore->setText("");
     ui->pushButtonStartGame->setEnabled(true);
+    ui->pushButtonContinue->setEnabled(false);
+    ui->pushButtonRestart->setEnabled(false);
     ui->labelGameState->setText("");
     ui->labelQuestionEdit->setText("QUESTION");
     ui->labelQuestionCount->setText("");

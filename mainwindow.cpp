@@ -1,14 +1,12 @@
 #include "mainwindow.h"
-#include "./ui_mainwindow.h"
-
-#include "App.h"
 
 #include <QMessageBox>
 
+#include "./ui_mainwindow.h"
+#include "App.h"
+
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent)
-    , ui(new Ui::MainWindow)
-{
+    : QMainWindow(parent), ui(new Ui::MainWindow) {
     ui->setupUi(this);
     ui->tabWidgetDictionary->clear();
     widgetSearch = new WidgetSearch(this);
@@ -21,103 +19,83 @@ MainWindow::MainWindow(QWidget *parent)
     App::get();
 }
 
-MainWindow::~MainWindow()
-{
+MainWindow::~MainWindow() {
     delete ui;
 }
 
 
-void MainWindow::on_tabWidgetDictionary_tabBarClicked(int newIndex)
-{
+void MainWindow::on_tabWidgetDictionary_tabBarClicked(int newIndex) {
     int oldIndex = ui->tabWidgetDictionary->currentIndex();
-    qDebug() << oldIndex << newIndex;
     switch (oldIndex) {
-        case Tab::SEARCH:
-        {
+        case Tab::SEARCH: {
             switch (newIndex) {
-                case Tab::SEARCH:
-                {
+                case Tab::SEARCH: {
                     return;
-                }
-                break;
-                case Tab::FAVORITE:
-                {
+                } break;
+                case Tab::FAVORITE: {
                     widgetFavorite->reloadDefinitionTabs();
                     widgetFavorite->reloadListWidgetFavorite();
-                }
-                break;
-                case Tab::GAME:
-                {
-                    App::get().changeDictionary(widgetGame->getCurrentDictName());
+                } break;
+                case Tab::GAME: {
+                    App::get().changeDictionary(
+                        widgetGame->getCurrentDictName());
 
-                }
-                break;
+                } break;
             }
-        }
-        break;
-        case Tab::FAVORITE:
-        {
+        } break;
+        case Tab::FAVORITE: {
             switch (newIndex) {
-                case Tab::SEARCH:
-                {
-                    qDebug() << "HERE1";
-                    App::get().changeDictionary(widgetSearch->getCurrentDictName());
-                    qDebug() << "HERE2";
+                case Tab::SEARCH: {
+                    App::get().changeDictionary(
+                        widgetSearch->getCurrentDictName());
                     widgetSearch->reloadFavoriteStates();
-                }
-                break;
-                case Tab::FAVORITE:
-                {
+                } break;
+                case Tab::FAVORITE: {
                     return;
-                }
-                break;
-                case Tab::GAME:
-                {
-                    App::get().changeDictionary(widgetGame->getCurrentDictName());
-                }
-                break;
+                } break;
+                case Tab::GAME: {
+                    App::get().changeDictionary(
+                        widgetGame->getCurrentDictName());
+                } break;
             }
-        }
-        break;
-        case Tab::GAME:
-        {
+        } break;
+        case Tab::GAME: {
             switch (newIndex) {
-                case Tab::SEARCH:
-                {
+                case Tab::SEARCH: {
                     // Stop game
-                    QMessageBox::StandardButton confirmAccept = QMessageBox::question(this, "Exit Game", "Are you sure you want to switch tab?\nYour game will be reset!",
-                                                                                    QMessageBox::Yes | QMessageBox::No);
-                    if (confirmAccept == QMessageBox::Yes)
-                    {
+                    QMessageBox::StandardButton confirmAccept =
+                        QMessageBox::question(
+                            this, "Exit Game",
+                            "Are you sure you want to switch tab?\nYour game "
+                            "will be reset!",
+                            QMessageBox::Yes | QMessageBox::No);
+                    if (confirmAccept == QMessageBox::Yes) {
                         widgetGame->resetGame();
-                        App::get().changeDictionary(widgetSearch->getCurrentDictName());
+                        App::get().changeDictionary(
+                            widgetSearch->getCurrentDictName());
                     } else {
                         return;
                     }
 
-                }
-                break;
-                case Tab::FAVORITE:
-                {
-                    QMessageBox::StandardButton confirmAccept = QMessageBox::question(this, "Exit Game", "Are you sure you want to switch tab?\nYour game will be reset!",
-                                                                                    QMessageBox::Yes | QMessageBox::No);
-                    if (confirmAccept == QMessageBox::Yes)
-                    {
+                } break;
+                case Tab::FAVORITE: {
+                    QMessageBox::StandardButton confirmAccept =
+                        QMessageBox::question(
+                            this, "Exit Game",
+                            "Are you sure you want to switch tab?\nYour game "
+                            "will be reset!",
+                            QMessageBox::Yes | QMessageBox::No);
+                    if (confirmAccept == QMessageBox::Yes) {
                         widgetGame->resetGame();
                     } else {
                         return;
                     }
-                }
-                break;
-                case Tab::GAME:
-                {
+                } break;
+                case Tab::GAME: {
                     return;
-                }
-                break;
+                } break;
             }
-        }
-        break;
+        } break;
     }
     ui->tabWidgetDictionary->setCurrentIndex(newIndex);
 }
-

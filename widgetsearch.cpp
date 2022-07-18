@@ -1,21 +1,20 @@
 #include "widgetsearch.h"
+
+#include <QDebug>
+#include <QFileDialog>
+#include <QMessageBox>
+#include <filesystem>
+
+#include "App.h"
+#include "Dictionary.h"
 #include "ui_widgetsearch.h"
 #include "widgetdefinition.h"
-#include "App.h"
-#include <QMessageBox>
-#include <QFileDialog>
-#include <QDebug>
-#include <filesystem>
-#include "Dictionary.h"
 
-WidgetSearch::WidgetSearch(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::WidgetSearch)
-{
+WidgetSearch::WidgetSearch(QWidget* parent)
+    : QWidget(parent), ui(new Ui::WidgetSearch) {
     ui->setupUi(this);
     App::get();
-    for (auto& dictName : App::get().getListDictionaries())
-    {
+    for (auto& dictName : App::get().getListDictionaries()) {
         ui->comboBoxDictionaryType->addItem(dictName);
     }
     currentDictName = ui->comboBoxDictionaryType->currentText();
@@ -26,111 +25,106 @@ WidgetSearch::WidgetSearch(QWidget *parent) :
     loadHistory();
 }
 
-WidgetSearch::~WidgetSearch()
-{
+WidgetSearch::~WidgetSearch() {
     delete ui;
 }
 
-//Double click to word in history
-void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(QListWidgetItem *item)
-{
+// Double click to word in history
+void WidgetSearch::on_listWidgetHistory_itemDoubleClicked(
+    QListWidgetItem* item) {
     QString word = item->text();
-    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); ++tabIndex)
-    {
-        if (ui->tabWidgetDefinition->tabText(tabIndex) == word)
-        {
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count();
+         ++tabIndex) {
+        if (ui->tabWidgetDefinition->tabText(tabIndex) == word) {
             ui->tabWidgetDefinition->setCurrentIndex(tabIndex);
             return;
         }
     }
     auto newTab = new WidgetDefinition(this);
     ui->tabWidgetDefinition->addTab(newTab, word);
-    ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
-    //set title of the definition
+    ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() -
+                                             1);
+    // set title of the definition
     newTab->setWord(word);
 
-    //set definition of the definition
+    // set definition of the definition
     QString definition = App::get().getDefinition(word);
     newTab->setDefinition(definition);
 
-    //set favorite
+    // set favorite
     newTab->setFavoriteState(word);
 }
 
-void WidgetSearch::removeCurrentTabDefinition()
-{
+void WidgetSearch::removeCurrentTabDefinition() {
     int index = ui->tabWidgetDefinition->currentIndex();
     ui->tabWidgetDefinition->removeTab(index);
 }
 
-void WidgetSearch::reloadFavoriteStates()
-{
+void WidgetSearch::reloadFavoriteStates() {
     QList<QString> words;
-    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); ++tabIndex) {
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count();
+         ++tabIndex) {
         words.push_back(ui->tabWidgetDefinition->tabText(tabIndex));
     }
     ui->tabWidgetDefinition->clear();
     for (auto& word : words) {
         auto newTab = new WidgetDefinition(this);
         ui->tabWidgetDefinition->addTab(newTab, word);
-        ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
-        //set title of the definition
+        ui->tabWidgetDefinition->setCurrentIndex(
+            ui->tabWidgetDefinition->count() - 1);
+        // set title of the definition
         newTab->setWord(word);
 
-        //set definition of the definition
+        // set definition of the definition
         QString definition = App::get().getDefinition(word);
         newTab->setDefinition(definition);
 
-        //set favorite
+        // set favorite
         newTab->setFavoriteState(word);
     }
 }
 
-void WidgetSearch::clearWidgetHistory()
-{
+void WidgetSearch::clearWidgetHistory() {
     ui->listWidgetHistory->clear();
 }
 
-void WidgetSearch::clearLineEditSearch()
-{
+void WidgetSearch::clearLineEditSearch() {
     ui->lineEditSearch->clear();
 }
 
 
-void WidgetSearch::on_tabWidgetDefinition_tabCloseRequested(int index)
-{
+void WidgetSearch::on_tabWidgetDefinition_tabCloseRequested(int index) {
     ui->tabWidgetDefinition->removeTab(index);
 }
 
 
-void WidgetSearch::on_pushButtonRandomWord_clicked()
-{
+void WidgetSearch::on_pushButtonRandomWord_clicked() {
     QString word = App::get().getRandomWord();
-    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count(); ++tabIndex)
-    {
-        if (ui->tabWidgetDefinition->tabText(tabIndex) == word)
-        {
+    for (int tabIndex = 0; tabIndex < ui->tabWidgetDefinition->count();
+         ++tabIndex) {
+        if (ui->tabWidgetDefinition->tabText(tabIndex) == word) {
             ui->tabWidgetDefinition->setCurrentIndex(tabIndex);
             return;
         }
     }
     auto newTab = new WidgetDefinition(this);
     ui->tabWidgetDefinition->addTab(newTab, word);
-    ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() - 1);
-    //set title of the definition
+    ui->tabWidgetDefinition->setCurrentIndex(ui->tabWidgetDefinition->count() -
+                                             1);
+    // set title of the definition
     newTab->setWord(word);
 
-    //set definition of the definition
+    // set definition of the definition
     QString definition = App::get().getDefinition(word);
     newTab->setDefinition(definition);
 
-    //set favorite
+    // set favorite
     newTab->setFavoriteState(word);
 }
 
-//Change text in combo box dictionary type
-void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &text)
-{
+// Change text in combo box dictionary type
+void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(
+    const QString& text) {
     QString dictName = ui->comboBoxDictionaryType->currentText();
     App::get().changeDictionary(dictName);
     currentDictName = dictName;
@@ -139,9 +133,8 @@ void WidgetSearch::on_comboBoxDictionaryType_currentTextChanged(const QString &t
     loadHistory();
 }
 
-//Change text in searching bar -> change text in history widget
-void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
-{
+// Change text in searching bar -> change text in history widget
+void WidgetSearch::on_lineEditSearch_textChanged(const QString& prefix) {
     if (prefix == "") {
         ui->pushButtonAddWord->setEnabled(false);
         loadHistory();
@@ -151,12 +144,11 @@ void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
         return;
     }
     auto result = App::get().getListWordsWithPrefix(prefix);
-    if (result.size() == 0)
-    {
-        //Add new word enabled
+    if (result.size() == 0) {
+        // Add new word enabled
         ui->pushButtonAddWord->setEnabled(true);
-    }
-    else ui->pushButtonAddWord->setEnabled(false);
+    } else
+        ui->pushButtonAddWord->setEnabled(false);
 
     ui->listWidgetHistory->clear();
     for (auto& word : result) {
@@ -164,24 +156,25 @@ void WidgetSearch::on_lineEditSearch_textChanged(const QString &prefix)
     }
 }
 
-//Change text in history widget
+// Change text in history widget
 void WidgetSearch::loadHistory() {
     ui->listWidgetHistory->clear();
     for (auto& word : App::get().getHistory()) {
         new QListWidgetItem(word, ui->listWidgetHistory);
     }
-    for (int listIndex = 0; listIndex < ui->listWidgetHistory->count(); ++listIndex) {
+    for (int listIndex = 0; listIndex < ui->listWidgetHistory->count();
+         ++listIndex) {
         auto item = ui->listWidgetHistory->item(listIndex);
         item->setFlags(item->flags() & ~Qt::ItemIsEnabled);
     }
 }
 
-//Press reset button
-void WidgetSearch::on_pushButtonReset_clicked()
-{
-    QMessageBox::StandardButton confirm = QMessageBox::question(this, "Title", "Do you want to reset the current dictionary ?", QMessageBox::Yes | QMessageBox::No);
-    if (confirm == QMessageBox::Yes)
-    {
+// Press reset button
+void WidgetSearch::on_pushButtonReset_clicked() {
+    QMessageBox::StandardButton confirm = QMessageBox::question(
+        this, "Title", "Do you want to reset the current dictionary ?",
+        QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes) {
         ui->listWidgetHistory->clear();
         ui->tabWidgetDefinition->clear();
         loadHistory();
@@ -190,26 +183,23 @@ void WidgetSearch::on_pushButtonReset_clicked()
     }
 }
 
-void WidgetSearch::openDialogAddNewWord()
-{
+void WidgetSearch::openDialogAddNewWord() {
     QString newWord = ui->lineEditSearch->text();
     DialogAddNewWord dialogAddNewWord;
     dialogAddNewWord.setDataAddNewWord(newWord);
     dialogAddNewWord.exec();
 }
 
-//Press add new word button
-void WidgetSearch::on_pushButtonAddWord_clicked()
-{
+// Press add new word button
+void WidgetSearch::on_pushButtonAddWord_clicked() {
     openDialogAddNewWord();
 }
 
 
-
-void WidgetSearch::on_lineEditSearch_returnPressed()
-{
+void WidgetSearch::on_lineEditSearch_returnPressed() {
     if (ui->radioButtonSearchDictionary->isChecked()) {
-        auto result = App::get().getListWordsHaveDefinition(ui->lineEditSearch->text());
+        auto result =
+            App::get().getListWordsHaveDefinition(ui->lineEditSearch->text());
         ui->listWidgetHistory->clear();
         for (auto& word : result) {
             new QListWidgetItem(word, ui->listWidgetHistory);
@@ -217,27 +207,26 @@ void WidgetSearch::on_lineEditSearch_returnPressed()
     }
 }
 
-const QString &WidgetSearch::getCurrentDictName() const
-{
+const QString& WidgetSearch::getCurrentDictName() const {
     return currentDictName;
 }
 
 namespace fs = std::filesystem;
 
-void WidgetSearch::on_pushButtonAddDictionary_clicked()
-{
+void WidgetSearch::on_pushButtonAddDictionary_clicked() {
     const int NUM_PARTS = 1000;
 
-    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://", tr("CSV files (*.csv)"));
+    QString path = QFileDialog::getOpenFileName(this, "Open file", "C://",
+                                                tr("CSV files (*.csv)"));
 
-    qDebug() << path;
     if (path == "") return;
 
     int index = path.lastIndexOf('/');
     QString dictName = path.mid(index + 1, path.length() - index - 5);
 
     if (App::get().getListDictionaries().contains(dictName)) {
-        QMessageBox::critical(this, "Add Dictionary", "This dictionary already exists!");
+        QMessageBox::critical(this, "Add Dictionary",
+                              "This dictionary already exists!");
         return;
     }
 
@@ -251,7 +240,7 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked()
     int i = 0;
     QFile fin;
     fin.setFileName(path);
-    if(!fin.open(QFile::ReadOnly | QFile::Text)) return;
+    if (!fin.open(QFile::ReadOnly | QFile::Text)) return;
     QString line;
     QTextStream in;
     in.setDevice(&fin);
@@ -261,7 +250,7 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked()
         QString word;
         QFile fout;
         fout.setFileName(defisPath + QString::number(i) + ".csv");
-        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
+        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
         QTextStream out;
         out.setDevice(&fout);
         out << line << "\n";
@@ -270,7 +259,7 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked()
 
         word = CSV::readWordInLine(line);
         fout.setFileName(wordsPath + "index.csv");
-        if(!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
+        if (!fout.open(QFile::WriteOnly | QFile::Text | QFile::Append)) return;
         out << CSV::writeLine(word, QString::number(i)) << "\n";
         fout.close();
 
@@ -281,13 +270,13 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked()
     QFile fout;
     QTextStream out;
     fout.setFileName(defisPath + "info.txt");
-    if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
+    if (!fout.open(QFile::WriteOnly | QFile::Text)) return;
     out.setDevice(&fout);
     out << len / NUM_PARTS + 1 << '\n' << NUM_PARTS;
     fout.close();
 
     fout.setFileName(wordsPath + "info.txt");
-    if(!fout.open(QFile::WriteOnly | QFile::Text)) return;
+    if (!fout.open(QFile::WriteOnly | QFile::Text)) return;
     out << len;
     fout.close();
 
@@ -295,12 +284,9 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked()
              "data/dicts-origin/" + dictName.toStdString(),
              fs::copy_options::recursive);
 
-    qDebug() << "Done";
-
     ui->comboBoxDictionaryType->addItem(dictName);
     App::get().addDictionary(dictName);
 
     ui->comboBoxDictionaryType->setCurrentText(dictName);
     return;
 }
-
