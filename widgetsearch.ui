@@ -51,14 +51,14 @@
          <item>
           <widget class="QPushButton" name="pushButtonAddDictionary">
            <property name="text">
-            <string>Add Dictionary</string>
+            <string>Add Dict</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pushButtonReset">
            <property name="text">
-            <string>Reset</string>
+            <string>Reset Dict</string>
            </property>
           </widget>
          </item>
