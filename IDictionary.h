@@ -6,6 +6,7 @@
 
 class IDictionary {
    public:
+    virtual bool addDictionary(const QString& dictName) = 0;
     virtual QList<QString> getListWordsWithPrefix(const QString& prefix,
                                                   int maxResultLength = 20) = 0;
     virtual QList<QString> getListDictionaries() = 0;

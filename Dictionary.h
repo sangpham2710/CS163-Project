@@ -20,6 +20,11 @@ class Dictionary : public IDictionary {
    public:
     Dictionary() : dictMap{}, currentDict{nullptr} { allocate(); }
     ~Dictionary() { deallocate(); }
+    bool addDictionary(const QString& dictName) {
+        if (dictMap.contains(dictName)) return false;
+        dictMap[dictName] = new DictionaryDataStructure(dictName);
+        return true;
+    }
     void allocate() {
         QElapsedTimer totalTimer;
         int totalNumWords = 0;
@@ -31,7 +36,7 @@ class Dictionary : public IDictionary {
             QString dictName =
                 QString::fromStdString(dirName.path().filename().string());
             timer.start();
-            dictMap[dictName] = new DictionaryDataStructure(dictName);
+            addDictionary(dictName);
             qDebug() << QString("Loaded %1 dictionary in %2 ms (%3 words)")
                             .arg(dictName)
                             .arg(timer.restart())
