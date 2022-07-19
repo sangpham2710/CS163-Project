@@ -5,6 +5,7 @@
 #include <QList>
 #include <QString>
 #include <QTextStream>
+#include <QDebug>
 
 #include "CSV.h"
 #include "IFavorite.h"
@@ -95,6 +96,30 @@ class Favorite : public IFavorite {
                                               int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
+    bool removeWordsInDictionary(const QString& dictName) {
+        auto listFavoriteWords = getFavoriteWordsWithPrefix("", trie->size());
+        qDebug() << trie->size() << listFavoriteWords;
+        for (auto& word : listFavoriteWords) {
+            if (getDictName(word) == dictName) {
+                trie->remove(word);
+            }
+        }
+        listFavoriteWords = getFavoriteWordsWithPrefix("", trie->size());
+        qDebug() << listFavoriteWords;
+        QString favoritePath = getFavoritePath();
+        QFile fout;
+        QTextStream out;
+
+        fout.setFileName(favoritePath);
+        if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
+        out.setDevice(&fout);
+        for (auto& word : listFavoriteWords) {
+            out << CSV::writeLine(word, (*trie)[word]) << '\n';
+        }
+        fout.close();
+
+        return true;
+    }
     QString getFavoriteWordDefinition(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return QString();
         QString defiPath = (*trie)[wordDictName];
@@ -118,6 +143,9 @@ class Favorite : public IFavorite {
     }
     QString getWord(const QString& wordDictName) {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
+    }
+    QString getDictName(const QString& wordDictName) {
+        return wordDictName.last(wordDictName.size() - wordDictName.lastIndexOf('(') - 1).remove(')');
     }
     QString getFavoritePath() {
         return "data/favorite/index.csv";

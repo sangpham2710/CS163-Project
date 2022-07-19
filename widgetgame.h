@@ -17,6 +17,8 @@ class WidgetGame : public QWidget {
 
     const QString &getCurrentDictName() const;
     void resetGame();
+    bool isPlaying();
+    void reloadListDictionaries();
 
 private slots:
     void on_pushButtonStartGame_clicked();

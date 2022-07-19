@@ -43,7 +43,7 @@ private:
         return ptr;
     }
 public:
-    Trie() : root{new TrieNode()} {}
+    Trie() : root{new TrieNode()}, trieSize{0} {}
     ~Trie() {
         clear();
         delete root;

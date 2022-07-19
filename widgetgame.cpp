@@ -15,6 +15,7 @@ WidgetGame::WidgetGame(QWidget *parent)
     for (int i = 0; i < a.size(); i++) {
         ui->comboBoxChooseLang->addItem(a[i]);
     }
+    currentDictName = a[0];
     ui->comboBoxChooseMode->addItem("Play by definition"); //load game mode
     ui->comboBoxChooseMode->addItem("Play by keyword");
     ui->pushButtonContinue->setEnabled(false);
@@ -212,6 +213,7 @@ void WidgetGame::QuestionPopUp()
 
 void WidgetGame::restart(QString lang)
 {
+    isplay=false;
     App::get().changeDictionary(lang);
     currentDictName = lang;
     score=0;
@@ -318,6 +320,25 @@ void WidgetGame::setDefautAnswerBackGround()
 void WidgetGame::resetGame()
 {
     restart(lang);
+}
+
+bool WidgetGame::isPlaying()
+{
+    return isplay;
+}
+
+void WidgetGame::reloadListDictionaries()
+{
+    ui->comboBoxChooseLang->clear();
+    for (auto& dictName : App::get().getListDictionaries()) {
+        ui->comboBoxChooseLang->addItem(dictName);
+    }
+    if (App::get().getListDictionaries().contains(currentDictName)) {
+        ui->comboBoxChooseLang->setCurrentText(currentDictName);
+    } else {
+        currentDictName = App::get().getCurrentDictionaryName();
+        ui->comboBoxChooseLang->setCurrentText(currentDictName);
+    }
 }
 
 const QString &WidgetGame::getCurrentDictName() const
