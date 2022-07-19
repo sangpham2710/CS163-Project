@@ -74,6 +74,14 @@ void WidgetGame::on_pushButtonAnswer1_clicked() {
     } else {
         ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: red; }\n"
                                              "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer1->text()) ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer2->text()) ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer3->text()) ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer4->text()) ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText(
             "Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
@@ -97,6 +105,14 @@ void WidgetGame::on_pushButtonAnswer2_clicked() {
     } else {
         ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: red; }\n"
                                              "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer1->text()) ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer2->text()) ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer3->text()) ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer4->text()) ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText(
             "Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
@@ -122,6 +138,14 @@ void WidgetGame::on_pushButtonAnswer3_clicked() {
     } else {
         ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: red; }\n"
                                              "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer1->text()) ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer2->text()) ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer3->text()) ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer4->text()) ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText(
             "Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
@@ -147,6 +171,14 @@ void WidgetGame::on_pushButtonAnswer4_clicked() {
     } else {
         ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: red; }\n"
                                              "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer1->text()) ui->pushButtonAnswer1->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer2->text()) ui->pushButtonAnswer2->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer3->text()) ui->pushButtonAnswer3->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
+        if (ans == ui->labelAnswer4->text()) ui->pushButtonAnswer4->setStyleSheet("QPushButton { background-color: green; }\n"
+                                                                                          "QPushButton:enabled { background-color: rgb(200,0,0); }\n");
         ui->labelGameState->setText("Wrong answer, please click continue");
         ui->pushButtonContinue->setEnabled(true);
         setAnswerkeyState(false);
