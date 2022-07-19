@@ -46,7 +46,7 @@ private slots:
 
     void on_pushButtonAddDictionary_clicked();
 
-    void on_pushButton_clicked();
+    void on_pushButtonRemoveDictionary_clicked();
 
 private:
     Ui::WidgetSearch *ui;

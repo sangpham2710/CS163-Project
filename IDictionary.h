@@ -16,7 +16,7 @@ class IDictionary {
                           const QString& newDefinition) = 0;
     virtual bool removeWord(const QString& word) = 0;
     virtual bool reset() = 0;
-    virtual bool remove() = 0;
+    virtual bool remove(const QString& dictName) = 0;
     virtual QString getDefinition(const QString& word) = 0;
     virtual QString getRandomWord() = 0;
     virtual QList<QString> getListWordsHaveDefinition(

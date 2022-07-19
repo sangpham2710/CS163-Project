@@ -291,7 +291,7 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked() {
     return;
 }
 
-void WidgetSearch::on_pushButton_clicked()
+void WidgetSearch::on_pushButtonRemoveDictionary_clicked()
 {
     QMessageBox::StandardButton confirm = QMessageBox::question(
         this, "Title", "Do you want to remove the current dictionary ?",
@@ -303,10 +303,16 @@ void WidgetSearch::on_pushButton_clicked()
             return;
         }
 
-        int currIndex = ui->comboBoxDictionaryType->currentIndex();
-        App::get().removeDictionary();
-        ui->comboBoxDictionaryType->setCurrentText(App::get().getCurrentDictionaryName());
-        ui->comboBoxDictionaryType->removeItem(currIndex);
+        int index = ui->comboBoxDictionaryType->currentIndex();
+        QString dictName = ui->comboBoxDictionaryType->currentText();
+        QString firstDict = App::get().getListDictionaries().front();
+        if (dictName == firstDict) {
+            firstDict = App::get().getListDictionaries()[1];
+        }
+        App::get().changeDictionary(firstDict);
+        App::get().removeDictionary(dictName);
+        ui->comboBoxDictionaryType->setCurrentText(firstDict);
+        ui->comboBoxDictionaryType->removeItem(index);
     }
 }
 

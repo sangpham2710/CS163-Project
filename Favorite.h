@@ -101,6 +101,42 @@ class Favorite : public IFavorite {
                 removeWord(it);
             }
         }
+
+        QString favoritePath = getFavoritePath();
+        QFile fin, fout;
+        QTextStream in, out;
+        QList<QString> listWordDictNames, listDefinitionPaths;
+        QString line, _wordDictname, _defiPath;
+        int wordIndex;
+
+        fin.setFileName(favoritePath);
+        if (!fin.open(QFile::ReadOnly | QFile::Text)) return false;
+        in.setDevice(&fin);
+        while (!in.atEnd()) {
+            line = in.readLine();
+            CSV::readLine(line, _wordDictname, _defiPath);
+            listWordDictNames.push_back(_wordDictname);
+            listDefinitionPaths.push_back(_defiPath);
+        }
+        fin.close();
+
+        for (auto it : listWordDictNames) {
+            if (getDictName(it) == dictName) {
+                wordIndex = listWordDictNames.indexOf(it);
+                listWordDictNames.removeAt(wordIndex);
+                listDefinitionPaths.removeAt(wordIndex);
+            }
+        }
+
+        fout.setFileName(favoritePath);
+        if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
+        out.setDevice(&fout);
+        for (int i = 0; i < listWordDictNames.size(); ++i) {
+            out << CSV::writeLine(listWordDictNames[i], listDefinitionPaths[i])
+                << '\n';
+        }
+        fout.close();
+
         return true;
     }
     QString getFavoriteWordDefinition(const QString& wordDictName) {
