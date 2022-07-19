@@ -52,6 +52,10 @@ class App {
         return true;
     }
     bool resetDictionary() { return dictionary->reset(); }
+    bool removeDictionary() {
+        QString currDict = getCurrentDictionaryName();
+        return dictionary->remove() && favorite->removeWordsInDictionary(currDict);
+    }
     QString getDefinition(const QString& word) {
         history->add(word);
         return dictionary->getDefinition(word);

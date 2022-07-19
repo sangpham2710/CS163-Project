@@ -290,3 +290,23 @@ void WidgetSearch::on_pushButtonAddDictionary_clicked() {
     ui->comboBoxDictionaryType->setCurrentText(dictName);
     return;
 }
+
+void WidgetSearch::on_pushButton_clicked()
+{
+    QMessageBox::StandardButton confirm = QMessageBox::question(
+        this, "Title", "Do you want to remove the current dictionary ?",
+        QMessageBox::Yes | QMessageBox::No);
+    if (confirm == QMessageBox::Yes) {
+        if (App::get().getListDictionaries().size() == 1) {
+            QMessageBox::critical(this, "Remove Dictionary",
+                                  "Can't remove the only dictionary!");
+            return;
+        }
+
+        int currIndex = ui->comboBoxDictionaryType->currentIndex();
+        App::get().removeDictionary();
+        ui->comboBoxDictionaryType->setCurrentText(App::get().getCurrentDictionaryName());
+        ui->comboBoxDictionaryType->removeItem(currIndex);
+    }
+}
+

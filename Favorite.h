@@ -95,6 +95,14 @@ class Favorite : public IFavorite {
                                               int maxResultLength) {
         return trie->searchPrefix(prefix, maxResultLength);
     }
+    bool removeWordsInDictionary(const QString& dictName) {
+        for (auto it : getFavoriteWordsWithPrefix("",trie->size())) {
+            if (getDictName(it) == dictName) {
+                removeWord(it);
+            }
+        }
+        return true;
+    }
     QString getFavoriteWordDefinition(const QString& wordDictName) {
         if (!trie->contains(wordDictName)) return QString();
         QString defiPath = (*trie)[wordDictName];
@@ -118,6 +126,9 @@ class Favorite : public IFavorite {
     }
     QString getWord(const QString& wordDictName) {
         return wordDictName.first(wordDictName.lastIndexOf('(') - 1);
+    }
+    QString getDictName(const QString& wordDictName) {
+        return wordDictName.last(wordDictName.size() - wordDictName.lastIndexOf('(') - 1).remove(')');
     }
     QString getFavoritePath() {
         return "data/favorite/index.csv";

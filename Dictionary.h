@@ -86,6 +86,14 @@ class Dictionary : public IDictionary {
         currentDict = dictMap[dictName];
         return true;
     }
+    bool remove() {
+        QString dictName = currentDict->getDictionaryName();
+        QDir("data/dicts/" + dictName).removeRecursively();
+        QDir("data/dicts-origin/" + dictName).removeRecursively();
+        delete dictMap[dictName];
+        changeDictionary(dictMap.keys().front());
+        return true;
+    }
     QString getDefinition(const QString &word) {
         return currentDict->getDefinition(word);
     }
