@@ -5,6 +5,7 @@
 #include <QList>
 #include <QString>
 #include <QTextStream>
+#include <QDebug>
 
 #include "CSV.h"
 #include "IFavorite.h"
@@ -96,44 +97,24 @@ class Favorite : public IFavorite {
         return trie->searchPrefix(prefix, maxResultLength);
     }
     bool removeWordsInDictionary(const QString& dictName) {
-        for (auto it : getFavoriteWordsWithPrefix("",trie->size())) {
-            if (getDictName(it) == dictName) {
-                removeWord(it);
+        auto listFavoriteWords = getFavoriteWordsWithPrefix("", trie->size());
+        qDebug() << trie->size() << listFavoriteWords;
+        for (auto& word : listFavoriteWords) {
+            if (getDictName(word) == dictName) {
+                trie->remove(word);
             }
         }
-
+        listFavoriteWords = getFavoriteWordsWithPrefix("", trie->size());
+        qDebug() << listFavoriteWords;
         QString favoritePath = getFavoritePath();
-        QFile fin, fout;
-        QTextStream in, out;
-        QList<QString> listWordDictNames, listDefinitionPaths;
-        QString line, _wordDictname, _defiPath;
-        int wordIndex;
-
-        fin.setFileName(favoritePath);
-        if (!fin.open(QFile::ReadOnly | QFile::Text)) return false;
-        in.setDevice(&fin);
-        while (!in.atEnd()) {
-            line = in.readLine();
-            CSV::readLine(line, _wordDictname, _defiPath);
-            listWordDictNames.push_back(_wordDictname);
-            listDefinitionPaths.push_back(_defiPath);
-        }
-        fin.close();
-
-        for (auto it : listWordDictNames) {
-            if (getDictName(it) == dictName) {
-                wordIndex = listWordDictNames.indexOf(it);
-                listWordDictNames.removeAt(wordIndex);
-                listDefinitionPaths.removeAt(wordIndex);
-            }
-        }
+        QFile fout;
+        QTextStream out;
 
         fout.setFileName(favoritePath);
         if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
         out.setDevice(&fout);
-        for (int i = 0; i < listWordDictNames.size(); ++i) {
-            out << CSV::writeLine(listWordDictNames[i], listDefinitionPaths[i])
-                << '\n';
+        for (auto& word : listFavoriteWords) {
+            out << CSV::writeLine(word, (*trie)[word]) << '\n';
         }
         fout.close();
 

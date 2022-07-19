@@ -7,6 +7,7 @@
 class IDictionary {
    public:
     virtual bool addDictionary(const QString& dictName) = 0;
+    virtual bool removeDictionary(const QString& dictName) = 0;
     virtual QList<QString> getListWordsWithPrefix(const QString& prefix,
                                                   int maxResultLength = 20) = 0;
     virtual QList<QString> getListDictionaries() = 0;
@@ -16,7 +17,6 @@ class IDictionary {
                           const QString& newDefinition) = 0;
     virtual bool removeWord(const QString& word) = 0;
     virtual bool reset() = 0;
-    virtual bool remove(const QString& dictName) = 0;
     virtual QString getDefinition(const QString& word) = 0;
     virtual QString getRandomWord() = 0;
     virtual QList<QString> getListWordsHaveDefinition(

@@ -20,9 +20,16 @@ class Dictionary : public IDictionary {
    public:
     Dictionary() : dictMap{}, currentDict{nullptr} { allocate(); }
     ~Dictionary() { deallocate(); }
-    bool addDictionary(const QString& dictName) {
+    bool addDictionary(const QString &dictName) {
         if (dictMap.contains(dictName)) return false;
         dictMap[dictName] = new DictionaryDataStructure(dictName);
+        return true;
+    }
+    bool removeDictionary(const QString &dictName) {
+        QDir("data/dicts/" + dictName).removeRecursively();
+        QDir("data/dicts-origin/" + dictName).removeRecursively();
+        delete dictMap[dictName];
+        dictMap.remove(dictName);
         return true;
     }
     void allocate() {
@@ -84,12 +91,6 @@ class Dictionary : public IDictionary {
         delete dictMap[dictName];
         dictMap[dictName] = new DictionaryDataStructure(dictName);
         currentDict = dictMap[dictName];
-        return true;
-    }
-    bool remove(const QString& dictName) {
-        QDir("data/dicts/" + dictName).removeRecursively();
-        QDir("data/dicts-origin/" + dictName).removeRecursively();
-        delete dictMap[dictName];
         return true;
     }
     QString getDefinition(const QString &word) {

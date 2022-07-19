@@ -12,7 +12,6 @@ class IFavorite {
     virtual bool removeWordsInDictionary(const QString& dictName) = 0;
     virtual QList<QString> getFavoriteWordsWithPrefix(
         const QString& prefix, int maxResultLength = 20) = 0;
-    virtual QString getDictName(const QString& wordDictName) = 0;
     virtual QString getFavoriteWordDefinition(const QString& wordDictName) = 0;
     virtual ~IFavorite() = default;
 };
