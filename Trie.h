@@ -14,16 +14,16 @@ private:
     class TrieNode {
     public:
         bool flag;
+        int cnt;
         T* value;
         Map<QChar, TrieNode*> next;
-        TrieNode() : flag{0}, value{nullptr}, next{} {}
+        TrieNode() : flag{0}, cnt{0}, value{nullptr}, next{} {}
         bool isLeaf() {
             return next.empty();
         }
     };
 
     TrieNode* root;
-    int trieSize;
 
     void clear(TrieNode*& root) {
         for (auto& ch : root->next.keys()) {
@@ -43,29 +43,30 @@ private:
         return ptr;
     }
 public:
-    Trie() : root{new TrieNode()}, trieSize{0} {}
+    Trie() : root{new TrieNode()} {}
     ~Trie() {
         clear();
         delete root;
     }
 
-    int size() const { return trieSize; }
+    int size() const { return root->cnt; }
 
     void clear() {
         clear(root);
-        trieSize = 0;
+        root->cnt = 0;
     }
 
     TrieNode* insert(const QString& word, const T& value) {
         TrieNode* ptr = root;
+        ++ptr->cnt;
         for (auto& ch : word) {
             if (!ptr->next.contains(ch))
                 ptr->next[ch] = new TrieNode();
             ptr = ptr->next[ch];
+            ++ptr->cnt;
         }
         ptr->flag = true;
         ptr->value = new T(value);
-        ++trieSize;
         return ptr;
     }
 
@@ -86,7 +87,8 @@ public:
         }
         if (!ptr->flag) return false;
         ptr->flag = false;
-        for (int i = stackNodes.size() - 1; i > 0; --i) {
+        int i;
+        for (i = stackNodes.size() - 1; i > 0; --i) {
             TrieNode* cur = stackNodes[i];
             TrieNode* par = stackNodes[i - 1];
             QChar curChar = word[i - 1];
@@ -95,7 +97,10 @@ public:
                 delete cur;
             } else break;
         }
-        --trieSize;
+        for (; i >= 0; --i) {
+            TrieNode* cur = stackNodes[i];
+            --cur->cnt;
+        }
         return true;
     }
 
@@ -110,6 +115,29 @@ public:
 
     T& operator[](const QString& word) {
         return this->value(word);
+    }
+
+    QString getKth(int k) {
+        if (k < 0 || k >= size()) return QString();
+        ++k;
+        QString result;
+        TrieNode* ptr = root;
+        while (k > 0) {
+            if (ptr->flag) {
+                --k;
+                if (k == 0) break;
+            }
+            for (auto& ch : ptr->next.keys()) {
+                if (k > ptr->next[ch]->cnt) {
+                    k -= ptr->next[ch]->cnt;
+                } else {
+                    result.push_back(ch);
+                    ptr = ptr->next[ch];
+                    break;
+                }
+            }
+        }
+        return result;
     }
 
     QList<QString> searchPrefix(const QString& prefix, int maxResultLength) const {

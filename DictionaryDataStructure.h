@@ -182,25 +182,7 @@ class DictionaryDataStructure {
     QString getRandomWord() {
         std::mt19937 rng(
             std::chrono::steady_clock::now().time_since_epoch().count());
-        int wordIndex = rng() % trie->size();
-        int currentIndex = 0;
-        QFile fin;
-        QTextStream in;
-        QString line, _word, _definition;
-        QString wordPath = getFullWordPath();
-        fin.setFileName(wordPath);
-        if (!fin.open(QFile::ReadOnly | QFile::Text)) return QString();
-        in.setDevice(&fin);
-        while (!in.atEnd()) {
-            line = in.readLine();
-            CSV::readLine(line, _word, _definition);
-            if (currentIndex++ == wordIndex) {
-                fin.close();
-                return _word;
-            }
-        }
-        fin.close();
-        return QString();
+        return trie->getKth(rng() % trie->size());
     }
     QString getDefinition(const QString& word) {
         if (!trie->contains(word)) return QString();
