@@ -120,6 +120,7 @@ void WidgetSearch::on_pushButtonRandomWord_clicked() {
 
     // set favorite
     newTab->setFavoriteState(word);
+    loadHistory();
 }
 
 // Change text in combo box dictionary type
