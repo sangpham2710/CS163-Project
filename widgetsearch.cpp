@@ -18,7 +18,13 @@ WidgetSearch::WidgetSearch(QWidget* parent)
         ui->comboBoxDictionaryType->addItem(dictName);
     }
     currentDictName = ui->comboBoxDictionaryType->currentText();
-
+    QFile fin("data/currentDictionary.txt");
+    if (!fin.open(QFile::ReadOnly | QFile::Text)) return;
+    QTextStream in(&fin);
+    QString dictName = in.readLine();
+    fin.close();
+    qDebug() << dictName << '\n';
+    ui->comboBoxDictionaryType->setCurrentText(dictName);
     ui->tabWidgetDefinition->clear();
     ui->radioButtonSearchKeyword->setChecked(true);
     ui->pushButtonAddWord->setEnabled(false);
