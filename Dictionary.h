@@ -70,6 +70,11 @@ class Dictionary : public IDictionary {
         if (currentDict->getDictionaryName() == dictName) return true;
         if (!dictMap.contains(dictName)) return false;
         currentDict = dictMap[dictName];
+        QFile fout("data/currentDictionary.txt");
+        if (!fout.open(QFile::WriteOnly | QFile::Text)) return false;
+        QTextStream out(&fout);
+        out << dictName << '\n';
+        fout.close();
         return true;
     }
     bool addWord(const QString &word, const QString &definition) {
